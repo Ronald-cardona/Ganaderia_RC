@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/1. Presentaciones/" />
+  <Folder Name="/2. Servicios/">
+    <Project Path="aplicacion_libreria/aplicacion_libreria.csproj" />
+  </Folder>
+  <Folder Name="/3. Pruebas Unitarias/" />
+</Solution>
