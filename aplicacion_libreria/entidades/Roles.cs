@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace aplicacion_libreria.entidades
 {
-    public class Roles  //arreglar en sql relacion para que sea de muchos a uno 
+    public class Roles  
     {
         public int Id { get; set; }
 

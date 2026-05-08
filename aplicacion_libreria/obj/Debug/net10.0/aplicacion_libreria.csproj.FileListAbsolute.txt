@@ -1,0 +1,13 @@
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\aplicacion_libreria\bin\Debug\net10.0\aplicacion_libreria.deps.json
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\aplicacion_libreria\bin\Debug\net10.0\aplicacion_libreria.dll
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\aplicacion_libreria\bin\Debug\net10.0\aplicacion_libreria.pdb
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\aplicacion_libreria\obj\Debug\net10.0\aplicacion_libreria.csproj.AssemblyReference.cache
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\aplicacion_libreria\obj\Debug\net10.0\aplicacion_libreria.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\aplicacion_libreria\obj\Debug\net10.0\aplicacion_libreria.AssemblyInfoInputs.cache
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\aplicacion_libreria\obj\Debug\net10.0\aplicacion_libreria.AssemblyInfo.cs
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\aplicacion_libreria\obj\Debug\net10.0\aplicacion_libreria.csproj.CoreCompileInputs.cache
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\aplicacion_libreria\obj\Debug\net10.0\aplicacion_libreria.sourcelink.json
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\aplicacion_libreria\obj\Debug\net10.0\aplicacion_libreria.dll
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\aplicacion_libreria\obj\Debug\net10.0\refint\aplicacion_libreria.dll
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\aplicacion_libreria\obj\Debug\net10.0\aplicacion_libreria.pdb
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\aplicacion_libreria\obj\Debug\net10.0\ref\aplicacion_libreria.dll
