@@ -2,6 +2,7 @@
   <Folder Name="/1. Presentaciones/" />
   <Folder Name="/2. Servicios/">
     <Project Path="aplicacion_libreria/aplicacion_libreria.csproj" />
+    <Project Path="asp_servicios/asp_servicios.csproj" Id="4b25d9e0-ef68-4843-8eb8-161ee8450166" />
   </Folder>
   <Folder Name="/3. Pruebas Unitarias/" />
 </Solution>
