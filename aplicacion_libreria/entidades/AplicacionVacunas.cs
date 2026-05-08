@@ -1,0 +1,18 @@
+﻿
+
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace aplicacion_libreria.entidades
+{
+    public class AplicacionVacunas
+    {
+        public int Id { get; set; }
+        public DateTime FechaAplicacion { get; set; }
+
+        public int AnimalId { get; set; }
+        public int? VacunaId { get; set; }
+
+        [ForeignKey("AnimalId")] public Animales? _animal { get; set; }
+        [ForeignKey("VacunaId")] public Vacunas? _vacuna { get; set; }
+    }
+}

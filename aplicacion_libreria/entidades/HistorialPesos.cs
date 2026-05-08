@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace aplicacion_libreria.entidades
 {
-    internal class HistorialPesos
+    public class HistorialPesos
     {
         public int Id { get; set; }  
         public DateTime FechaUltimoPesaje { get; set; }

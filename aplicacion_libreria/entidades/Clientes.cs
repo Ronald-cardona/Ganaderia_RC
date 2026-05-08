@@ -12,6 +12,8 @@ namespace aplicacion_libreria.entidades
         public string Direccion { get; set; }
 
 
-        [NotMapped] public List<Ventas>? ventas { get; set; } 
+        [NotMapped] public List<Ventas>? ventas { get; set; }
+        [NotMapped] public List<PersonasNaturalesC>? PersonasNaturalesC { get; set; }
+        [NotMapped] public List<SubastasC>? SubastasC { get; set; }
     }
 }
