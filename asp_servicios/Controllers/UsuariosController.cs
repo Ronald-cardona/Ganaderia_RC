@@ -31,7 +31,7 @@ namespace asp_servicios.Controllers
             return this.IUsuariosNegocio!.Guardar(entidad);
         }
 
-        [HttpPut]
+        [HttpPost]
         public Usuarios Modificar(Usuarios entidad)
         {
             if (this.IUsuariosNegocio == null)
@@ -41,7 +41,7 @@ namespace asp_servicios.Controllers
             return this.IUsuariosNegocio.Modificar(entidad);
         }
 
-        [HttpDelete]
+        [HttpPost]
         public void Borrar(Usuarios entidad)
         {
             if (this.IUsuariosNegocio == null)

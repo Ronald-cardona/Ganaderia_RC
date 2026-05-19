@@ -12,8 +12,8 @@ namespace aplicacion_libreria.entidades
         public decimal UltimoPeso { get; set; }
         public decimal PesoActual { get; set; }
 
-        public int AnimalId { get; set; }
-        [ForeignKey("AnimalId")] public Animales? _animal { get; set; }
+        public int IdAnimal { get; set; }
+        [ForeignKey("IdAnimal")] public Animales? _animal { get; set; }
     }
 }
 // se debe de sacar la ganancia, la ganancia diaria y los dias que van de un pesaje al otro

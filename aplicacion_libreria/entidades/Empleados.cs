@@ -7,9 +7,9 @@ namespace aplicacion_libreria.entidades
     {
         public int Id { get; set; }
         public int IdPersona { get; set; }
-        public int FincaId { get; set; }
+        public int IdFinca { get; set; }
 
         [ForeignKey("IdPersona")] public Personas? _persona { get; set; }
-        [ForeignKey("FincaId")] public Fincas? _finca { get; set; }
+        [ForeignKey("IdFinca")] public Fincas? _finca { get; set; }
     }
 }

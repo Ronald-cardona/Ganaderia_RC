@@ -32,7 +32,7 @@ namespace asp_servicios.Controllers
             return this.IAnimalesNegocio!.Guardar(entidad);
         }
 
-        [HttpPut]
+        [HttpPost]
         public Animales Modificar(Animales entidad)
         {
             if (this.IAnimalesNegocio == null)
@@ -42,7 +42,7 @@ namespace asp_servicios.Controllers
             return this.IAnimalesNegocio.Modificar(entidad);
         }
 
-        [HttpDelete]
+        [HttpPost]
         public void Borrar(Animales entidad)
         {
             if (this.IAnimalesNegocio == null)

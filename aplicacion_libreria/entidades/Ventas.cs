@@ -9,7 +9,7 @@ namespace aplicacion_libreria.entidades
         public int Id { get; set; }  // segunda regla
         public DateTime FechaVenta { get; set; }
         public decimal PesoFinal { get; set; }
-        public decimal PrecioKiloVenta { get; set; }  //precio del kilo
+        public decimal PrecioKilo { get; set; }  //precio del kilo
         
         public string DescripcionVenta { get; set; }
 

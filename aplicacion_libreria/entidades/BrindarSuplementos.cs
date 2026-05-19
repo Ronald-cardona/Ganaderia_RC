@@ -7,10 +7,10 @@ namespace aplicacion_libreria.entidades
     {
         public int Id { get; set; }
         public DateTime FechaBrindarSuplemetos { get; set; }
-        public int? AnimalId { get; set; }
+        public int? IdAnimal { get; set; }
         public int? SuplementoId { get; set; }
 
-        [ForeignKey("AnimalId")] public Animales? _animal { get; set; }
+        [ForeignKey("IdAnimal")] public Animales? _animal { get; set; }
         [ForeignKey("SuplementoId")] public Suplementos? _suplemento { get; set; }
     }
 }

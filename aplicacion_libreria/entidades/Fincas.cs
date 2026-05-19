@@ -9,7 +9,7 @@ namespace aplicacion_libreria.entidades
         public int Id { get; set; }  
         public int Codigo { get; set; }
         public string Nombre { get; set; }
-        public string Direccion { get; set; }
+        public string Direcccion { get; set; }
         public decimal ExtensionMetro { get; set; }
 
         [NotMapped] public List<Empleados>? _empleado { get; set; } 

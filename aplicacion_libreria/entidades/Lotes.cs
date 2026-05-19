@@ -8,7 +8,7 @@ namespace aplicacion_libreria.entidades
     {
         public int Id { get; set; }  
         public string Codigo { get; set; }
-        public DateTime FechaCreacionLote { get; set; }
+        public DateTime FechaCreacion { get; set; }
         public int CantidadAnimales { get; set; }
         
 

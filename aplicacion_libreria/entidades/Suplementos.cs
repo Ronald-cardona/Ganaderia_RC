@@ -9,8 +9,8 @@ namespace aplicacion_libreria.entidades
         public int Id { get; set; }  
         public string? Nombre { get; set; }
         public decimal CostoSuplemento { get; set; }
-        public decimal Cantidad { get; set; }
-        public DateTime FechaCompraSuplemeto { get; set; }
+        public decimal CantidadSuplemento { get; set; }
+        public DateTime FechaCompraSuplemento { get; set; }
 
        
         [NotMapped] public List<BrindarSuplementos>? brindarSuplemento { get; set; } 
