@@ -4,7 +4,7 @@ using aplicacion_libreria.entidades;
 
 namespace presentacion_libreria.interfaces
 {
-    public interface IPersonasNaturalesP
+    public interface IPersonasNaturalesPNegocio
     {
         List<PersonasNaturalesP> Consultar();
         PersonasNaturalesP Guardar(PersonasNaturalesP entidad);
