@@ -17,6 +17,7 @@ namespace aplicacion_libreria.implementaciones
         }
 
         public DbSet<Alimentos>? Alimentos { get; set; }
+        public DbSet<Auditorias>? Auditorias { get; set; }
         public DbSet<Animales>? Animales { get; set; }
         public DbSet<AplicacionVacunas>? AplicacionVacunas { get; set; }
         public DbSet<BrindarAlimentos>? BrindarAlimentos { get; set; }

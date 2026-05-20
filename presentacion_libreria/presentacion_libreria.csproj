@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="implementaciones\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\aplicacion_libreria\aplicacion_libreria.csproj" />
   </ItemGroup>
 

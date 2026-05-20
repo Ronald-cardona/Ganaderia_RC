@@ -16,6 +16,14 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
 
+            Auditorias auditorias = new Auditorias();
+            auditorias.Metodo = "Consultar";
+            auditorias.Fecha = DateTime.Now;
+            auditorias.Descripcion = "Se consultó la lista de Corrales";
+            this.iConexion.Auditorias!.Add(auditorias);
+            this.iConexion.SaveChanges();
+
+
             return this.iConexion.Corrales!.ToList();
         }
 
@@ -33,6 +41,13 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
 
             this.iConexion.Corrales!.Add(entidad!);
+
+            Auditorias auditorias = new Auditorias();
+            auditorias.Metodo = "Guardar";
+            auditorias.Fecha = DateTime.Now;
+            auditorias.Descripcion = "Se Guardó un nuevo Corral";
+            this.iConexion.Auditorias!.Add(auditorias);
+
             this.iConexion.SaveChanges();
             return entidad;
         }
@@ -47,6 +62,14 @@ namespace aplicacion_libreria.implementaciones
 
             var entry = this.iConexion!.Entry<Corrales>(entidad);
             entry.State = EntityState.Modified;
+
+            Auditorias auditorias = new Auditorias();
+            auditorias.Metodo = "Modificar";
+            auditorias.Fecha = DateTime.Now;
+            auditorias.Descripcion = "Se modificó un  Corral";
+            this.iConexion.Auditorias!.Add(auditorias);
+
+
             this.iConexion!.SaveChanges();
 
 
@@ -71,6 +94,13 @@ namespace aplicacion_libreria.implementaciones
                 throw new Exception("No existe el registro en la base de datos ");
 
             this.iConexion.Corrales.Remove(corral);
+
+            Auditorias auditorias = new Auditorias();
+            auditorias.Metodo = "Borrar";
+            auditorias.Fecha = DateTime.Now;
+            auditorias.Descripcion = "Se borró un Corral";
+            this.iConexion.Auditorias!.Add(auditorias);
+
             this.iConexion.SaveChanges();
         }
     }

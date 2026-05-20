@@ -11,7 +11,8 @@ namespace aplicacion_libreria.interfaces
         string? string_conexion { get; set; }
 
          DbSet<Alimentos>? Alimentos { get; set; }
-         DbSet<Animales>? Animales { get; set; }
+        DbSet<Auditorias>? Auditorias { get; set; }
+        DbSet<Animales>? Animales { get; set; }
          DbSet<AplicacionVacunas>? AplicacionVacunas { get; set; }
          DbSet<BrindarAlimentos>? BrindarAlimentos { get; set; }
          DbSet<Clientes>? Clientes { get; set; }

@@ -16,6 +16,14 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
 
+            Auditorias auditorias = new Auditorias();
+            auditorias.Metodo = "Consultar";
+            auditorias.Fecha = DateTime.Now;
+            auditorias.Descripcion = "Se consultó la lista de Ingresos";
+            this.iConexion.Auditorias!.Add(auditorias);
+            this.iConexion.SaveChanges();
+
+
             return this.iConexion.Ingresos!.ToList();
         }
 
@@ -33,6 +41,14 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
 
             this.iConexion.Ingresos!.Add(entidad!);
+
+            Auditorias auditorias = new Auditorias();
+            auditorias.Metodo = "Guardar";
+            auditorias.Fecha = DateTime.Now;
+            auditorias.Descripcion = "Se Guardó un nuevo Ingreso";
+            this.iConexion.Auditorias!.Add(auditorias);
+
+
             this.iConexion.SaveChanges();
             return entidad;
         }
@@ -47,6 +63,14 @@ namespace aplicacion_libreria.implementaciones
 
             var entry = this.iConexion!.Entry<Ingresos>(entidad);
             entry.State = EntityState.Modified;
+
+            Auditorias auditorias = new Auditorias();
+            auditorias.Metodo = "Modificar";
+            auditorias.Fecha = DateTime.Now;
+            auditorias.Descripcion = "Se modificó un  usuario";
+            this.iConexion.Auditorias!.Add(auditorias);
+
+
             this.iConexion!.SaveChanges();
 
 
@@ -71,6 +95,13 @@ namespace aplicacion_libreria.implementaciones
                 throw new Exception("No existe el registro en la base de datos ");
 
             this.iConexion.Ingresos.Remove(ingreso);
+
+            Auditorias auditorias = new Auditorias();
+            auditorias.Metodo = "Borrar";
+            auditorias.Fecha = DateTime.Now;
+            auditorias.Descripcion = "Se borró un Ingreso";
+            this.iConexion.Auditorias!.Add(auditorias);
+
             this.iConexion.SaveChanges();
         }
     }
