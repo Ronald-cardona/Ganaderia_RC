@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - presentacion_aspnetcore</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/presentacion_aspnetcore.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <h3>🐄 Ganadería RC</h3>
+            </div>
+
+            <ul class="menu">
+
+                <li>
+
+                    <button class="dropdown-btn">
+                         Mi entorno ganadero
+                    </button>
+
+                    <ul class="submenu">
+
+                        <li>
+                            <a asp-page="/ventanas/Fincas">
+                                Finca
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-page="/ventanas/Personas">
+                                Personas en mi entorno
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-page="/ventanas/LugarAnimales">
+                                Potreros y Corrales
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                <li>
+
+                    <button class="dropdown-btn">
+                        🐄 Gestión Animal
+                    </button>
+
+                    <ul class="submenu">
+
+                        <li>
+                            <a asp-page="/ventanas/Animales">
+                                Animales
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-page="/ventanas/Lotes">
+                                Lotes de animales
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-page="/ventanas/HistorialPesos">
+                                Historial de pesos
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                <li>
+
+                    <button class="dropdown-btn">
+                        💉 Sanidad
+                    </button>
+
+                    <ul class="submenu">
+
+                        <li>
+                            <a asp-page="/ventanas/Vacunas">
+                                Vacunas
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-page="/ventanas/AplicacionVacunas">
+                                Aplicación vacunas
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-page="/ventanas/VisitasVeterinarias">
+                                Visitas veterinarias
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                <li>
+
+                    <button class="dropdown-btn">
+                        Suplementacion y alimento
+                    </button>
+
+                    <ul class="submenu">
+
+                        <li>
+                            <a asp-page="/ventanas/Alimentos">
+                                Alimentos
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-page="/ventanas/BrindarAlimentos">
+                                Alimentos brindados
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-page="/ventanas/Suplementos">
+                                Suplementos
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-page="/ventanas/BrindarSuplementos">
+                                Suplementos brindados
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                <li>
+
+                    <button class="dropdown-btn">
+                        💰 Socios del negocio
+                    </button>
+
+                    <ul class="submenu">
+
+                        
+
+                        <li>
+                            <a asp-page="/ventanas/Clientes">
+                                Clientes
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-page="/ventanas/Proveedores">
+                                Proveedores
+                            </a>
+                        </li>
+
+
+                    </ul>
+
+                </li>
+
+
+                <li>
+
+                    <button class="dropdown-btn">
+                        💰 Movimientos 
+                    </button>
+
+                    <ul class="submenu">
+
+                        <li>
+                            <a asp-page="/ventanas/Compras">
+                                Compras
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-page="/ventanas/Ventas">
+                                Ventas
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-page="/ventanas/Ingresos">
+                                Ingresos
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-page="/ventanas/Gastos">
+                                Gastos
+                            </a>
+                        </li>
+
+                       
+
+
+                    </ul>
+
+                </li>
+
+            </ul>
+
+        </aside>
+
+        <!-- CONTENIDO -->
+        <main class="main-content">
+
+            <header class="navbar-custom">
+                <h4>
+                    Sistema de Gestión Ganadera RC
+                </h4>
+            </header>
+
+            <section class="content">
+                @RenderBody()
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- Algo de java script que me ayudara a que el menu sea desplegable -->
+    <script>
+
+        const dropdowns =
+        document.querySelectorAll(".dropdown-btn");
+
+        dropdowns.forEach(button => {
+
+        button.addEventListener("click", function () {
+
+        const submenu =
+        this.nextElementSibling;
+
+        if(submenu.style.display === "block")
+        {
+        submenu.style.display = "none";
+        }
+        else
+        {
+        submenu.style.display = "block";
+        }
+
+        });
+
+        });
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+﻿@page
+@model ComprasModel
+@{
+    ViewData["Title"] = "Compras";
+}
+
+<center>
+    <div>
+        <form method="POST"
+              enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div align="left">
+                <h3>Compras</h3>
+            </div>
+
+            <div>
+                <input type="submit"
+                       value="Refrescar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtRefrescar" />
+                <input type="submit"
+                       value="Nuevo"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtNuevo"
+                       disabled="@(Model.Compra != null)" />
+                <input type="submit"
+                       value="Guardar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtGuardar"
+                       disabled="@(Model.Compra == null)" />
+            </div>
+
+            @if (Model.Compra != null)
+            {
+                <input type="hidden"
+                       asp-for="@Model.Compra!.Id" />
+
+                <div>
+                    <div class="form-group">
+                        <label>
+                            Fecha de la compra
+                        </label>
+                        <div class="col-6">
+                            <input id="inFechaCompra"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Compra!.FechaCompra" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Peso del animal en la Compra
+                        </label>
+                        <div class="col-6">
+                            <input id="inPesoCompra"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Compra!.PesoCompra" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Precio del Kilo
+                        </label>
+                        <div class="col-6">
+                            <input id="inPrecioKilo"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Compra!.PrecioKilo" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Descripción de la Compra
+                        </label>
+                        <div class="col-6">
+                            <input id="inDescripcionCompra"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Compra!.DescripcionCompra" />
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label>
+                            Id del Proveedor
+                        </label>
+                        <div class="col-6">
+                            <input id="inProveedorId"
+                                   asp-for="@Model.Compra!.ProveedorId" />
+                        </div>
+                    </div>
+
+                    
+
+                    
+                </div>
+            }
+
+            @if (ViewData.ContainsKey("Mensaje"))
+            {
+                @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+                ;
+            }
+
+            @if (Model.Compra != null && Model.Borrando)
+            {
+                <div class='popup'>
+                    <div class='pp_ms_inner'>
+                        <div style='width:95%'>
+                            <h2 align="left">
+                                Mensaje
+                            </h2>
+
+                            <h6 align="left">
+                                Desea borrar el Compra?
+                            </h6>
+                            <h6 align="left">
+                                @Model.Compra!.FechaCompra
+                            </h6>
+
+                            <input type="submit"
+                                   value="Cerrar"
+                                   asp-page-handler="BtCerrar"
+                                   class="btn btn-secondary" />
+                            <input type="submit"
+                                   value="Borrar"
+                                   asp-page-handler="BtBorrar"
+                                   class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model != null &&
+                Model.ListaCompras != null &&
+                Model.ListaCompras.Count > 0)
+            {
+                <table class="tb_data table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>
+                            Fecha de la Compra
+                        </th>
+                        <th>
+                            Peso del animal en la compra
+                        </th>
+                        <th>
+                            Precio del Kilo
+                        </th>
+                       
+                        <th class="cl_hidden">
+                            Descripción de la Compra
+                        </th>
+
+                        <th class="cl_hidden">
+                            Id del proveedor
+                        </th>
+                        
+
+                        <th class="cl_actions">
+                            Acción
+                        </th>
+                    </tr>
+                    @foreach (var elemento in Model.ListaCompras)
+                    {
+                        <tr>
+                            <td>
+                                @elemento.FechaCompra.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @elemento.PesoCompra
+                            </td>
+                            <td>
+                                @elemento.PrecioKilo
+                            </td>
+                            
+                            <td class="cl_hidden">
+                                @elemento.DescripcionCompra
+                            </td>
+                            <td class="cl_hidden">
+                                @elemento.ProveedorId
+                            </td>
+                          
+
+                            <td>
+                                <input type="submit"
+                                       value="Modicar"
+                                       asp-page-handler="BtModificar"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                                <input type="submit"
+                                       value="Borrar"
+                                       asp-page-handler="BtBorrarVal"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </form>
+    </div>
+</center>

@@ -1,0 +1,16 @@
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\bin\Debug\net10.0\presentacion_libreria.deps.json
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\bin\Debug\net10.0\presentacion_libreria.dll
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\bin\Debug\net10.0\presentacion_libreria.pdb
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\bin\Debug\net10.0\aplicacion_libreria.dll
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\bin\Debug\net10.0\aplicacion_libreria.pdb
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\obj\Debug\net10.0\presentacion_libreria.csproj.AssemblyReference.cache
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\obj\Debug\net10.0\presentacion_libreria.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\obj\Debug\net10.0\presentacion_libreria.AssemblyInfoInputs.cache
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\obj\Debug\net10.0\presentacion_libreria.AssemblyInfo.cs
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\obj\Debug\net10.0\presentacion_libreria.csproj.CoreCompileInputs.cache
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\obj\Debug\net10.0\presentacion_libreria.sourcelink.json
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\obj\Debug\net10.0\presenta.6E43581D.Up2Date
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\obj\Debug\net10.0\presentacion_libreria.dll
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\obj\Debug\net10.0\refint\presentacion_libreria.dll
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\obj\Debug\net10.0\presentacion_libreria.pdb
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_libreria\obj\Debug\net10.0\ref\presentacion_libreria.dll

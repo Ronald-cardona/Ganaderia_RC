@@ -1,0 +1,201 @@
+﻿@page
+@model HistorialPesosModel
+@{
+    ViewData["Title"] = "HistorialPesos";
+}
+
+<center>
+    <div>
+        <form method="POST"
+              enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div align="left">
+                <h3>Historial de pesos</h3>
+            </div>
+
+            <div>
+                <input type="submit"
+                       value="Refrescar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtRefrescar" />
+                <input type="submit"
+                       value="Nuevo"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtNuevo"
+                       disabled="@(Model.HistorialPeso != null)" />
+                <input type="submit"
+                       value="Guardar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtGuardar"
+                       disabled="@(Model.HistorialPeso == null)" />
+            </div>
+
+            @if (Model.HistorialPeso != null)
+            {
+                <input type="hidden"
+                       asp-for="@Model.HistorialPeso!.Id" />
+
+                <div>
+                    <div class="form-group">
+                        <label>
+                             Fecha del último pesaje
+                        </label>
+                        <div class="col-6">
+                            <input id="inFechaUltimoPesaje"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.HistorialPeso!.FechaUltimoPesaje" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Fecha del pesaje actual
+                        </label>
+                        <div class="col-6">
+                            <input id="inFechaPesajeActual"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.HistorialPeso!.FechaPesajeActual" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Ultimo Peso
+                        </label>
+                        <div class="col-6">
+                            <input id="inUltimoPeso"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.HistorialPeso!.UltimoPeso" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Peso actual
+                        </label>
+                        <div class="col-6">
+                            <input id="inPesoActual"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.HistorialPeso!.PesoActual" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Id del animal
+                        </label>
+                        <div class="col-6">
+                            <input id="inIdAnimal"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.HistorialPeso!.IdAnimal" />
+                        </div>
+                    </div>
+                   
+
+                    
+                </div>
+            }
+
+            @if (ViewData.ContainsKey("Mensaje"))
+            {
+                @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+                ;
+            }
+
+            @if (Model.HistorialPeso != null && Model.Borrando)
+            {
+                <div class='popup'>
+                    <div class='pp_ms_inner'>
+                        <div style='width:95%'>
+                            <h2 align="left">
+                                Mensaje
+                            </h2>
+
+                            <h6 align="left">
+                                Desea borrar el HistorialPeso?
+                            </h6>
+                            <h6 align="left">
+                                @Model.HistorialPeso!.UltimoPeso
+                            </h6>
+
+                            <input type="submit"
+                                   value="Cerrar"
+                                   asp-page-handler="BtCerrar"
+                                   class="btn btn-secondary" />
+                            <input type="submit"
+                                   value="Borrar"
+                                   asp-page-handler="BtBorrar"
+                                   class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model != null &&
+                Model.ListaHistorialPesos != null &&
+                Model.ListaHistorialPesos.Count > 0)
+            {
+                <table class="tb_data table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>
+                            Fecha último Pesaje
+                        </th>
+                        <th>
+                            Fecha pesaje actual
+                        </th>
+                        <th>
+                            Ultimo peso
+                        </th>
+                       
+                        <th class="cl_hidden">
+                            Peso actual
+                        </th>
+
+                        <th class="cl_hidden">
+                            Id animal
+                        </th>
+                       
+
+                        <th class="cl_actions">
+                            Acción
+                        </th>
+                    </tr>
+                    @foreach (var elemento in Model.ListaHistorialPesos)
+                    {
+                        <tr>
+                           
+                             <td class="cl_hidden">
+                                @elemento.FechaUltimoPesaje.ToString("dd/MM/yyyy")
+                            </td> 
+                            <td class="cl_hidden">
+                                @elemento.FechaPesajeActual.ToString("dd/MM/yyyy")
+                            </td>
+                            <td class="cl_hidden">
+                                @elemento.UltimoPeso
+                            </td>
+                            <td class="cl_hidden">
+                                @elemento.PesoActual
+                            </td>
+                            <td class="cl_hidden">
+                                @elemento.IdAnimal
+                            </td>
+
+                           
+
+                            <td>
+                                <input type="submit"
+                                       value="Modicar"
+                                       asp-page-handler="BtModificar"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                                <input type="submit"
+                                       value="Borrar"
+                                       asp-page-handler="BtBorrarVal"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </form>
+    </div>
+</center>

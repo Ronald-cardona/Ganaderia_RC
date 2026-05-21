@@ -1,0 +1,184 @@
+﻿@page
+@model FincasModel
+@{
+    ViewData["Title"] = "Fincas";
+}
+
+<center>
+    <div>
+        <form method="POST"
+              enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div align="left">
+                <h3>Fincaes</h3>
+            </div>
+
+            <div>
+                <input type="submit"
+                       value="Refrescar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtRefrescar" />
+                <input type="submit"
+                       value="Nuevo"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtNuevo"
+                       disabled="@(Model.Finca != null)" />
+                <input type="submit"
+                       value="Guardar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtGuardar"
+                       disabled="@(Model.Finca == null)" />
+            </div>
+
+            @if (Model.Finca != null)
+            {
+                <input type="hidden"
+                       asp-for="@Model.Finca!.Id" />
+
+                <div>
+                    <div class="form-group">
+                        <label>
+                            Código
+                        </label>
+                        <div class="col-6">
+                            <input id="inCodigo"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Finca!.Codigo" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Nombre de la finca
+                        </label>
+                        <div class="col-6">
+                            <input id="inNombre"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Finca!.Nombre" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Direccion de la finca
+                        </label>
+                        <div class="col-6">
+                            <input id="inDirecccion"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Finca!.Direcccion" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Extension en metros de la finca
+                        </label>
+                        <div class="col-6">
+                            <input id="inExtensionMetro"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Finca!.ExtensionMetro" />
+                        </div>
+                     </div>
+                   
+
+                    
+                </div>
+            }
+
+            @if (ViewData.ContainsKey("Mensaje"))
+            {
+                @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+                ;
+            }
+
+            @if (Model.Finca != null && Model.Borrando)
+            {
+                <div class='popup'>
+                    <div class='pp_ms_inner'>
+                        <div style='width:95%'>
+                            <h2 align="left">
+                                Mensaje
+                            </h2>
+
+                            <h6 align="left">
+                                Desea borrar el Finca?
+                            </h6>
+                            <h6 align="left">
+                                @Model.Finca!.Codigo
+                            </h6>
+
+                            <input type="submit"
+                                   value="Cerrar"
+                                   asp-page-handler="BtCerrar"
+                                   class="btn btn-secondary" />
+                            <input type="submit"
+                                   value="Borrar"
+                                   asp-page-handler="BtBorrar"
+                                   class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model != null &&
+                Model.ListaFincas != null &&
+                Model.ListaFincas.Count > 0)
+            {
+                <table class="tb_data table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>
+                            Código
+                        </th>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Direccion
+                        </th>
+                        
+                        <th class="cl_hidden">
+                            Extension
+                        </th>
+                        
+
+                        <th class="cl_actions">
+                            Acción
+                        </th>
+                    </tr>
+                    @foreach (var elemento in Model.ListaFincas)
+                    {
+                        <tr>
+                            <td>
+                                @elemento.Codigo
+                            </td>
+                            <td>
+                                @elemento.Nombre
+                            </td>
+                            <td>
+                                @elemento.Direcccion
+                            </td>
+                            @* <td class="cl_hidden">
+                                @elemento.Fecha.ToString("dd/MM/yyyy")
+                            </td> *@
+                            <td class="cl_hidden">
+                                @elemento.ExtensionMetro
+                            </td>
+                           
+
+                            <td>
+                                <input type="submit"
+                                       value="Modicar"
+                                       asp-page-handler="BtModificar"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                                <input type="submit"
+                                       value="Borrar"
+                                       asp-page-handler="BtBorrarVal"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </form>
+    </div>
+</center>

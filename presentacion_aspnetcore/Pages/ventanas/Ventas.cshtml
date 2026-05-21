@@ -1,0 +1,214 @@
+﻿@page
+@model VentasModel
+@{
+    ViewData["Title"] = "Ventas";
+}
+
+<center>
+    <div>
+        <form method="POST"
+              enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div align="left">
+                <h3>Ventas</h3>
+            </div>
+
+            <div>
+                <input type="submit"
+                       value="Refrescar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtRefrescar" />
+                <input type="submit"
+                       value="Nuevo"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtNuevo"
+                       disabled="@(Model.Venta != null)" />
+                <input type="submit"
+                       value="Guardar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtGuardar"
+                       disabled="@(Model.Venta == null)" />
+            </div>
+
+            @if (Model.Venta != null)
+            {
+                <input type="hidden"
+                       asp-for="@Model.Venta!.Id" />
+
+                <div>
+                    <div class="form-group">
+                        <label>
+                            Fecha de la venta
+                        </label>
+                        <div class="col-6">
+                            <input id="inFechaVenta"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Venta!.FechaVenta" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Peso final del animal
+                        </label>
+                        <div class="col-6">
+                            <input id="inPesoFinal"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Venta!.PesoFinal" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Precio del Kilo
+                        </label>
+                        <div class="col-6">
+                            <input id="inPrecioKilo"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Venta!.PrecioKilo" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Descripción de la Venta
+                        </label>
+                        <div class="col-6">
+                            <input id="inDescripcionVenta"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Venta!.DescripcionVenta" />
+                        </div>
+                    </div>
+                  
+                    <div class="form-group">
+                        <label>
+                           Id del  Ingreso
+                        </label>
+                        <div class="col-6">
+                            <input id="inIngresoId"
+                                   asp-for="@Model.Venta!.IngresoId" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Id del Cliente
+                        </label>
+                        <div class="col-6">
+                            <input id="inClienteId"
+                                   asp-for="@Model.Venta!.ClienteId" />
+                        </div>
+                    </div>
+                   
+
+                    
+                </div>
+            }
+
+            @if (ViewData.ContainsKey("Mensaje"))
+            {
+                @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+                ;
+            }
+
+            @if (Model.Venta != null && Model.Borrando)
+            {
+                <div class='popup'>
+                    <div class='pp_ms_inner'>
+                        <div style='width:95%'>
+                            <h2 align="left">
+                                Mensaje
+                            </h2>
+
+                            <h6 align="left">
+                                Desea borrar el Venta?
+                            </h6>
+                            <h6 align="left">
+                                @Model.Venta!.FechaVenta
+                            </h6>
+
+                            <input type="submit"
+                                   value="Cerrar"
+                                   asp-page-handler="BtCerrar"
+                                   class="btn btn-secondary" />
+                            <input type="submit"
+                                   value="Borrar"
+                                   asp-page-handler="BtBorrar"
+                                   class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model != null &&
+                Model.ListaVentas != null &&
+                Model.ListaVentas.Count > 0)
+            {
+                <table class="tb_data table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>
+                            Fecha de venta
+                        </th>
+                        <th>
+                            Peso final del animal
+                        </th>
+                        <th>
+                            Precio del Kilo
+                        </th>
+                        
+                        <th class="cl_hidden">
+                            Descripción de la venta
+                        </th>
+                        <th class="cl_hidden">
+                            Id del Ingreso
+                        </th>
+
+                        <th class="cl_hidden">
+                            Id del Cliente
+                        </th>
+                   
+                        <th class="cl_actions">
+                            Acción
+                        </th>
+                    </tr>
+                    @foreach (var elemento in Model.ListaVentas)
+                    {
+                        <tr>
+                            <td>
+                                @elemento.FechaVenta.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @elemento.PesoFinal
+                            </td>
+                            <td>
+                                @elemento.PrecioKilo
+                            </td>
+                           
+                            <td class="cl_hidden">
+                                @elemento.DescripcionVenta
+                            </td>
+                            <td class="cl_hidden">
+                                @elemento.IngresoId
+                            </td>
+                            <td class="cl_hidden">
+                                @elemento.ClienteId
+                            </td>
+                           
+
+                            <td>
+                                <input type="submit"
+                                       value="Modicar"
+                                       asp-page-handler="BtModificar"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                                <input type="submit"
+                                       value="Borrar"
+                                       asp-page-handler="BtBorrarVal"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </form>
+    </div>
+</center>

@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/1. Presentaciones/">
+    <Project Path="presentacion_aspnetcore/presentacion_aspnetcore.csproj" Id="449bb25d-4e65-47bd-b989-43629b6bdc97" />
     <Project Path="presentacion_libreria/presentacion_libreria.csproj" Id="325a6811-cbaf-4ff6-a817-4eb83246dce0" />
   </Folder>
   <Folder Name="/2. Servicios/">

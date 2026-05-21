@@ -7,7 +7,7 @@ namespace aplicacion_libreria.entidades
     public class Fincas
     {
         public int Id { get; set; }  
-        public int Codigo { get; set; }
+        public string Codigo { get; set; }
         public string Nombre { get; set; }
         public string Direcccion { get; set; }
         public decimal ExtensionMetro { get; set; }

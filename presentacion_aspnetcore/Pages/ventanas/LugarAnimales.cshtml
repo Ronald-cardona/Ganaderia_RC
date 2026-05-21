@@ -1,0 +1,213 @@
+﻿@page
+@model LugarAnimalesModel
+@{
+    ViewData["Title"] = "LugarLugarAnimales";
+}
+
+<center>
+    <div>
+        <form method="POST"
+              enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div align="left">
+                <h3>LugarAnimales</h3>
+            </div>
+
+            <div>
+                <input type="submit"
+                       value="Refrescar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtRefrescar" />
+                <input type="submit"
+                       value="Nuevo"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtNuevo"
+                       disabled="@(Model.LugarAnimal != null)" />
+                <input type="submit"
+                       value="Guardar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtGuardar"
+                       disabled="@(Model.LugarAnimal == null)" />
+            </div>
+
+            @if (Model.LugarAnimal != null)
+            {
+                <input type="hidden"
+                       asp-for="@Model.LugarAnimal!.Id" />
+
+                <div>
+                    <div class="form-group">
+                        <label>
+                            Código
+                        </label>
+                        <div class="col-6">
+                            <input id="inCodigo"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.LugarAnimal!.Codigo" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Metros del lugar
+                        </label>
+                        <div class="col-6">
+                            <input id="inMetros"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.LugarAnimal!.Metros" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Corral o Potrero?
+                        </label>
+                        <div class="col-6">
+                            <input id="inDireccion"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.LugarAnimal!.Direccion" />
+                        </div>
+                    </div>
+                    
+                     <div class="form-group">
+                        <label>
+                            Fecha de ingreso del animal 
+                        </label>
+                        <div class="col-6">
+                            <input id="inFechaIngreso"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.LugarAnimal!.FechaIngreso" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Fecha de salida del animal
+                        </label>
+                        <div class="col-6">
+                            <input id="inFechaSalida"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.LugarAnimal!.FechaSalida" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Id de la finca
+                        </label>
+                        <div class="col-6">
+                            <input id="inFincaId"
+                                   asp-for="@Model.LugarAnimal!.FincaId" />
+                        </div>
+                    </div>
+                    
+
+                    
+                </div>
+            }
+
+            @if (ViewData.ContainsKey("Mensaje"))
+            {
+                @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+                ;
+            }
+
+            @if (Model.LugarAnimal != null && Model.Borrando)
+            {
+                <div class='popup'>
+                    <div class='pp_ms_inner'>
+                        <div style='width:95%'>
+                            <h2 align="left">
+                                Mensaje
+                            </h2>
+
+                            <h6 align="left">
+                                Desea borrar el LugarAnimal?
+                            </h6>
+                            <h6 align="left">
+                                @Model.LugarAnimal!.Codigo
+                            </h6>
+
+                            <input type="submit"
+                                   value="Cerrar"
+                                   asp-page-handler="BtCerrar"
+                                   class="btn btn-secondary" />
+                            <input type="submit"
+                                   value="Borrar"
+                                   asp-page-handler="BtBorrar"
+                                   class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model != null &&
+                Model.ListaLugarAnimales != null &&
+                Model.ListaLugarAnimales.Count > 0)
+            {
+                <table class="tb_data table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>
+                            Código
+                        </th>
+                        <th>
+                            Metros
+                        </th>
+                        <th>
+                            Corral/Potrero
+                        </th>
+                         <th class="cl_hidden">
+                            Fecha entrada 
+                        </th> 
+                        <th class="cl_hidden">
+                            Fecha Salida
+                        </th>
+                        <th class="cl_hidden">
+                            Id de la finca
+                        </th>
+                        
+
+                        <th class="cl_actions">
+                            Acción
+                        </th>
+                    </tr>
+                    @foreach (var elemento in Model.ListaLugarAnimales)
+                    {
+                        <tr>
+                            <td>
+                                @elemento.Codigo
+                            </td>
+                            <td>
+                                @elemento.Metros
+                            </td>
+                            <td>
+                                @elemento.Direccion
+                            </td>
+                             <td class="cl_hidden">
+                                @elemento.FechaIngreso.ToString("dd/MM/yyyy")
+                            </td> 
+                            <td class="cl_hidden">
+                                @elemento.FechaSalida
+                            </td>
+                            <td class="cl_hidden">
+                                @elemento.FincaId
+                            </td>
+                            
+
+                            <td>
+                                <input type="submit"
+                                       value="Modicar"
+                                       asp-page-handler="BtModificar"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                                <input type="submit"
+                                       value="Borrar"
+                                       asp-page-handler="BtBorrarVal"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </form>
+    </div>
+</center>

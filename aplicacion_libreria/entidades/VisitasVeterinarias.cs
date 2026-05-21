@@ -12,6 +12,6 @@ namespace aplicacion_libreria.entidades
         public int? VeterinarioId { get; set; }
 
         [ForeignKey("IdAnimal")] public Animales? _animal { get; set; }
-        [ForeignKey("VeterinarioId")] public Veterinarios? _veterinario { get; set; }
+        [ForeignKey("VeterinarioId")] public Personas? _persona { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace aplicacion_libreria.entidades
         public int Id { get; set; }  
         public string Codigo { get; set; }
         public decimal Metros { get; set; }
+        public string Direccion { get; set; }
         public DateTime FechaIngreso { get; set; }
         public DateTime? FechaSalida { get; set; }
 

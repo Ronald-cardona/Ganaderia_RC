@@ -13,10 +13,10 @@ namespace aplicacion_libreria.entidades
         public int Edad { get; set; }
         public bool Sexo { get; set; }
 
-        public int LoteId { get; set; }
-        public int CompraId { get; set; }
+        public int? LoteId { get; set; }
+        public int? CompraId { get; set; }
         public int EstadoId { get; set; }
-        public int VentaId { get; set; }
+        public int? VentaId { get; set; }
         public int LugarAnimalId { get; set; }
 
         [ForeignKey("LoteId")] public Lotes? _lote { get; set; }

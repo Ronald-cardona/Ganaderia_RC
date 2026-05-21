@@ -1,0 +1,163 @@
+﻿@page
+@model BrindarAlimentosModel
+@{
+    ViewData["Title"] = "BrindarAlimentos";
+}
+
+<center>
+    <div>
+        <form method="POST"
+              enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div align="left">
+                <h3>Brindar Alimentos</h3>
+            </div>
+
+            <div>
+                <input type="submit"
+                       value="Refrescar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtRefrescar" />
+                <input type="submit"
+                       value="Nuevo"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtNuevo"
+                       disabled="@(Model.BrindarAlimento != null)" />
+                <input type="submit"
+                       value="Guardar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtGuardar"
+                       disabled="@(Model.BrindarAlimento == null)" />
+            </div>
+
+            @if (Model.BrindarAlimento != null)
+            {
+                <input type="hidden"
+                       asp-for="@Model.BrindarAlimento!.Id" />
+
+                <div>
+                    <div class="form-group">
+                        <label>
+                            Fecha Brindar Alimentos
+                        </label>
+                        <div class="col-6">
+                            <input id="inFechaBrindarAlimentos"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.BrindarAlimento!.FechaBrindarAlimentos" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Id del animal
+                        </label>
+                        <div class="col-6">
+                            <input id="inIdAnimal"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.BrindarAlimento!.IdAnimal" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Id del alimento
+                        </label>
+                        <div class="col-6">
+                            <input id="inAlimentoId"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.BrindarAlimento!.AlimentoId" />
+                        </div>
+                    </div>
+                   
+
+                    
+                </div>
+            }
+
+            @if (ViewData.ContainsKey("Mensaje"))
+            {
+                @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+                ;
+            }
+
+            @if (Model.BrindarAlimento != null && Model.Borrando)
+            {
+                <div class='popup'>
+                    <div class='pp_ms_inner'>
+                        <div style='width:95%'>
+                            <h2 align="left">
+                                Mensaje
+                            </h2>
+
+                            <h6 align="left">
+                                Desea borrar el BrindarAlimento?
+                            </h6>
+                            <h6 align="left">
+                                @Model.BrindarAlimento!.FechaBrindarAlimentos
+                            </h6>
+
+                            <input type="submit"
+                                   value="Cerrar"
+                                   asp-page-handler="BtCerrar"
+                                   class="btn btn-secondary" />
+                            <input type="submit"
+                                   value="Borrar"
+                                   asp-page-handler="BtBorrar"
+                                   class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model != null &&
+                Model.ListaBrindarAlimentos != null &&
+                Model.ListaBrindarAlimentos.Count > 0)
+            {
+                <table class="tb_data table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>
+                            Fecha brindar alimentos
+                        </th>
+                        <th>
+                            Id del Animal
+                        </th>
+                        <th>
+                           Id del alimento
+                        </th>
+                        
+                        <th class="cl_actions">
+                            Acción
+                        </th>
+                    </tr>
+                    @foreach (var elemento in Model.ListaBrindarAlimentos)
+                    {
+                        <tr>
+                            <td>
+                                @elemento.FechaBrindarAlimentos.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @elemento.IdAnimal
+                            </td>
+                            <td>
+                                @elemento.AlimentoId
+                            </td>
+                            
+
+                            <td>
+                                <input type="submit"
+                                       value="Modicar"
+                                       asp-page-handler="BtModificar"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                                <input type="submit"
+                                       value="Borrar"
+                                       asp-page-handler="BtBorrarVal"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </form>
+    </div>
+</center>

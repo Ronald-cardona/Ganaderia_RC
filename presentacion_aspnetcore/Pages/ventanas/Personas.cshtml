@@ -1,0 +1,227 @@
+﻿@page
+@model PersonasModel
+@{
+    ViewData["Title"] = "Personas";
+}
+
+
+<center>
+    <div>
+        <form method="POST"
+              enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div align="left">
+                <h3>Personas</h3>
+            </div>
+
+            <div>
+                <input type="submit"
+                       value="Refrescar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtRefrescar" />
+                <input type="submit"
+                       value="Nuevo"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtNuevo"
+                       disabled="@(Model.Persona != null)" />
+                <input type="submit"
+                       value="Guardar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtGuardar"
+                       disabled="@(Model.Persona == null)" />
+            </div>
+
+            @if (Model.Persona != null)
+            {
+                <input type="hidden"
+                       asp-for="@Model.Persona!.Id" />
+
+                <div>
+                    <div class="form-group">
+                        <label>
+                            Nombre
+                        </label>
+                        <div class="col-6">
+                            <input id="inNombre"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Persona!.Nombre" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Veterinario o empleado? 
+                        </label>
+                        <div class="col-6">
+                            <input id="inApellido"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Persona!.Apellido" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Cedula
+                        </label>
+                        <div class="col-6">
+                            <input id="inCedula"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Persona!.Cedula" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Telefono
+                        </label>
+                        <div class="col-6">
+                            <input id="inTelefono"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Persona!.Telefono" />
+                        </div>
+                    </div>
+                    @*  <div class="form-group">
+                        <label>
+                            Fecha
+                        </label>
+                        <div class="col-6">
+                            <input id="inFecha"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Persona!.Fecha" />
+                        </div>
+                    </div> *@
+                    <div class="form-group">
+                        <label>
+                            Sueldo
+                        </label>
+                        <div class="col-6">
+                            <input id="inSueldo"
+                                   asp-for="@Model.Persona!.Sueldo" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Activo marcar para si
+                        </label>
+                        <div class="col-6">
+                            <input id="inActivo"
+                                   asp-for="@Model.Persona!.Activo" />
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            }
+
+            @if (ViewData.ContainsKey("Mensaje"))
+            {
+                @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+                ;
+            }
+
+            @if (Model.Persona != null && Model.Borrando)
+            {
+                <div class='popup'>
+                    <div class='pp_ms_inner'>
+                        <div style='width:95%'>
+                            <h2 align="left">
+                                Mensaje
+                            </h2>
+
+                            <h6 align="left">
+                                Desea borrar la Persona?
+                            </h6>
+                            <h6 align="left">
+                                @Model.Persona!.Nombre
+                            </h6>
+
+                            <input type="submit"
+                                   value="Cerrar"
+                                   asp-page-handler="BtCerrar"
+                                   class="btn btn-secondary" />
+                            <input type="submit"
+                                   value="Borrar"
+                                   asp-page-handler="BtBorrar"
+                                   class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model != null &&
+                Model.ListaPersonas != null &&
+                Model.ListaPersonas.Count > 0)
+            {
+                <table class="tb_data table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                           Veterinario/empleado
+                        </th>
+                        <th>
+                            Cedula
+                        </th>
+                        @* <th class="cl_hidden">
+                            Fecha
+                        </th> *@
+                        <th class="cl_hidden">
+                            Telefono
+                        </th>
+                        <th class="cl_hidden">
+                            Sueldo
+                        </th>
+                        <th class="cl_hidden">
+                            Activo
+                        </th>
+                        
+
+                        <th class="cl_actions">
+                            Acción
+                        </th>
+                    </tr>
+                    @foreach (var elemento in Model.ListaPersonas)
+                    {
+                        <tr>
+                            <td>
+                                @elemento.Nombre
+                            </td>
+                            <td>
+                                @elemento.Apellido
+                            </td>
+                            <td>
+                                @elemento.Cedula
+                            </td>
+                            @* <td class="cl_hidden">
+                                @elemento.Fecha.ToString("dd/MM/yyyy")
+                            </td> *@
+                            <td class="cl_hidden">
+                                @elemento.Telefono
+                            </td>
+                            <td class="cl_hidden">
+                                @elemento.Sueldo
+                            </td>
+                            <td class="cl_hidden">
+                                @elemento.Activo
+                            </td>
+                           
+
+                            <td>
+                                <input type="submit"
+                                       value="Modicar"
+                                       asp-page-handler="BtModificar"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                                <input type="submit"
+                                       value="Borrar"
+                                       asp-page-handler="BtBorrarVal"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </form>
+    </div>
+</center>

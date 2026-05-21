@@ -11,11 +11,11 @@ namespace aplicacion_libreria.entidades
         public decimal CostoGasto { get; set; }
         public string? DescripcionGasto { get; set; }
 
-        public int CompraId { get; set; }
-        public int AlimentoId { get; set; }
-        public int VacunaId { get; set; }
-        public int SuplementoId { get; set; }
-        public int PersonaId { get; set; }
+        public int? CompraId { get; set; }
+        public int? AlimentoId { get; set; }
+        public int? VacunaId { get; set; }
+        public int? SuplementoId { get; set; }
+        public int? PersonaId { get; set; }
 
         [ForeignKey("CompraId")] public Compras? _compra { get; set; }
         [ForeignKey("AlimentoId")] public Alimentos? _alimento { get; set; }
@@ -24,5 +24,5 @@ namespace aplicacion_libreria.entidades
         [ForeignKey("PersonaId")] public Personas? _persona { get; set; }
 
 
-    } //calcular el gato total 
+    } //calcular el gasto total 
 }

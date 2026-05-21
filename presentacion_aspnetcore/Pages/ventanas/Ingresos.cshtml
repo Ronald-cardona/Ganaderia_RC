@@ -1,0 +1,164 @@
+﻿@page
+@model IngresosModel
+@{
+    ViewData["Title"] = "Ingresos";
+}
+
+<center>
+    <div>
+        <form method="POST"
+              enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div align="left">
+                <h3>Ingresos</h3>
+            </div>
+
+            <div>
+                <input type="submit"
+                       value="Refrescar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtRefrescar" />
+                <input type="submit"
+                       value="Nuevo"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtNuevo"
+                       disabled="@(Model.Ingreso != null)" />
+                <input type="submit"
+                       value="Guardar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtGuardar"
+                       disabled="@(Model.Ingreso == null)" />
+            </div>
+
+            @if (Model.Ingreso != null)
+            {
+                <input type="hidden"
+                       asp-for="@Model.Ingreso!.Id" />
+
+                <div>
+                    <div class="form-group">
+                        <label>
+                            Fecha del ingreso
+                        </label>
+                        <div class="col-6">
+                            <input id="inFechaIngreso"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Ingreso!.FechaIngreso" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Cantidad del iIngreso
+                        </label>
+                        <div class="col-6">
+                            <input id="inCantidadIngreso"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Ingreso!.CantidadIngreso" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Descripción del ingreso
+                        </label>
+                        <div class="col-6">
+                            <input id="inDescripcionIngreso"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Ingreso!.DescripcionIngreso" />
+                        </div>
+                    </div>
+                   
+
+                    
+                </div>
+            }
+
+            @if (ViewData.ContainsKey("Mensaje"))
+            {
+                @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+                ;
+            }
+
+            @if (Model.Ingreso != null && Model.Borrando)
+            {
+                <div class='popup'>
+                    <div class='pp_ms_inner'>
+                        <div style='width:95%'>
+                            <h2 align="left">
+                                Mensaje
+                            </h2>
+
+                            <h6 align="left">
+                                Desea borrar el Ingreso?
+                            </h6>
+                            <h6 align="left">
+                                @Model.Ingreso!.FechaIngreso
+                            </h6>
+
+                            <input type="submit"
+                                   value="Cerrar"
+                                   asp-page-handler="BtCerrar"
+                                   class="btn btn-secondary" />
+                            <input type="submit"
+                                   value="Borrar"
+                                   asp-page-handler="BtBorrar"
+                                   class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model != null &&
+                Model.ListaIngresos != null &&
+                Model.ListaIngresos.Count > 0)
+            {
+                <table class="tb_data table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>
+                            Fecha del ingreso
+                        </th>
+                        <th>
+                            Cantidad del ingreso
+                        </th>
+                        <th>
+                            Descripción del ingreso
+                        </th>
+                        
+
+                        <th class="cl_actions">
+                            Acción
+                        </th>
+                    </tr>
+                    @foreach (var elemento in Model.ListaIngresos)
+                    {
+                        <tr>
+                            <td>
+                                @elemento.FechaIngreso.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @elemento.CantidadIngreso
+                            </td>
+                            <td>
+                                @elemento.DescripcionIngreso
+                            </td>
+                            
+
+                            <td>
+                                <input type="submit"
+                                       value="Modicar"
+                                       asp-page-handler="BtModificar"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                                <input type="submit"
+                                       value="Borrar"
+                                       asp-page-handler="BtBorrarVal"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </form>
+    </div>
+</center>

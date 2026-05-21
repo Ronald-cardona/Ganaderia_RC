@@ -1,5 +1,7 @@
 ﻿
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace aplicacion_libreria.entidades
 {
     public class Estados
@@ -7,6 +9,6 @@ namespace aplicacion_libreria.entidades
         public int Id { get; set; }
         public string Descripcion { get; set; }
 
-        public Animales? _animal { get; set; }
+        [NotMapped] public List<Animales>? animales { get; set; }
     }
 }

@@ -1,0 +1,244 @@
+﻿@page
+@model GastosModel
+@{
+    ViewData["Title"] = "Gastos";
+}
+
+<center>
+    <div>
+        <form method="POST"
+              enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div align="left">
+                <h3>Gastos</h3>
+            </div>
+
+            <div>
+                <input type="submit"
+                       value="Refrescar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtRefrescar" />
+                <input type="submit"
+                       value="Nuevo"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtNuevo"
+                       disabled="@(Model.Gasto != null)" />
+                <input type="submit"
+                       value="Guardar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtGuardar"
+                       disabled="@(Model.Gasto == null)" />
+            </div>
+
+            @if (Model.Gasto != null)
+            {
+                <input type="hidden"
+                       asp-for="@Model.Gasto!.Id" />
+
+                <div>
+                    <div class="form-group">
+                        <label>
+                            Fecha del gasto
+                        </label>
+                        <div class="col-6">
+                            <input id="inFechaGasto"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Gasto!.FechaGasto" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Costo del Gastol
+                        </label>
+                        <div class="col-6">
+                            <input id="inCostoGasto"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Gasto!.CostoGasto" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Descripción del gasto
+                        </label>
+                        <div class="col-6">
+                            <input id="inDescripcionGasto"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Gasto!.DescripcionGasto" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            CompraId
+                        </label>
+                        <div class="col-6">
+                            <input id="inCompraId"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Gasto!.CompraId" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                           Id del  Alimento
+                        </label>
+                        <div class="col-6">
+                            <input id="inAlimentoId"
+                                   asp-for="@Model.Gasto!.AlimentoId" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            id de la Vacuna
+                        </label>
+                        <div class="col-6">
+                            <input id="inVacunaId"
+                                   asp-for="@Model.Gasto!.VacunaId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                          Id del Suplemento
+                        </label>
+                        <div class="col-6">
+                            <input id="inSuplementoId"
+                                   asp-for="@Model.Gasto!.SuplementoId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Id de la compra (opcional)
+                        </label>
+                        <div class="col-6">
+                            <input id="inPersonaId"
+                                   asp-for="@Model.Gasto!.PersonaId" />
+                        </div>
+                    </div>
+                   
+
+                    
+                </div>
+            }
+
+            @if (ViewData.ContainsKey("Mensaje"))
+            {
+                @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+                ;
+            }
+
+            @if (Model.Gasto != null && Model.Borrando)
+            {
+                <div class='popup'>
+                    <div class='pp_ms_inner'>
+                        <div style='width:95%'>
+                            <h2 align="left">
+                                Mensaje
+                            </h2>
+
+                            <h6 align="left">
+                                Desea borrar el Gasto?
+                            </h6>
+                            <h6 align="left">
+                                @Model.Gasto!.FechaGasto
+                            </h6>
+
+                            <input type="submit"
+                                   value="Cerrar"
+                                   asp-page-handler="BtCerrar"
+                                   class="btn btn-secondary" />
+                            <input type="submit"
+                                   value="Borrar"
+                                   asp-page-handler="BtBorrar"
+                                   class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model != null &&
+                Model.ListaGastos != null &&
+                Model.ListaGastos.Count > 0)
+            {
+                <table class="tb_data table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>
+                            Fecha del gasto
+                        </th>
+                        <th>
+                            Costo del gasto
+                        </th>
+                        <th>
+                            Descripción del gasto
+                        </th>
+                        
+                        <th class="cl_hidden">
+                           Id de la  Compra
+                        </th>
+                        <th class="cl_hidden">
+                            Id del Alimento
+                        </th>
+                        <th class="cl_hidden">
+                            Id de la Vacuna
+                        </th>
+                        <th class="cl_hidden">
+                           Id del  Suplemento
+                        </th>
+                        <th class="cl_hidden">
+                            Id de la Persona
+                        </th>
+                        
+
+                        <th class="cl_actions">
+                            Acción
+                        </th>
+                    </tr>
+                    @foreach (var elemento in Model.ListaGastos)
+                    {
+                        <tr>
+                            <td>
+                                @elemento.FechaGasto.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @elemento.CostoGasto
+                            </td>
+                            <td>
+                                @elemento.DescripcionGasto
+                            </td>
+                            
+                            <td class="cl_hidden">
+                                @elemento.CompraId
+                            </td>
+                            <td class="cl_hidden">
+                                @elemento.AlimentoId
+                            </td>
+                            <td class="cl_hidden">
+                                @elemento.VacunaId
+                            </td>
+                            <td class="cl_hidden">
+                                @elemento.SuplementoId
+                            </td>
+                            <td class="cl_hidden">
+                                @elemento.PersonaId
+                            </td>
+                            
+
+                            <td>
+                                <input type="submit"
+                                       value="Modicar"
+                                       asp-page-handler="BtModificar"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                                <input type="submit"
+                                       value="Borrar"
+                                       asp-page-handler="BtBorrarVal"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </form>
+    </div>
+</center>
