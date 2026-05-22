@@ -77,19 +77,10 @@
                                    asp-for="@Model.Animal!.Edad" />
                         </div>
                      </div>
-                   @*  <div class="form-group">
-                        <label>
-                            Fecha
-                        </label>
-                        <div class="col-6">
-                            <input id="inFecha"
-                                   class="cts_forms form-control"
-                                   asp-for="@Model.Animal!.Fecha" />
-                        </div> 
-                    </div> *@
+                  
                     <div class="form-group">
                         <label>
-                            Sexo
+                            Sexo (Marcar para Hembra)
                         </label>
                         <div class="col-6">
                             <input id="inSexo"
@@ -97,33 +88,97 @@
                         </div>
                     </div>
 
+                    @{
+                        var lugarAnimales = new presentacion_libreria.implementaciones.LugarAnimalesNegocio().Consultar();
+                    }
+
                     <div class="form-group">
                         <label>
-                            Lugar donde se encuentra el animal
+                            Lugar del animal
                         </label>
+
                         <div class="col-6">
-                            <input id="inLugarAnimalId"
-                                   asp-for="@Model.Animal!.LugarAnimalId" />
+
+                            <select asp-for="Animal.LugarAnimalId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione un lugar
+                                </option>
+
+                                @foreach (var lugar in lugarAnimales)
+                                {
+                                    <option value="@lugar.Id">
+                                        @lugar.Codigo
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
+
+                        @{
+                            var lotes = new presentacion_libreria.implementaciones.LotesNegocio().Consultar();
+                        }
+
                     <div class="form-group">
                         <label>
-                            Lote donde se encuentra (Opcional)
+                            Lote del animal (Opcional)
                         </label>
+
                         <div class="col-6">
-                            <input id="inLoteId"
-                                   asp-for="@Model.Animal!.LoteId" />
+
+                            <select asp-for="Animal.LoteId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione un lote
+                                </option>
+
+                                @foreach (var lote in lotes)
+                                {
+                                    <option value="@lote.Id">
+                                        @lote.Codigo
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
+
+                    @{
+                        var compras = new presentacion_libreria.implementaciones.ComprasNegocio().Consultar();
+                    }
+
                     <div class="form-group">
                         <label>
-                            Id de la compra (opcional)
+                            Descripción de la compra  (Opcional)
                         </label>
+
                         <div class="col-6">
-                            <input id="inCompraId"
-                                   asp-for="@Model.Animal!.CompraId" />
+
+                            <select asp-for="Animal.CompraId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione una descripción
+                                </option>
+
+                                @foreach (var compra in compras)
+                                {
+                                    <option value="@compra.Id">
+                                        @compra.DescripcionCompra
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
+
+
                     <div class="form-group">
                         <label>
                             Estado en el que se encuentra (1 en la finca, 2 vendido, 3 muerto)
@@ -133,13 +188,35 @@
                                    asp-for="@Model.Animal!.EstadoId" />
                         </div>
                     </div>
+
+
+                    @{
+                        var ventas = new presentacion_libreria.implementaciones.VentasNegocio().Consultar();
+                    }
+
                     <div class="form-group">
                         <label>
-                            Id de la Venta (opcional)
+                            Descripción de la venta  (Opcional)
                         </label>
+
                         <div class="col-6">
-                            <input id="inVentaId"
-                                   asp-for="@Model.Animal!.VentaId" />
+
+                            <select asp-for="Animal.VentaId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione una descripción
+                                </option>
+
+                                @foreach (var venta in ventas)
+                                {
+                                    <option value="@venta.Id">
+                                        @venta.DescripcionVenta
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
 
@@ -197,9 +274,7 @@
                         <th>
                             Raza
                         </th>
-                        @* <th class="cl_hidden">
-                            Fecha
-                        </th> *@
+                       
                         <th class="cl_hidden">
                             Edad
                         </th>
@@ -207,20 +282,30 @@
                             Sexo
                         </th>
                          <th class="cl_hidden">
-                            LoteId
+                            Código del lote
                         </th>
                         <th class="cl_hidden">
-                            CompraId
+                            Descripción compra
                         </th>
                         <th class="cl_hidden">
-                            EstadoId
+                            Estado del animal
                         </th>
                         <th class="cl_hidden">
-                            VentaId
+                            Descripción venta 
                         </th>
                         <th class="cl_hidden">
-                            LugarAnimalId
+                            Lugar del animal
                         </th>
+
+                        <th class="cl_hidden">
+                            Ganancia 
+                        </th>
+
+                        <th class="cl_hidden">
+                            Ganancia en porcentaje
+                        </th>
+
+
 
                         <th class="cl_actions">
                             Acción
@@ -238,34 +323,40 @@
                             <td>
                                 @elemento.Raza
                             </td>
-                            @* <td class="cl_hidden">
-                                @elemento.Fecha.ToString("dd/MM/yyyy")
-                            </td> *@
+                            
                             <td class="cl_hidden">
                                 @elemento.Edad
                             </td>
                             <td class="cl_hidden">
-                                @elemento.Sexo
+                                @(elemento.Sexo ? "Hembra" : "Macho") 
                             </td>
                             <td class="cl_hidden">
-                                @elemento.LoteId
+                                @elemento._lote?.Codigo
                             </td>
                             <td class="cl_hidden">
-                                @elemento.CompraId
+                                @elemento._compra?.DescripcionCompra
                             </td>
                             <td class="cl_hidden">
-                                @elemento.EstadoId
+                                @elemento._estado?.Descripcion
                             </td>
                             <td class="cl_hidden">
-                                @elemento.VentaId
+                                @elemento._venta?.DescripcionVenta
                             </td>
                             <td class="cl_hidden">
-                                @elemento.LugarAnimalId
+                                @elemento._lugarAnimal?.Codigo
+                            </td>
+
+                            <td class="cl_hidden">
+                                @elemento.Ganancia
+                            </td>
+
+                            <td class="cl_hidden">
+                                @elemento.PorcentajeGanancia
                             </td>
 
                             <td>
                                 <input type="submit"
-                                       value="Modicar"
+                                       value="Modificar"
                                        asp-page-handler="BtModificar"
                                        class="btn btn-secondary"
                                        asp-route-data="@elemento.Id" />

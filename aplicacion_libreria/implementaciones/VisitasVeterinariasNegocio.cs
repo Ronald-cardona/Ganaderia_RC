@@ -24,7 +24,10 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.SaveChanges();
 
 
-            return this.iConexion.VisitasVeterinarias!.ToList();
+            return this.iConexion.VisitasVeterinarias!
+            .Include(x => x._persona)
+            .Include(x => x._animal)
+            .ToList();
         }
 
         public VisitasVeterinarias Guardar(VisitasVeterinarias entidad)

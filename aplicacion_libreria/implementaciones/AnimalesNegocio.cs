@@ -23,7 +23,13 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion.SaveChanges();
 
-            return this.iConexion.Animales!.ToList();
+            return this.iConexion.Animales!
+            .Include(x => x._lote)
+            .Include(x => x._compra)
+            .Include(x => x._estado)
+            .Include(x => x._lugarAnimal)
+            .ToList();
+
         }
 
         public Animales Guardar(Animales entidad)
@@ -49,6 +55,15 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.Auditorias!.Add(auditorias);
 
             this.iConexion.SaveChanges();
+
+            //metodo que me cuenta la  cantidad de animales en un lote 
+            var lote = this.iConexion.Lotes!.FirstOrDefault(x => x.Id == entidad.LoteId);
+            if (lote != null)
+            {
+                lote.CantidadAnimales = this.iConexion.Animales!.Count(x => x.LoteId == lote.Id);
+                this.iConexion.Lotes!.Update(lote);
+                this.iConexion.SaveChanges();
+            }
             return entidad;
         }
 
@@ -60,6 +75,10 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
 
+            var animalAnterior = this.iConexion.Animales
+        .FirstOrDefault(x => x.Id == entidad.Id); // parte de  calculo de contar lote animales
+            int? loteAnteriorId = animalAnterior.LoteId;
+
             var entry = this.iConexion!.Entry<Animales>(entidad);
             entry.State = EntityState.Modified;
 
@@ -70,7 +89,77 @@ namespace aplicacion_libreria.implementaciones
             auditorias.Descripcion = "Se modificó un  usuario";
             this.iConexion.Auditorias!.Add(auditorias);
 
+            //calculo de ganancia de animales 
+            if (entidad.VentaId != null && entidad.CompraId != null)
+            {
+                var compra = this.iConexion.Compras
+                    .FirstOrDefault(x => x.Id == entidad.CompraId);
+
+                var venta = this.iConexion.Ventas
+                    .FirstOrDefault(x => x.Id == entidad.VentaId);
+
+                if (compra != null && venta != null)
+                {
+                    decimal costoAnimal =
+                        compra.PesoCompra * compra.PrecioKilo;
+
+                    decimal valorVenta =
+                        venta.PesoFinal * venta.PrecioKilo;
+
+                    decimal ganancia =
+                        valorVenta - costoAnimal;
+
+                    decimal porcentajeGanancia = 0;
+
+                    if (costoAnimal > 0)
+                    {
+                        porcentajeGanancia =
+                            (ganancia / costoAnimal) * 100;
+                    }
+
+                    entidad.Ganancia = ganancia;
+                    entidad.PorcentajeGanancia =
+                        porcentajeGanancia;
+                }
+            }
+
             this.iConexion!.SaveChanges();
+
+            // RECALCULAR LOTE ANTERIOR
+            if (loteAnteriorId != null)
+            {
+                var loteAnterior = this.iConexion.Lotes
+                    .FirstOrDefault(x => x.Id == loteAnteriorId);
+
+                if (loteAnterior != null)
+                {
+                    loteAnterior.CantidadAnimales =
+                        this.iConexion.Animales
+                        .Count(x => x.LoteId == loteAnteriorId);
+
+                    
+                }
+            }
+
+            // RECALCULAR NUEVO LOTE
+            if (entidad.LoteId != null)
+            {
+                var loteNuevo = this.iConexion.Lotes
+                    .FirstOrDefault(x => x.Id == entidad.LoteId);
+
+                if (loteNuevo != null)
+                {
+                    loteNuevo.CantidadAnimales =
+                        this.iConexion.Animales
+                        .Count(x => x.LoteId == entidad.LoteId);
+
+                    
+                }
+            }
+
+            this.iConexion.SaveChanges();
+
+
 
 
             return entidad;
@@ -93,7 +182,14 @@ namespace aplicacion_libreria.implementaciones
             if (animal == null)
                 throw new Exception("No existe el registro en la base de datos ");
 
+            int? loteId = animal.LoteId; //guardar lote antes de borrar
+
+
+
             this.iConexion.Animales.Remove(animal);
+
+
+
             Auditorias auditorias = new Auditorias();
 
             auditorias.Metodo = "Borrar";
@@ -102,6 +198,23 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.Auditorias!.Add(auditorias);
 
             this.iConexion.SaveChanges();
+
+            // RECALCULAR EL LOTE
+            if (loteId != null)
+            {
+                var lote = this.iConexion.Lotes
+                    .FirstOrDefault(x => x.Id == loteId);
+
+                if (lote != null)
+                {
+                    lote.CantidadAnimales =
+                        this.iConexion.Animales
+                        .Count(x => x.LoteId == loteId);
+
+                    this.iConexion.Lotes!.Update(lote);
+                    this.iConexion.SaveChanges();
+                }
+            }
         }
     }
 }

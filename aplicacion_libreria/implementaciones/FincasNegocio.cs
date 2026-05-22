@@ -39,6 +39,10 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
 
+            //calculo para las hectareas 
+
+            entidad.ExtensionHectareas = entidad.ExtensionMetro / 10000;
+
             this.iConexion.Fincas!.Add(entidad!);
 
             Auditorias auditorias = new Auditorias();
@@ -58,6 +62,10 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
+
+            //calculo para las hectareas 
+
+            entidad.ExtensionHectareas = entidad.ExtensionMetro / 10000;
 
             var entry = this.iConexion!.Entry<Fincas>(entidad);
             entry.State = EntityState.Modified;

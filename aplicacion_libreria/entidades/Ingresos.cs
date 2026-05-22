@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace aplicacion_libreria.entidades
 {
     public class Ingresos
@@ -9,6 +11,6 @@ namespace aplicacion_libreria.entidades
         public string? DescripcionIngreso { get; set; }
 
 
-        public Ventas? _venta { get; set; }
+        [NotMapped] public Ventas? venta { get; set; }
     }
 }

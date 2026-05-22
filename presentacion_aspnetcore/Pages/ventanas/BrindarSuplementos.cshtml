@@ -47,24 +47,66 @@
                                    asp-for="@Model.BrindarSuplemento!.FechaBrindarSuplemetos" />
                         </div>
                     </div>
+
+
+                    @{
+                        var animales = new presentacion_libreria.implementaciones.AnimalesNegocio().Consultar();
+                    }
+
                     <div class="form-group">
                         <label>
-                            Id del Animal
+                           Animales
                         </label>
+
                         <div class="col-6">
-                            <input id="inIdAnimal"
-                                   class="cts_forms form-control"
-                                   asp-for="@Model.BrindarSuplemento!.IdAnimal" />
+
+                            <select asp-for="BrindarSuplemento.IdAnimal"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione un animal
+                                </option>
+
+                                @foreach (var animal in animales)
+                                {
+                                    <option value="@animal.Id">
+                                        @animal.Codigo
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
+
+
+                    @{
+                        var suplementos = new presentacion_libreria.implementaciones.SuplementosNegocio().Consultar();
+                    }
+
                     <div class="form-group">
                         <label>
-                            Id del Suplemento
+                            Descripción de la venta  (Opcional)
                         </label>
+
                         <div class="col-6">
-                            <input id="inSuplementoId"
-                                   class="cts_forms form-control"
-                                   asp-for="@Model.BrindarSuplemento!.SuplementoId" />
+
+                            <select asp-for="BrindarSuplemento.SuplementoId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione una descripción
+                                </option>
+
+                                @foreach (var suplemento in suplementos)
+                                {
+                                    <option value="@suplemento.Id">
+                                        @suplemento.Nombre
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
                    
@@ -118,10 +160,10 @@
                             Fecha brindar suplemetos
                         </th>
                         <th>
-                            Id del Animal
+                            Código del animal
                         </th>
                         <th>
-                            Id del suplemento
+                            Nombre del suplemento
                         </th>
                        
 
@@ -136,16 +178,16 @@
                                 @elemento.FechaBrindarSuplemetos.ToString("dd/MM/yyyy")
                             </td>
                             <td>
-                                @elemento.IdAnimal
+                                @elemento._animal?.Codigo
                             </td>
                             <td>
-                                @elemento.SuplementoId
+                                @elemento._suplemento?.Nombre
                             </td>
                            
 
                             <td>
                                 <input type="submit"
-                                       value="Modicar"
+                                       value="Modificar"
                                        asp-page-handler="BtModificar"
                                        class="btn btn-secondary"
                                        asp-route-data="@elemento.Id" />

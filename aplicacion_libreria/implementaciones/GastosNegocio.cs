@@ -24,7 +24,13 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.SaveChanges();
 
 
-            return this.iConexion.Gastos!.ToList();
+            return this.iConexion.Gastos!
+           .Include(x => x._alimento)
+           .Include(x => x._compra)
+           .Include(x => x._vacuna)
+           .Include(x => x._suplemento)
+           .Include(x => x._persona)
+           .ToList();
         }
 
         public Gastos Guardar(Gastos entidad)

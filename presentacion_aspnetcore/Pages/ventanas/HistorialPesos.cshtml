@@ -57,16 +57,26 @@
                                    asp-for="@Model.HistorialPeso!.FechaPesajeActual" />
                         </div>
                     </div>
-                    <div class="form-group">
+
+                    @{
+                        var animal = new presentacion_libreria.implementaciones.AnimalesNegocio()
+                        .Consultar().FirstOrDefault(x => x.Id == Model.HistorialPeso!.IdAnimal);
+                                   
+                    }
+                   @*  <div class="form-group">
                         <label>
-                            Ultimo Peso
+                            Último Peso
                         </label>
+
                         <div class="col-6">
                             <input id="inUltimoPeso"
                                    class="cts_forms form-control"
-                                   asp-for="@Model.HistorialPeso!.UltimoPeso" />
+                                   value="@animal?.PesoInicial"
+                                   readonly />
                         </div>
-                    </div>
+                    </div> *@
+
+
                     <div class="form-group">
                         <label>
                             Peso actual
@@ -78,14 +88,33 @@
                         </div>
                     </div>
 
+                    @{
+                        var animales = new presentacion_libreria.implementaciones.AnimalesNegocio().Consultar();
+                    }
+
                     <div class="form-group">
                         <label>
-                            Id del animal
+                            Código del animal
                         </label>
+
                         <div class="col-6">
-                            <input id="inIdAnimal"
-                                   class="cts_forms form-control"
-                                   asp-for="@Model.HistorialPeso!.IdAnimal" />
+
+                            <select asp-for="HistorialPeso.IdAnimal"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione el codigo del animal
+                                </option>
+
+                                @foreach (var animal in animales)
+                                {
+                                    <option value="@animal.Id">
+                                        @animal.Codigo
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
                    
@@ -113,7 +142,7 @@
                                 Desea borrar el HistorialPeso?
                             </h6>
                             <h6 align="left">
-                                @Model.HistorialPeso!.UltimoPeso
+                                @Model.HistorialPeso!.FechaPesajeActual
                             </h6>
 
                             <input type="submit"
@@ -150,7 +179,7 @@
                         </th>
 
                         <th class="cl_hidden">
-                            Id animal
+                            Código del  animal
                         </th>
                        
 
@@ -169,13 +198,13 @@
                                 @elemento.FechaPesajeActual.ToString("dd/MM/yyyy")
                             </td>
                             <td class="cl_hidden">
-                                @elemento.UltimoPeso
+                                @elemento._animal?.PesoInicial
                             </td>
                             <td class="cl_hidden">
                                 @elemento.PesoActual
                             </td>
                             <td class="cl_hidden">
-                                @elemento.IdAnimal
+                                @elemento._animal?.Codigo
                             </td>
 
                            

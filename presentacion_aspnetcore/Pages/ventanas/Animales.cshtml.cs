@@ -10,6 +10,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
     {
         private IAnimalesNegocio? iAnimalesNegocio;
         [BindProperty] public List<Animales>? ListaAnimales { get; set; }
+        
         [BindProperty] public Animales? Animal { get; set; }
         [BindProperty] public bool Borrando { get; set; }
 
@@ -19,9 +20,15 @@ namespace presentacion_aspnetcore.Pages.ventanas
             iAnimalesNegocio = new AnimalesNegocio();
         }
 
+        
+
         public void OnGet()
         {
+            Animal = new Animales();
             OnPostBtRefrescar();
+            
+
+
         }
 
 
@@ -33,6 +40,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
                     return;
                 ListaAnimales = iAnimalesNegocio.Consultar();
                 Animal = null;
+                
             }
             catch (Exception ex)
             {
@@ -54,9 +62,11 @@ namespace presentacion_aspnetcore.Pages.ventanas
             try
             {
                 OnPostBtRefrescar();
+                
                 Animal = ListaAnimales!.FirstOrDefault(x => x.Id == data);
                 ListaAnimales = null;
                 Borrando = false;
+                
             }
             catch (Exception ex)
             {
@@ -77,6 +87,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
                 if (Animal.Id == 0)
                     return;
                 OnPostBtRefrescar();
+               
             }
             catch (Exception ex)
             {
@@ -92,6 +103,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
                     return;
                 Animal = iAnimalesNegocio!.Borrar(Animal!);
                 OnPostBtRefrescar();
+                
             }
             catch (Exception ex)
             {
@@ -107,6 +119,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
                 Animal = ListaAnimales!.FirstOrDefault(x => x.Id == data);
                 ListaAnimales = null;
                 Borrando = true;
+                
             }
             catch (Exception ex)
             {
@@ -118,6 +131,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
         {
             OnPostBtRefrescar();
             Borrando = false;
+            
         }
     }
 }

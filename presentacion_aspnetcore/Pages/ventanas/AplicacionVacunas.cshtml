@@ -47,24 +47,65 @@
                                    asp-for="@Model.AplicacionVacuna!.FechaAplicacion" />
                         </div>
                     </div>
+
+
+                    @{
+                        var animales = new presentacion_libreria.implementaciones.AnimalesNegocio().Consultar();
+                    }
+
                     <div class="form-group">
                         <label>
-                            Id del animal
+                            Código del animal 
                         </label>
+
                         <div class="col-6">
-                            <input id="inIdAnimal"
-                                   class="cts_forms form-control"
-                                   asp-for="@Model.AplicacionVacuna!.IdAnimal" />
+
+                            <select asp-for="AplicacionVacuna.IdAnimal"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione el código del animal 
+                                </option>
+
+                                @foreach (var animal in animales)
+                                {
+                                    <option value="@animal.Id">
+                                        @animal.Codigo
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
+
+                    @{
+                        var vacunas = new presentacion_libreria.implementaciones.VacunasNegocio().Consultar();
+                    }
+
                     <div class="form-group">
                         <label>
-                            Id de la vacuna
+                            Nombre de la vacuna
                         </label>
+
                         <div class="col-6">
-                            <input id="inVacunaId"
-                                   class="cts_forms form-control"
-                                   asp-for="@Model.AplicacionVacuna!.VacunaId" />
+
+                            <select asp-for="AplicacionVacuna.VacunaId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione una vacuna
+                                </option>
+
+                                @foreach (var vacuna in vacunas)
+                                {
+                                    <option value="@vacuna.Id">
+                                        @vacuna.Nombre
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
                     
@@ -118,10 +159,10 @@
                             Fecha de aplicación
                         </th>
                         <th>
-                            Id del animal
+                            Código del animal 
                         </th>
                         <th>
-                            Id de la vacuna
+                            Nombre  de la vacuna
                         <th class="cl_actions">
                                 Acción
                         </th>
@@ -134,10 +175,10 @@
                                     @elemento.FechaAplicacion.ToString("dd/MM/yyyy")
                             </td>
                             <td>
-                                    @elemento.IdAnimal
+                                    @elemento._animal?.Codigo
                             </td>
                             <td>
-                                    @elemento.VacunaId
+                                    @elemento._vacuna?.Nombre
                             </td>
                             
 

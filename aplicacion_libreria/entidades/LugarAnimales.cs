@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace aplicacion_libreria.entidades
 {
@@ -18,10 +19,10 @@ namespace aplicacion_libreria.entidades
         [ForeignKey("FincaId")] public Fincas? _finca { get; set; }
 
 
-
-        public List<Animales>? Animales { get; set; }
-        public List<Potreros>? Potreros { get; set; }
-        public List<Corrales>? Corrales { get; set; }
+        
+        [NotMapped] public List<Animales>? Animales { get; set; }
+        [NotMapped] public List<Potreros>? Potreros { get; set; }
+        [NotMapped] public List<Corrales>? Corrales { get; set; }
 
 
     }

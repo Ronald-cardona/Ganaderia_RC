@@ -78,13 +78,33 @@
                         </div>
                     </div>
                    
+                    @{
+                        var proveedores = new presentacion_libreria.implementaciones.ProveedoresNegocio().Consultar();
+                    }
+
                     <div class="form-group">
                         <label>
-                            Id del Proveedor
+                            Descripción de la venta  (Opcional)
                         </label>
+
                         <div class="col-6">
-                            <input id="inProveedorId"
-                                   asp-for="@Model.Compra!.ProveedorId" />
+
+                            <select asp-for="Compra.ProveedorId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione una descripción
+                                </option>
+
+                                @foreach (var proveedor in proveedores)
+                                {
+                                    <option value="@proveedor.Id">
+                                        @proveedor.Nombre
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
 
@@ -150,8 +170,13 @@
                         </th>
 
                         <th class="cl_hidden">
-                            Id del proveedor
+                            Proveedor
                         </th>
+
+                        <th class="cl_hidden">
+                            Total compra
+                        </th>
+
                         
 
                         <th class="cl_actions">
@@ -175,13 +200,19 @@
                                 @elemento.DescripcionCompra
                             </td>
                             <td class="cl_hidden">
-                                @elemento.ProveedorId
+                                @elemento._proveedor?.Nombre
+                            </td>
+
+
+                            <td>
+                                $ @elemento.CompraTotal?.ToString("N2")
+                            
                             </td>
                           
 
                             <td>
                                 <input type="submit"
-                                       value="Modicar"
+                                       value="Modificar"
                                        asp-page-handler="BtModificar"
                                        class="btn btn-secondary"
                                        asp-route-data="@elemento.Id" />

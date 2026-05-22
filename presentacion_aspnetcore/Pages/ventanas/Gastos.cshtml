@@ -57,6 +57,9 @@
                                    asp-for="@Model.Gasto!.CostoGasto" />
                         </div>
                     </div>
+
+
+
                     <div class="form-group">
                         <label>
                             Descripción del gasto
@@ -67,52 +70,157 @@
                                    asp-for="@Model.Gasto!.DescripcionGasto" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>
-                            CompraId
-                        </label>
-                        <div class="col-6">
-                            <input id="inCompraId"
-                                   class="cts_forms form-control"
-                                   asp-for="@Model.Gasto!.CompraId" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>
-                           Id del  Alimento
-                        </label>
-                        <div class="col-6">
-                            <input id="inAlimentoId"
-                                   asp-for="@Model.Gasto!.AlimentoId" />
-                        </div>
-                    </div>
+
+
+                    @{
+                        var compras = new presentacion_libreria.implementaciones.ComprasNegocio().Consultar();
+                    }
 
                     <div class="form-group">
                         <label>
-                            id de la Vacuna
+                            Nombre del proveedor 
                         </label>
+
                         <div class="col-6">
-                            <input id="inVacunaId"
-                                   asp-for="@Model.Gasto!.VacunaId" />
+
+                            <select asp-for="Gasto.CompraId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione un proveedor
+                                </option>
+
+                                @foreach (var compra in compras)
+                                {
+                                    <option value="@compra.Id">
+                                        @compra.DescripcionCompra
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
+                    
+                    @{
+                        var alimentos = new presentacion_libreria.implementaciones.AlimentosNegocio().Consultar();
+                    }
+
                     <div class="form-group">
                         <label>
-                          Id del Suplemento
+                            Nombre del alimento
                         </label>
+
                         <div class="col-6">
-                            <input id="inSuplementoId"
-                                   asp-for="@Model.Gasto!.SuplementoId" />
+
+                            <select asp-for="Gasto.AlimentoId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione un alimento
+                                </option>
+
+                                @foreach (var alimento in alimentos)
+                                {
+                                    <option value="@alimento.Id">
+                                        @alimento.TipoAlimento
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
+
+                    @{
+                        var vacunas = new presentacion_libreria.implementaciones.VacunasNegocio().Consultar();
+                    }
+
                     <div class="form-group">
                         <label>
-                            Id de la compra (opcional)
+                            Nombre de la vacuna
                         </label>
+
                         <div class="col-6">
-                            <input id="inPersonaId"
-                                   asp-for="@Model.Gasto!.PersonaId" />
+
+                            <select asp-for="Gasto.VacunaId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione una vacuna
+                                </option>
+
+                                @foreach (var vacuna in vacunas)
+                                {
+                                    <option value="@vacuna.Id">
+                                        @vacuna.Nombre
+                                    </option>
+                                }
+
+                            </select>
+
+                        </div>
+                    </div>
+
+
+                    @{
+                        var suplementos = new presentacion_libreria.implementaciones.SuplementosNegocio().Consultar();
+                    }
+
+                    <div class="form-group">
+                        <label>
+                            Nombre del suplemento
+                        </label>
+
+                        <div class="col-6">
+
+                            <select asp-for="Gasto.SuplementoId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione un suplemento
+                                </option>
+
+                                @foreach (var suplemento in suplementos)
+                                {
+                                    <option value="@suplemento.Id">
+                                        @suplemento.Nombre
+                                    </option>
+                                }
+
+                            </select>
+
+                        </div>
+                    </div>
+
+
+                    @{
+                        var personas = new presentacion_libreria.implementaciones.PersonasNegocio().Consultar();
+                    }
+
+                    <div class="form-group">
+                        <label>
+                            Seleccione un nombre
+                        </label>
+
+                        <div class="col-6">
+
+                            <select asp-for="Gasto.PersonaId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione un nombre
+                                </option>
+
+                                @foreach (var persona in personas)
+                                {
+                                    <option value="@persona.Id">
+                                        @persona.Nombre
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
                    
@@ -173,19 +281,19 @@
                         </th>
                         
                         <th class="cl_hidden">
-                           Id de la  Compra
+                           detalle de la compra
                         </th>
                         <th class="cl_hidden">
-                            Id del Alimento
+                            Nombre del alimento
                         </th>
                         <th class="cl_hidden">
-                            Id de la Vacuna
+                            Nombre de la Vacuna
                         </th>
                         <th class="cl_hidden">
-                           Id del  Suplemento
+                           Nombre del  Suplemento
                         </th>
                         <th class="cl_hidden">
-                            Id de la Persona
+                            Pago de nómina
                         </th>
                         
 
@@ -207,19 +315,19 @@
                             </td>
                             
                             <td class="cl_hidden">
-                                @elemento.CompraId
+                                @elemento._compra?.DescripcionCompra
                             </td>
                             <td class="cl_hidden">
-                                @elemento.AlimentoId
+                                @elemento._alimento?.TipoAlimento
                             </td>
                             <td class="cl_hidden">
-                                @elemento.VacunaId
+                                @elemento._vacuna?.Nombre
                             </td>
                             <td class="cl_hidden">
-                                @elemento.SuplementoId
+                                @elemento._suplemento?.Nombre
                             </td>
                             <td class="cl_hidden">
-                                @elemento.PersonaId
+                                @elemento._persona?.Nombre
                             </td>
                             
 

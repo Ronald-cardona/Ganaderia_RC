@@ -22,7 +22,10 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.Auditorias!.Add(auditorias);
             this.iConexion.SaveChanges();
 
-            return this.iConexion.BrindarAlimentos!.ToList();
+            return this.iConexion.BrindarAlimentos!
+            .Include(x => x._animal)
+            .Include(x => x._alimento)
+            .ToList();
         }
 
         public BrindarAlimentos Guardar(BrindarAlimentos entidad)

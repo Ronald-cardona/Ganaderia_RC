@@ -23,7 +23,9 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.SaveChanges();
 
 
-            return this.iConexion.LugarAnimales!.ToList();
+            return this.iConexion.LugarAnimales!
+            .Include(x => x._finca)
+            .ToList();
         }
 
         public LugarAnimales Guardar(LugarAnimales entidad)

@@ -10,7 +10,9 @@ namespace aplicacion_libreria.entidades
         public DateTime FechaVenta { get; set; }
         public decimal PesoFinal { get; set; }
         public decimal PrecioKilo { get; set; }  //precio del kilo
-        
+
+        public decimal? VentaTotal { get; set; }
+
         public string DescripcionVenta { get; set; }
 
         public int? IngresoId { get; set; }
@@ -18,6 +20,6 @@ namespace aplicacion_libreria.entidades
         [ForeignKey("IngresoId")] public Ingresos? _ingreso { get; set; }
         [ForeignKey("ClienteId")] public Clientes? _cliente { get; set; }
 
-        [NotMapped] public List<Animales>? _animal { get; set; }
+        [NotMapped] public List<Animales>? animal { get; set; }
     }
 } //calcular el total de la venta 

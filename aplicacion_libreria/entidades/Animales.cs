@@ -9,6 +9,8 @@ namespace aplicacion_libreria.entidades
         public int Id { get; set; }  
         public string Codigo { get; set; } //marca que lleva el animal o que se le pone en la finca
         public decimal PesoInicial { get; set; }
+        public decimal? Ganancia { get; set; }
+        public decimal? PorcentajeGanancia { get; set; }
         public string Raza { get; set; }
         public int Edad { get; set; }
         public bool Sexo { get; set; }

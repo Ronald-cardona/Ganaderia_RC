@@ -9,7 +9,7 @@ namespace aplicacion_libreria.entidades
         public int Id { get; set; }  
         public DateTime FechaUltimoPesaje { get; set; }
         public DateTime FechaPesajeActual { get; set; }
-        public decimal UltimoPeso { get; set; }
+       
         public decimal PesoActual { get; set; }
 
         public int IdAnimal { get; set; }

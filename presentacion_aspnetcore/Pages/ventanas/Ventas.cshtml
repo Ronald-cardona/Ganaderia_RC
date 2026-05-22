@@ -78,23 +78,63 @@
                         </div>
                     </div>
                   
-                    <div class="form-group">
-                        <label>
-                           Id del  Ingreso
-                        </label>
-                        <div class="col-6">
-                            <input id="inIngresoId"
-                                   asp-for="@Model.Venta!.IngresoId" />
-                        </div>
-                    </div>
+                    @{
+                        var ingresos = new presentacion_libreria.implementaciones.IngresosNegocio().Consultar();
+                    }
 
                     <div class="form-group">
                         <label>
-                            Id del Cliente
+                            Descripción del ingreso  (Opcional)
                         </label>
+
                         <div class="col-6">
-                            <input id="inClienteId"
-                                   asp-for="@Model.Venta!.ClienteId" />
+
+                            <select asp-for="Venta.IngresoId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione una descripción
+                                </option>
+
+                                @foreach (var ingreso in ingresos)
+                                {
+                                    <option value="@ingreso.Id">
+                                        @ingreso.DescripcionIngreso
+                                    </option>
+                                }
+
+                            </select>
+
+                        </div>
+                    </div>
+
+                    @{
+                        var clientes = new presentacion_libreria.implementaciones.ClientesNegocio().Consultar();
+                    }
+
+                    <div class="form-group">
+                        <label>
+                            Nombre del cliente 
+                        </label>
+
+                        <div class="col-6">
+
+                            <select asp-for="Venta.ClienteId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione un cliente
+                                </option>
+
+                                @foreach (var cliente in clientes)
+                                {
+                                    <option value="@cliente.Id">
+                                        @cliente.Nombre
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
                    
@@ -153,16 +193,20 @@
                         <th>
                             Precio del Kilo
                         </th>
+
+                        <th>
+                            Total de la venta
+                        </th>
                         
                         <th class="cl_hidden">
                             Descripción de la venta
                         </th>
                         <th class="cl_hidden">
-                            Id del Ingreso
+                            detalle del ingreso
                         </th>
 
                         <th class="cl_hidden">
-                            Id del Cliente
+                            vendido a 
                         </th>
                    
                         <th class="cl_actions">
@@ -181,21 +225,26 @@
                             <td>
                                 @elemento.PrecioKilo
                             </td>
+
+                            <td>
+                                $ @elemento.VentaTotal?.ToString("N2")
+
+                            </td>
                            
                             <td class="cl_hidden">
                                 @elemento.DescripcionVenta
                             </td>
                             <td class="cl_hidden">
-                                @elemento.IngresoId
+                                @elemento._ingreso?.DescripcionIngreso
                             </td>
                             <td class="cl_hidden">
-                                @elemento.ClienteId
+                                @elemento._cliente?.Nombre
                             </td>
                            
 
                             <td>
                                 <input type="submit"
-                                       value="Modicar"
+                                       value="Modificar"
                                        asp-page-handler="BtModificar"
                                        class="btn btn-secondary"
                                        asp-route-data="@elemento.Id" />

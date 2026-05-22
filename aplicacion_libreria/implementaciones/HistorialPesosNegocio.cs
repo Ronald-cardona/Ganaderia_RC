@@ -24,7 +24,9 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.SaveChanges();
 
 
-            return this.iConexion.HistorialPesos!.ToList();
+            return this.iConexion.HistorialPesos!
+            .Include(x => x._animal)
+            .ToList();
         }
 
         public HistorialPesos Guardar(HistorialPesos entidad)

@@ -24,7 +24,9 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.SaveChanges();
 
 
-            return this.iConexion.Compras!.ToList();
+            return this.iConexion.Compras!
+            .Include(x => x._proveedor)
+            .ToList();
         }
 
         public Compras Guardar(Compras entidad)
@@ -39,6 +41,9 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
+
+            //calculo para el precio total de la compra 
+            entidad.CompraTotal = entidad.PesoCompra * entidad.PrecioKilo;
 
             this.iConexion.Compras!.Add(entidad!);
 
@@ -59,6 +64,9 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
+
+            //calculo para el precio total de la compra 
+            entidad.CompraTotal = entidad.PesoCompra * entidad.PrecioKilo;
 
             var entry = this.iConexion!.Entry<Compras>(entidad);
             entry.State = EntityState.Modified;

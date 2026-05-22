@@ -89,13 +89,33 @@
                         </div>
                     </div>
 
+                    @{
+                        var fincas = new presentacion_libreria.implementaciones.FincasNegocio().Consultar();
+                    }
+
                     <div class="form-group">
                         <label>
-                            Id de la finca
+                            Fincas
                         </label>
+
                         <div class="col-6">
-                            <input id="inFincaId"
-                                   asp-for="@Model.LugarAnimal!.FincaId" />
+
+                            <select asp-for="LugarAnimal.FincaId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione una finca
+                                </option>
+
+                                @foreach (var finca in fincas)
+                                {
+                                    <option value="@finca.Id">
+                                        @finca.Nombre
+                                    </option>
+                                }
+
+                            </select>
+
                         </div>
                     </div>
                     
@@ -161,7 +181,7 @@
                             Fecha Salida
                         </th>
                         <th class="cl_hidden">
-                            Id de la finca
+                            Nombre de la finca
                         </th>
                         
 
@@ -188,13 +208,13 @@
                                 @elemento.FechaSalida
                             </td>
                             <td class="cl_hidden">
-                                @elemento.FincaId
+                                @elemento._finca?.Nombre
                             </td>
                             
 
                             <td>
                                 <input type="submit"
-                                       value="Modicar"
+                                       value="Modificar"
                                        asp-page-handler="BtModificar"
                                        class="btn btn-secondary"
                                        asp-route-data="@elemento.Id" />

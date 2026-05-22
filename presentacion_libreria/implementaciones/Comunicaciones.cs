@@ -26,10 +26,24 @@ namespace presentacion_libreria.implementaciones
             else
                 message = await httpClient.GetAsync(url);
 
+            //if (!message.IsSuccessStatusCode)
+            //    throw new Exception("Error Comunicacion");
+            //
             if (!message.IsSuccessStatusCode)
-                throw new Exception("Error Comunicacion");
+            {
+                var detalle =
+                    await message.Content.ReadAsStringAsync();
 
-            var resp = await message.Content.ReadAsStringAsync();
+                throw new Exception(
+                    $"Error Comunicación. " +
+                    $"Status: {(int)message.StatusCode} - " +
+                    $"{message.ReasonPhrase} " +
+                    $"{detalle}"
+                );//
+            }
+
+
+                var resp = await message.Content.ReadAsStringAsync();
             httpClient.Dispose(); httpClient = null;
 
             resp = Replace(resp);

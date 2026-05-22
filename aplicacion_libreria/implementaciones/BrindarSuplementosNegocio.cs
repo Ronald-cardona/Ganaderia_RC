@@ -23,7 +23,10 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.SaveChanges();
 
 
-            return this.iConexion.BrindarSuplementos!.ToList();
+            return this.iConexion.BrindarSuplementos!
+            .Include(x => x._animal)
+            .Include(x => x._suplemento)
+            .ToList();
         }
 
         public BrindarSuplementos Guardar(BrindarSuplementos entidad)

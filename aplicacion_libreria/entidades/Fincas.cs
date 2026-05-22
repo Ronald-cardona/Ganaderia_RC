@@ -12,6 +12,8 @@ namespace aplicacion_libreria.entidades
         public string Direcccion { get; set; }
         public decimal ExtensionMetro { get; set; }
 
+        public decimal? ExtensionHectareas { get; set; }
+
         [NotMapped] public List<Empleados>? _empleado { get; set; } 
         [NotMapped] public List<LugarAnimales>? _lugarAnimal { get; set; }
     }

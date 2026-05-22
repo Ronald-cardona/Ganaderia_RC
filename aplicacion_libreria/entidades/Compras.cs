@@ -12,9 +12,11 @@ namespace aplicacion_libreria.entidades
         public decimal PrecioKilo { get; set; }  //precio del kilo
         public string? DescripcionCompra { get; set; }
 
+        public decimal? CompraTotal { get; set; }
+
         public int ProveedorId { get; set; }
 
-        public Gastos? _gasto { get; set; }
+        [NotMapped] public List<Gastos>? gasto { get; set; }
         [ForeignKey("ProveedorId")] public Proveedores? _proveedor { get; set; }
         [NotMapped] public List<Animales>? _animal { get; set; }
     }

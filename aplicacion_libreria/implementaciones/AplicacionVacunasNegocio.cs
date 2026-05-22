@@ -23,7 +23,10 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.Auditorias!.Add(auditorias);
             this.iConexion.SaveChanges();
 
-            return this.iConexion.AplicacionVacunas!.ToList();
+            return this.iConexion.AplicacionVacunas!
+            .Include(x => x._animal)
+            .Include(x => x._vacuna)
+            .ToList();
         }
 
         public AplicacionVacunas Guardar(AplicacionVacunas entidad)

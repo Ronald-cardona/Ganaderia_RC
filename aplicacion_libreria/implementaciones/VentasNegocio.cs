@@ -24,7 +24,10 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.SaveChanges();
 
 
-            return this.iConexion.Ventas!.ToList();
+            return this.iConexion.Ventas!
+            .Include(x => x._ingreso)
+            .Include(x => x._cliente)
+            .ToList();
         }
 
         public Ventas Guardar(Ventas entidad)
@@ -39,6 +42,9 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
+
+            //calculo para total de ventas 
+            entidad.VentaTotal = entidad.PrecioKilo * entidad.PesoFinal;
 
             this.iConexion.Ventas!.Add(entidad!);
 
@@ -59,6 +65,10 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
+
+            //calculo para total de ventas 
+            entidad.VentaTotal = entidad.PrecioKilo * entidad.PesoFinal;
+
 
             var entry = this.iConexion!.Entry<Ventas>(entidad);
             entry.State = EntityState.Modified;

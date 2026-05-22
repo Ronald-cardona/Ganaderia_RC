@@ -135,8 +135,13 @@
                         </th>
                         
                         <th class="cl_hidden">
-                            Extension
+                            Extension metros 
                         </th>
+
+                        <th class="cl_hidden">
+                            Extension hectáreas
+                        </th>
+
                         
 
                         <th class="cl_actions">
@@ -161,11 +166,15 @@
                             <td class="cl_hidden">
                                 @elemento.ExtensionMetro
                             </td>
+
+                            <td>
+                                @elemento.ExtensionHectareas?.ToString("N2") ha 
+                            </td>
                            
 
                             <td>
                                 <input type="submit"
-                                       value="Modicar"
+                                       value="Modificar"
                                        asp-page-handler="BtModificar"
                                        class="btn btn-secondary"
                                        asp-route-data="@elemento.Id" />

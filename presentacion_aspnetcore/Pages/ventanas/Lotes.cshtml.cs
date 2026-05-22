@@ -22,6 +22,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
         public void OnGet()
         {
             OnPostBtRefrescar();
+            
         }
 
 
