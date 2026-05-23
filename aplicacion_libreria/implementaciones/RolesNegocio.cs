@@ -25,7 +25,9 @@ namespace aplicacion_libreria.implementaciones
 
 
 
-            return this.iConexion.Roles!.ToList();
+            return this.iConexion.Roles!
+           .Include(x => x._usuario)
+           .ToList();
         }
 
         public Roles Guardar(Roles entidad)

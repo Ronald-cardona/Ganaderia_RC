@@ -71,6 +71,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdmVudGFuYXNcQ29tcHJhcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ronal/Desktop/ProyectoDEV/Ganaderia_RC/presentacion_aspnetcore/Pages/ventanas/Configuraciones.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdmVudGFuYXNcQ29uZmlndXJhY2lvbmVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ronal/Desktop/ProyectoDEV/Ganaderia_RC/presentacion_aspnetcore/Pages/ventanas/Fincas.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdmVudGFuYXNcRmluY2FzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -103,8 +107,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdmVudGFuYXNcUHJvdmVlZG9yZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ronal/Desktop/ProyectoDEV/Ganaderia_RC/presentacion_aspnetcore/Pages/ventanas/Roles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdmVudGFuYXNcUm9sZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ronal/Desktop/ProyectoDEV/Ganaderia_RC/presentacion_aspnetcore/Pages/ventanas/Suplementos.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdmVudGFuYXNcU3VwbGVtZW50b3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ronal/Desktop/ProyectoDEV/Ganaderia_RC/presentacion_aspnetcore/Pages/ventanas/Usuarios.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdmVudGFuYXNcVXN1YXJpb3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ronal/Desktop/ProyectoDEV/Ganaderia_RC/presentacion_aspnetcore/Pages/ventanas/Vacunas.cshtml]

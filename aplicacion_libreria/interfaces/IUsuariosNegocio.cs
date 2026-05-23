@@ -11,5 +11,8 @@ namespace aplicacion_libreria.interfaces
 
         Usuarios Modificar(Usuarios entidad);
         void Borrar(Usuarios entidad);
+
+        Usuarios? Login(string correo, string contraseña);
+       
     }
 }

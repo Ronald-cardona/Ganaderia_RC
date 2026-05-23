@@ -11,5 +11,7 @@ namespace aplicacion_libreria.interfaces
 
         HistorialPesos Modificar(HistorialPesos entidad);
         void Borrar(HistorialPesos entidad);
+
+         byte[] GenerarReporte(int IdAnimal);
     }
 }

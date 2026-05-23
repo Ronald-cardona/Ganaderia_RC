@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using presentacion_libreria.implementaciones;
 using presentacion_libreria.interfaces;
 
+
+
 namespace presentacion_aspnetcore.Pages.ventanas
 {
     public class HistorialPesosModel : PageModel
@@ -119,5 +121,22 @@ namespace presentacion_aspnetcore.Pages.ventanas
             OnPostBtRefrescar();
             Borrando = false;
         }
+
+
+        public IActionResult OnPostReportePdf(int IdAnimal)
+    
+        {
+            var negocio = new aplicacion_libreria.implementaciones.HistorialPesosNegocio();
+            
+
+            byte[] pdf = negocio.GenerarReporte(IdAnimal);
+            
+
+            return File(pdf, "application/pdf", "ReporteHistorialPesos.pdf");
+           
+        }
+
+
+
     }
 }

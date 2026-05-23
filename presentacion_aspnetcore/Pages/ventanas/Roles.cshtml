@@ -1,0 +1,170 @@
+﻿@page
+@model RolesModel
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<center>
+    <div>
+        <form method="POST"
+              enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div align="left">
+                <h3>Roles</h3>
+            </div>
+
+            <div>
+                <input type="submit"
+                       value="Refrescar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtRefrescar" />
+                <input type="submit"
+                       value="Nuevo"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtNuevo"
+                       disabled="@(Model.Rol != null)" />
+                <input type="submit"
+                       value="Guardar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtGuardar"
+                       disabled="@(Model.Rol == null)" />
+            </div>
+
+            @if (Model.Rol != null)
+            {
+                <input type="hidden"
+                       asp-for="@Model.Rol!.Id" />
+
+                <div>
+                    <div class="form-group">
+                        <label>
+                            Tipo de Rol
+                        </label>
+                        <div class="col-6">
+                            <input id="inRol"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Rol!.Tipo" />
+                        </div>
+                    </div>
+
+                    @{
+                        var usuarios = new presentacion_libreria.implementaciones.UsuariosNegocio().Consultar();
+                    }
+
+                    <div class="form-group">
+                        <label>
+                            Correo del usuario
+                        </label>
+
+                        <div class="col-6">
+
+                            <select asp-for="Rol.RolUsuario"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione el codigo del animal
+                                </option>
+
+                                @foreach (var usuario in usuarios)
+                                {
+                                    <option value="@usuario.Id">
+                                        @usuario.Correo
+                                    </option>
+                                }
+
+                            </select>
+
+                        </div>
+                    </div>
+
+                  
+
+                </div>
+            }
+
+            @if (ViewData.ContainsKey("Mensaje"))
+            {
+                @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+                ;
+            }
+
+            @if (Model.Rol != null && Model.Borrando)
+            {
+                <div class='popup'>
+                    <div class='pp_ms_inner'>
+                        <div style='width:95%'>
+                            <h2 align="left">
+                                Mensaje
+                            </h2>
+
+                            <h6 align="left">
+                                Desea borrar el Rol?
+                            </h6>
+                            <h6 align="left">
+                                @Model.Rol!.Tipo
+                            </h6>
+
+                            <input type="submit"
+                                   value="Cerrar"
+                                   asp-page-handler="BtCerrar"
+                                   class="btn btn-secondary" />
+                            <input type="submit"
+                                   value="Borrar"
+                                   asp-page-handler="BtBorrar"
+                                   class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model != null &&
+                Model.ListaRoles != null &&
+                Model.ListaRoles.Count > 0)
+            {
+                <table class="tb_data table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>
+                            Tipo de Rol
+                        </th>
+                        <th>
+                            Correo del usuario
+                        </th>
+                       
+
+                       
+                        <th class="cl_actions">
+                            Acción
+                        </th>
+                    </tr>
+                    @foreach (var elemento in Model.ListaRoles)
+                    {
+                        <tr>
+                            <td>
+                                @elemento.Tipo
+                            </td>
+                            <td>
+                                @elemento._usuario?.Correo
+                            </td>
+                            
+
+                            
+                            <td>
+                                <input type="submit"
+                                       value="Modicar"
+                                       asp-page-handler="BtModificar"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                                <input type="submit"
+                                       value="Borrar"
+                                       asp-page-handler="BtBorrarVal"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </form>
+    </div>
+</center>

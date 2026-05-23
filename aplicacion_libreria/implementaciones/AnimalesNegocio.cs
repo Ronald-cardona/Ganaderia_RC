@@ -1,7 +1,8 @@
 ﻿
-using aplicacion_libreria.nucleo;
 using aplicacion_libreria.entidades;
 using aplicacion_libreria.interfaces;
+using aplicacion_libreria.nucleo;
+using aplicacion_libreria.reportes;
 using Microsoft.EntityFrameworkCore;
 
 namespace aplicacion_libreria.implementaciones
@@ -215,6 +216,14 @@ namespace aplicacion_libreria.implementaciones
                     this.iConexion.SaveChanges();
                 }
             }
+        }
+
+        public byte[] GenerarReporte(int Id)
+        {
+            ReporteAnimales reporte = new ReporteAnimales();
+           
+
+            return reporte.Generar(Id);
         }
     }
 }

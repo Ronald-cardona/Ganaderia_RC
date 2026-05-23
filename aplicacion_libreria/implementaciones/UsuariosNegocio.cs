@@ -105,5 +105,23 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion.SaveChanges();
         }
+
+        //login de usuarios 
+        public Usuarios? Login(
+           string correo,
+           string contraseña)
+        {
+            this.iConexion = new Conexion();
+
+            this.iConexion.string_conexion =
+                ConfiguracionesC.obtener(
+                    "string_conexion");
+
+            return this.iConexion.Usuarios!
+                .FirstOrDefault(x =>
+                    x.Correo == correo &&
+                    x.Contraseña == contraseña);
+        }
+
     }
 }

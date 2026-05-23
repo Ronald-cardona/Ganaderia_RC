@@ -1,0 +1,203 @@
+﻿@page
+@model ConfiguracionesModel
+@{
+    ViewData["Title"] = "Configuraciones";
+}
+
+
+<center>
+    <div>
+        <form method="POST"
+              enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div align="left">
+                <h3>Configuraciones</h3>
+            </div>
+
+            <div>
+                <input type="submit"
+                       value="Refrescar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtRefrescar" />
+                <input type="submit"
+                       value="Nuevo"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtNuevo"
+                       disabled="@(Model.Configuracion != null)" />
+                <input type="submit"
+                       value="Guardar"
+                       class="btn btn-secondary"
+                       asp-page-handler="BtGuardar"
+                       disabled="@(Model.Configuracion == null)" />
+            </div>
+
+            @if (Model.Configuracion != null)
+            {
+                <input type="hidden"
+                       asp-for="@Model.Configuracion!.Id" />
+
+                <div>
+                    <div class="form-group">
+                        <label>
+                           Idioma
+                        </label>
+                        <div class="col-6">
+                            <input id="inIdioma"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Configuracion!.Idioma" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Moneda
+                        </label>
+                        <div class="col-6">
+                            <input id="inMoneda"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Configuracion!.Moneda" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Tema
+                        </label>
+                        <div class="col-6">
+                            <input id="inTema"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Configuracion!.Tema" />
+                        </div>
+                    </div>
+
+                    @{
+                        var usuarios = new presentacion_libreria.implementaciones.UsuariosNegocio().Consultar();
+                    }
+
+                    <div class="form-group">
+                        <label>
+                            Correo del usuario
+                        </label>
+
+                        <div class="col-6">
+
+                            <select asp-for="Configuracion.UsuarioId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione un correo
+                                </option>
+
+                                @foreach (var usuario in usuarios)
+                                {
+                                    <option value="@usuario.Id">
+                                        @usuario.Correo
+                                    </option>
+                                }
+
+                            </select>
+
+                        </div>
+                    </div>
+
+                  
+
+                </div>
+            }
+
+            @if (ViewData.ContainsKey("Mensaje"))
+            {
+                @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+                ;
+            }
+
+            @if (Model.Configuracion != null && Model.Borrando)
+            {
+                <div class='popup'>
+                    <div class='pp_ms_inner'>
+                        <div style='width:95%'>
+                            <h2 align="left">
+                                Mensaje
+                            </h2>
+
+                            <h6 align="left">
+                                Desea borrar el Configuracion?
+                            </h6>
+                            <h6 align="left">
+                                @Model.Configuracion!.Idioma
+                            </h6>
+
+                            <input type="submit"
+                                   value="Cerrar"
+                                   asp-page-handler="BtCerrar"
+                                   class="btn btn-secondary" />
+                            <input type="submit"
+                                   value="Borrar"
+                                   asp-page-handler="BtBorrar"
+                                   class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model != null &&
+                Model.ListaConfiguraciones != null &&
+                Model.ListaConfiguraciones.Count > 0)
+            {
+                <table class="tb_data table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>
+                            Idioma
+                        </th>
+                        <th>
+                            Moneda
+                        </th>
+                        <th>
+                           Tema
+                        </th>
+                        <th>
+                            Correo
+                        </th>
+
+                       
+                        <th class="cl_actions">
+                            Acción
+                        </th>
+                    </tr>
+                    @foreach (var elemento in Model.ListaConfiguraciones)
+                    {
+                        <tr>
+                            <td>
+                                @elemento.Idioma
+                            </td>
+                            <td>
+                                @elemento.Moneda
+                            </td>
+                            <td>
+                                @elemento.Tema
+                            </td>
+                            <td>
+                                @elemento._usuario?.Correo
+                            </td>
+
+                           
+
+                            
+                            <td>
+                                <input type="submit"
+                                       value="Modicar"
+                                       asp-page-handler="BtModificar"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                                <input type="submit"
+                                       value="Borrar"
+                                       asp-page-handler="BtBorrarVal"
+                                       class="btn btn-secondary"
+                                       asp-route-data="@elemento.Id" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </form>
+    </div>
+</center>

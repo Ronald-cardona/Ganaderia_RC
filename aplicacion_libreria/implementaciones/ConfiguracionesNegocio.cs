@@ -23,7 +23,9 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.SaveChanges();
 
 
-            return this.iConexion.Configuraciones!.ToList();
+            return this.iConexion.Configuraciones!
+           .Include(x => x._usuario)
+           .ToList();
         }
 
         public Configuraciones Guardar(Configuraciones entidad)

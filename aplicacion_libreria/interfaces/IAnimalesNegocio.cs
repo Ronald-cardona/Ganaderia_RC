@@ -11,5 +11,7 @@ namespace aplicacion_libreria.interfaces
 
         Animales Modificar(Animales entidad);
         void Borrar(Animales entidad);
+
+        byte[] GenerarReporte(int Id);
     }
 }

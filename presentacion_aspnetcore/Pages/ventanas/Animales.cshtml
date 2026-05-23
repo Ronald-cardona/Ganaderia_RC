@@ -365,6 +365,12 @@
                                        asp-page-handler="BtBorrarVal"
                                        class="btn btn-secondary"
                                        asp-route-data="@elemento.Id" />
+
+                                <button asp-page-handler="ReportePdf"
+                                        asp-route-Id="@elemento.Id"
+                                        class="btn btn-success">
+                                    Rentabilidad PDF
+                                </button>
                             </td>
                         </tr>
                     }

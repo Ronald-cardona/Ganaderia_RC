@@ -133,5 +133,19 @@ namespace presentacion_aspnetcore.Pages.ventanas
             Borrando = false;
             
         }
+
+
+        public IActionResult OnPostReportePdf(int Id)
+
+        {
+            var negocio = new aplicacion_libreria.implementaciones.AnimalesNegocio();
+
+
+            byte[] pdf = negocio.GenerarReporte(Id);
+
+
+            return File(pdf, "application/pdf", "ReporteAnimales.pdf");
+
+        }
     }
 }

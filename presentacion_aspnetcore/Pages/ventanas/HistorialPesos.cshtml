@@ -266,6 +266,14 @@
                                        asp-page-handler="BtBorrarVal"
                                        class="btn btn-secondary"
                                        asp-route-data="@elemento.Id" />
+
+                                <button type="submit"
+                                        asp-page-handler="ReportePdf"
+                                        asp-route-IdAnimal="@elemento.IdAnimal"
+                                        class="btn btn-danger">
+
+                                    PDF
+                                </button>
                             </td>
                         </tr>
                     }
