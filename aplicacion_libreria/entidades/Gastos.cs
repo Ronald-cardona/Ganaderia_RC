@@ -10,7 +10,7 @@ namespace aplicacion_libreria.entidades
         public DateTime FechaGasto { get; set; }
         public decimal CostoGasto { get; set; }
         public string? DescripcionGasto { get; set; }
-
+        public decimal? TotalGastos { get; set; }
         public int? CompraId { get; set; }
         public int? AlimentoId { get; set; }
         public int? VacunaId { get; set; }

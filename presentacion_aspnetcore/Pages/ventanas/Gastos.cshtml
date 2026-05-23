@@ -307,9 +307,11 @@
                             <td>
                                 @elemento.FechaGasto.ToString("dd/MM/yyyy")
                             </td>
-                            <td>
-                                @elemento.CostoGasto
+                            <td class="cl_hidden">
+                               
+                                $  @elemento.CostoGasto.ToString("N0")
                             </td>
+
                             <td>
                                 @elemento.DescripcionGasto
                             </td>
@@ -333,7 +335,7 @@
 
                             <td>
                                 <input type="submit"
-                                       value="Modicar"
+                                       value="Modificar"
                                        asp-page-handler="BtModificar"
                                        class="btn btn-secondary"
                                        asp-route-data="@elemento.Id" />
@@ -344,7 +346,39 @@
                                        asp-route-data="@elemento.Id" />
                             </td>
                         </tr>
+
+                       
+
+                        
                     }
+
+                    @{
+                        decimal totalGastos = Model.ListaGastos.Sum(x => x.CostoGasto);
+                           
+                    }
+
+                    <tfoot>
+                        <tr style="background-color:#f2f2f2;
+                             font-weight:bold;">
+
+                            <td class ="cl_hidden">
+                                
+                                 Total Gastos:
+                           </td>
+
+                             <td>
+                                 $@totalGastos.ToString("N0")
+                           </td>
+
+                           <td colspan="7"></td>
+                       </tr>
+                    </tfoot>
+
+                    
+                   
+                        
+
+                    
                 </table>
             }
         </form>

@@ -63,19 +63,17 @@
                         .Consultar().FirstOrDefault(x => x.Id == Model.HistorialPeso!.IdAnimal);
                                    
                     }
-                   @*  <div class="form-group">
+                    
+                    <div class="form-group">
                         <label>
-                            Último Peso
+                            Peso actual
                         </label>
-
                         <div class="col-6">
-                            <input id="inUltimoPeso"
+                            <input id="inPesoActual"
                                    class="cts_forms form-control"
-                                   value="@animal?.PesoInicial"
-                                   readonly />
+                                   asp-for="@Model.HistorialPeso!.UltimoPeso" />
                         </div>
-                    </div> *@
-
+                    </div>
 
                     <div class="form-group">
                         <label>
@@ -164,24 +162,45 @@
             {
                 <table class="tb_data table table-striped table-bordered table-hover">
                     <tr>
+
+                        <th class="cl_hidden">
+                            Código del  animal
+                        </th>
+
+                        <th>
+                            Peso inicial del animal
+                        </th>
+
                         <th>
                             Fecha último Pesaje
                         </th>
-                        <th>
-                            Fecha pesaje actual
-                        </th>
+
                         <th>
                             Ultimo peso
                         </th>
+
+                        <th>
+                            Fecha pesaje actual
+                        </th>
+                       
                        
                         <th class="cl_hidden">
                             Peso actual
                         </th>
 
                         <th class="cl_hidden">
-                            Código del  animal
+                            Ganancia de peso 
                         </th>
-                       
+
+
+                        <th class="cl_hidden">
+                            Ganancia diaria de peso
+                        </th>
+
+                        <th class="cl_hidden">
+                            Dias 
+                        </th>
+               
 
                         <th class="cl_actions">
                             Acción
@@ -191,27 +210,54 @@
                     {
                         <tr>
                            
-                             <td class="cl_hidden">
-                                @elemento.FechaUltimoPesaje.ToString("dd/MM/yyyy")
-                            </td> 
-                            <td class="cl_hidden">
-                                @elemento.FechaPesajeActual.ToString("dd/MM/yyyy")
-                            </td>
-                            <td class="cl_hidden">
-                                @elemento._animal?.PesoInicial
-                            </td>
-                            <td class="cl_hidden">
-                                @elemento.PesoActual
-                            </td>
                             <td class="cl_hidden">
                                 @elemento._animal?.Codigo
                             </td>
+
+                            <td class="cl_hidden">
+                                @elemento._animal?.PesoInicial kg
+                            </td>
+
+                             <td class="cl_hidden">
+                                @elemento.FechaUltimoPesaje.ToString("dd/MM/yyyy")
+                            </td> 
+
+                            <td class="cl_hidden">
+                                @elemento.UltimoPeso kg
+                            </td>
+
+                            <td class="cl_hidden">
+                                @elemento.FechaPesajeActual.ToString("dd/MM/yyyy")
+                            </td>
+                           
+                           
+                            <td class="cl_hidden">
+                                @elemento.PesoActual kg
+                            </td>
+
+                            
+                            <td class="cl_hidden">
+                                @elemento.GananciaPeso?.ToString("N2") kg
+                            </td>
+
+                            
+                            <td class="cl_hidden">
+                                @elemento.GananciaDiaria?.ToString("N2") kg/día
+                            </td>
+
+                            
+                            <td class="cl_hidden">
+                                @elemento.DiasTranscurridos
+                            </td>
+
+
+                            
 
                            
 
                             <td>
                                 <input type="submit"
-                                       value="Modicar"
+                                       value="Modificar"
                                        asp-page-handler="BtModificar"
                                        class="btn btn-secondary"
                                        asp-route-data="@elemento.Id" />

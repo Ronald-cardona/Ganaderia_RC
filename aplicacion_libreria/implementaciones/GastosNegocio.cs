@@ -11,6 +11,12 @@ namespace aplicacion_libreria.implementaciones
     {
         private IConexion? iConexion;
 
+        // Método  para calcular el total
+        //private decimal CalcularTotalGastos()
+        //{
+        //    return this.iConexion.Gastos?.Sum(g => g.CostoGasto) ?? 0;
+        //}
+
         public List<Gastos> Consultar()
         {
             this.iConexion = new Conexion();
@@ -48,6 +54,10 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion.Gastos!.Add(entidad!);
 
+            //llamamos metodo totalgastos
+            //entidad.TotalGastos = CalcularTotalGastos();
+            
+
             Auditorias auditorias = new Auditorias();
             auditorias.Metodo = "Guardar";
             auditorias.Fecha = DateTime.Now;
@@ -69,6 +79,9 @@ namespace aplicacion_libreria.implementaciones
 
             var entry = this.iConexion!.Entry<Gastos>(entidad);
             entry.State = EntityState.Modified;
+
+            //llamado del metodo
+            //entidad.TotalGastos = CalcularTotalGastos();
 
             Auditorias auditorias = new Auditorias();
             auditorias.Metodo = "Modificar";
@@ -102,6 +115,9 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion.Gastos.Remove(gasto);
 
+            //llamado del metodo
+            //entidad.TotalGastos = CalcularTotalGastos();
+
             Auditorias auditorias = new Auditorias();
             auditorias.Metodo = "Borrar";
             auditorias.Fecha = DateTime.Now;
@@ -112,5 +128,11 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion.SaveChanges();
         }
+
+
+
+
+
+
     }
 }

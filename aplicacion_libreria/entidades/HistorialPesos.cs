@@ -12,6 +12,14 @@ namespace aplicacion_libreria.entidades
        
         public decimal PesoActual { get; set; }
 
+        public decimal? UltimoPeso { get; set; }
+
+        public decimal? GananciaPeso { get; set; }
+
+        public decimal? GananciaDiaria { get; set; }
+
+        public int? DiasTranscurridos { get; set; }
+
         public int IdAnimal { get; set; }
         [ForeignKey("IdAnimal")] public Animales? _animal { get; set; }
     }

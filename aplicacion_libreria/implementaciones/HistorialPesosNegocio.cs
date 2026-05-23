@@ -42,6 +42,24 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
 
+            //calculos de ganancia de peso 
+
+            entidad.GananciaPeso = entidad.PesoActual - entidad.UltimoPeso;
+
+            //ganancia dias transcurridos
+
+            entidad.DiasTranscurridos = (entidad.FechaPesajeActual - entidad.FechaUltimoPesaje).Days;
+
+            //ganancia diaria del animal 
+            if(entidad.DiasTranscurridos >0 )
+            {
+                entidad.GananciaDiaria = entidad.GananciaPeso / entidad.DiasTranscurridos;
+            }
+
+
+
+
+
             this.iConexion.HistorialPesos!.Add(entidad!);
 
             Auditorias auditorias = new Auditorias();
@@ -62,6 +80,20 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
+
+            //calculos de ganancia de peso 
+
+            entidad.GananciaPeso = entidad.PesoActual - entidad.UltimoPeso;
+
+            //ganancia dias transcurridos
+
+            entidad.DiasTranscurridos = (entidad.FechaPesajeActual - entidad.FechaUltimoPesaje).Days;
+
+            //ganancia diaria del animal 
+            if (entidad.DiasTranscurridos > 0)
+            {
+                entidad.GananciaDiaria = entidad.GananciaPeso / entidad.DiasTranscurridos;
+            }
 
             var entry = this.iConexion!.Entry<HistorialPesos>(entidad);
             entry.State = EntityState.Modified;
