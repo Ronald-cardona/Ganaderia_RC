@@ -12,10 +12,13 @@ namespace aplicacion_libreria.entidades
         public DateTime FechaCreacion { get; set; }
         public int CantidadAnimales { get; set; }
 
-        
+        public int? UsuarioId { get; set; }
+
+        [ForeignKey("UsuarioId")] public Usuarios? _usuario { get; set; }
+
         [NotMapped] public List<Animales>? animal { get; set; } // Cuarta regla
 
     }
 
-    //aca se saca el peso promedio del lote 
+    // se saca el peso promedio del lote 
 }

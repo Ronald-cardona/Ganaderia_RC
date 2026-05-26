@@ -6,8 +6,8 @@ namespace aplicacion_libreria.interfaces
 {
     public interface ILugarAnimalesNegocio
     {
-        List<LugarAnimales> Consultar();
-        LugarAnimales Guardar(LugarAnimales entidad);
+        List<LugarAnimales> Consultar(string correo);
+        LugarAnimales Guardar(LugarAnimales entidad, string correo);
 
         LugarAnimales Modificar(LugarAnimales entidad);
         void Borrar(LugarAnimales entidad);

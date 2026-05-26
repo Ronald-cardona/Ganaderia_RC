@@ -21,6 +21,23 @@ namespace presentacion_aspnetcore.Pages.ventanas
 
         public void OnGet()
         {
+            //LugarAnimal = new LugarAnimales();
+
+            //codigo para proteger paginas  no se puede ingresar sin registrarse antes
+            var usuario = HttpContext.Session.GetString("Usuario");
+
+
+            if (string.IsNullOrEmpty(usuario))
+            {
+                Response.Redirect("/");
+                return;
+            }
+
+            //para manejar las sesiones 
+            var correo = HttpContext.Session.GetString("Usuario");
+
+            ListaLugarAnimales = new LugarAnimalesNegocio().Consultar(correo!);
+
             OnPostBtRefrescar();
         }
 
@@ -31,7 +48,9 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (iLugarAnimalesNegocio == null)
                     return;
-                ListaLugarAnimales = iLugarAnimalesNegocio.Consultar();
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+                ListaLugarAnimales = iLugarAnimalesNegocio.Consultar(correo!);
                 LugarAnimal = null;
             }
             catch (Exception ex)
@@ -70,8 +89,11 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (LugarAnimal == null)
                     return;
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+
                 if (LugarAnimal.Id == 0)
-                    LugarAnimal = iLugarAnimalesNegocio!.Guardar(LugarAnimal!);
+                    LugarAnimal = iLugarAnimalesNegocio!.Guardar(LugarAnimal!,correo!);
                 else
                     LugarAnimal = iLugarAnimalesNegocio!.Modificar(LugarAnimal!);
                 if (LugarAnimal.Id == 0)

@@ -21,6 +21,21 @@ namespace presentacion_aspnetcore.Pages.ventanas
 
         public void OnGet()
         {
+
+            //codigo para proteger paginas  no se puede ingresar sin registrarse antes
+            var usuario = HttpContext.Session.GetString("Usuario");
+
+
+            if (string.IsNullOrEmpty(usuario))
+            {
+                Response.Redirect("/");
+                return;
+            }
+
+            //para manejar las sesiones 
+            var correo = HttpContext.Session.GetString("Usuario");
+
+            ListaBrindarSuplementos = new BrindarSuplementosNegocio().Consultar(correo!);
             OnPostBtRefrescar();
         }
 
@@ -31,7 +46,10 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (iBrindarSuplementosNegocio == null)
                     return;
-                ListaBrindarSuplementos = iBrindarSuplementosNegocio.Consultar();
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+
+                ListaBrindarSuplementos = iBrindarSuplementosNegocio.Consultar(correo!);
                 BrindarSuplemento = null;
             }
             catch (Exception ex)
@@ -70,8 +88,10 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (BrindarSuplemento == null)
                     return;
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
                 if (BrindarSuplemento.Id == 0)
-                    BrindarSuplemento = iBrindarSuplementosNegocio!.Guardar(BrindarSuplemento!);
+                    BrindarSuplemento = iBrindarSuplementosNegocio!.Guardar(BrindarSuplemento!,correo!);
                 else
                     BrindarSuplemento = iBrindarSuplementosNegocio!.Modificar(BrindarSuplemento!);
                 if (BrindarSuplemento.Id == 0)

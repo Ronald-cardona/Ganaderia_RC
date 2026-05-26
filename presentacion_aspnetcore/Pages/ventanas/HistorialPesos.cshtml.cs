@@ -23,6 +23,21 @@ namespace presentacion_aspnetcore.Pages.ventanas
 
         public void OnGet()
         {
+
+            //codigo para proteger paginas  no se puede ingresar sin registrarse antes
+            var usuario = HttpContext.Session.GetString("Usuario");
+
+
+            if (string.IsNullOrEmpty(usuario))
+            {
+                Response.Redirect("/");
+                return;
+            }
+
+            //para manejar las sesiones 
+            var correo = HttpContext.Session.GetString("Usuario");
+
+            ListaHistorialPesos = new HistorialPesosNegocio().Consultar(correo!);
             OnPostBtRefrescar();
         }
 
@@ -33,7 +48,10 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (iHistorialPesosNegocio == null)
                     return;
-                ListaHistorialPesos = iHistorialPesosNegocio.Consultar();
+
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+                ListaHistorialPesos = iHistorialPesosNegocio.Consultar(correo!);
                 HistorialPeso = null;
             }
             catch (Exception ex)
@@ -72,8 +90,10 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (HistorialPeso == null)
                     return;
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
                 if (HistorialPeso.Id == 0)
-                    HistorialPeso = iHistorialPesosNegocio!.Guardar(HistorialPeso!);
+                    HistorialPeso = iHistorialPesosNegocio!.Guardar(HistorialPeso!,correo!);
                 else
                     HistorialPeso = iHistorialPesosNegocio!.Modificar(HistorialPeso!);
                 if (HistorialPeso.Id == 0)

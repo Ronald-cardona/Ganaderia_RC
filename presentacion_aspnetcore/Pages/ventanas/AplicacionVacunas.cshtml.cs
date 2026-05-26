@@ -21,6 +21,21 @@ namespace presentacion_aspnetcore.Pages.ventanas
 
         public void OnGet()
         {
+
+            //codigo para proteger paginas  no se puede ingresar sin registrarse antes
+            var usuario = HttpContext.Session.GetString("Usuario");
+
+
+            if (string.IsNullOrEmpty(usuario))
+            {
+                Response.Redirect("/");
+                return;
+            }
+
+            //para manejar las sesiones 
+            var correo = HttpContext.Session.GetString("Usuario");
+
+            ListaAplicacionVacunas = new AplicacionVacunasNegocio().Consultar(correo!);
             OnPostBtRefrescar();
         }
 
@@ -31,7 +46,9 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (iAplicacionVacunasNegocio == null)
                     return;
-                ListaAplicacionVacunas = iAplicacionVacunasNegocio.Consultar();
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+                ListaAplicacionVacunas = iAplicacionVacunasNegocio.Consultar(correo!);
                 AplicacionVacuna = null;
             }
             catch (Exception ex)
@@ -70,8 +87,10 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (AplicacionVacuna == null)
                     return;
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
                 if (AplicacionVacuna.Id == 0)
-                    AplicacionVacuna = iAplicacionVacunasNegocio!.Guardar(AplicacionVacuna!);
+                    AplicacionVacuna = iAplicacionVacunasNegocio!.Guardar(AplicacionVacuna!,correo!);
                 else
                     AplicacionVacuna = iAplicacionVacunasNegocio!.Modificar(AplicacionVacuna!);
                 if (AplicacionVacuna.Id == 0)

@@ -20,7 +20,24 @@ namespace presentacion_aspnetcore.Pages.ventanas
         }
 
         public void OnGet()
+
         {
+
+            Finca = new Fincas();
+
+            //codigo para proteger paginas  no se puede ingresar sin registrarse antes
+            var usuario = HttpContext.Session.GetString("Usuario");
+
+
+            if (string.IsNullOrEmpty(usuario))
+            {
+                Response.Redirect("/");
+                return;
+            }
+
+            //para manejar las sesiones 
+            var correo = HttpContext.Session.GetString("Usuario");
+
             OnPostBtRefrescar();
         }
 
@@ -31,7 +48,11 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (iFincasNegocio == null)
                     return;
-                ListaFincas = iFincasNegocio.Consultar();
+
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+
+                ListaFincas = iFincasNegocio.Consultar(correo!);
                 Finca = null;
             }
             catch (Exception ex)
@@ -40,14 +61,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
             }
         }
 
-        //public void OnPostBtNuevo()
-        //{
-        //    Finca = new Fincas()
-        //    {
-        //        Fecha = DateTime.Now
-        //    };
-        //    Borrando = false;
-        //}
+        
 
         public void OnPostBtModificar(int data)
         {
@@ -70,8 +84,10 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (Finca == null)
                     return;
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
                 if (Finca.Id == 0)
-                    Finca = iFincasNegocio!.Guardar(Finca!);
+                    Finca = iFincasNegocio!.Guardar(Finca!,correo!);
                 else
                     Finca = iFincasNegocio!.Modificar(Finca!);
                 if (Finca.Id == 0)

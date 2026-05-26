@@ -59,14 +59,15 @@
                     </div>
 
                     @{
+                        var correo = HttpContext.Session.GetString("Usuario");
                         var animal = new presentacion_libreria.implementaciones.AnimalesNegocio()
-                        .Consultar().FirstOrDefault(x => x.Id == Model.HistorialPeso!.IdAnimal);
+                        .Consultar(correo!).FirstOrDefault(x => x.Id == Model.HistorialPeso!.IdAnimal);
                                    
                     }
                     
                     <div class="form-group">
                         <label>
-                            Peso actual
+                            Último peso
                         </label>
                         <div class="col-6">
                             <input id="inPesoActual"
@@ -87,7 +88,8 @@
                     </div>
 
                     @{
-                        var animales = new presentacion_libreria.implementaciones.AnimalesNegocio().Consultar();
+                        var correo1 = HttpContext.Session.GetString("Usuario");
+                        var animales = new presentacion_libreria.implementaciones.AnimalesNegocio().Consultar(correo1!);
                     }
 
                     <div class="form-group">

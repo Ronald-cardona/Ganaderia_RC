@@ -79,7 +79,8 @@
                     </div>
                   
                     @{
-                        var ingresos = new presentacion_libreria.implementaciones.IngresosNegocio().Consultar();
+                        var correo = HttpContext.Session.GetString("Usuario");
+                        var ingresos = new presentacion_libreria.implementaciones.IngresosNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">
@@ -109,7 +110,8 @@
                     </div>
 
                     @{
-                        var clientes = new presentacion_libreria.implementaciones.ClientesNegocio().Consultar();
+                       
+                        var clientes = new presentacion_libreria.implementaciones.ClientesNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">

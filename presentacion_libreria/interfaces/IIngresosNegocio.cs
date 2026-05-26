@@ -5,8 +5,8 @@ namespace presentacion_libreria.interfaces
 {
     public interface IIngresosNegocio
     {
-        List<Ingresos> Consultar();
-        Ingresos Guardar(Ingresos entidad);
+        List<Ingresos> Consultar(string correo);
+        Ingresos Guardar(Ingresos entidad, string correo);
         Ingresos Modificar(Ingresos entidad);
         Ingresos Borrar(Ingresos entidad);
     }

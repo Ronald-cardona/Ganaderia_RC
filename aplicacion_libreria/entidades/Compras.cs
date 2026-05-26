@@ -16,6 +16,10 @@ namespace aplicacion_libreria.entidades
 
         public int ProveedorId { get; set; }
 
+        public int? UsuarioId { get; set; }
+
+        [ForeignKey("UsuarioId")] public Usuarios? _usuario { get; set; }
+
         [NotMapped] public List<Gastos>? gasto { get; set; }
         [ForeignKey("ProveedorId")] public Proveedores? _proveedor { get; set; }
         [NotMapped] public List<Animales>? _animal { get; set; }

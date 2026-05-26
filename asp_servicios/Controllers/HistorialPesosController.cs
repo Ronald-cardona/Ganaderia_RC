@@ -18,19 +18,19 @@ namespace asp_servicios.Controllers
         }
 
         [HttpGet]
-        public List<HistorialPesos> Consultar()
+        public List<HistorialPesos> Consultar(string correo)
         {
             if (this.IHistorialPesosNegocio == null)
                 throw new Exception("No implementado");
-            return this.IHistorialPesosNegocio!.Consultar();
+            return this.IHistorialPesosNegocio!.Consultar(correo);
         }
 
         [HttpPost]
-        public HistorialPesos Guardar(HistorialPesos entidad)
+        public HistorialPesos Guardar(HistorialPesos entidad, string correo)
         {
             if (this.IHistorialPesosNegocio == null)
                 throw new Exception("No implementado");
-            return this.IHistorialPesosNegocio!.Guardar(entidad);
+            return this.IHistorialPesosNegocio!.Guardar(entidad,correo);
         }
 
         [HttpPost]

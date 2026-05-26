@@ -8,10 +8,10 @@ namespace presentacion_libreria.implementaciones
     {
         private IComunicaciones? iComunicaciones;
 
-        public List<Gastos> Consultar()
+        public List<Gastos> Consultar(string correo)
         {
             var datos = new Dictionary<string, object>();
-            datos["Url"] = "http://localhost:5241/Gastos/Consultar";
+            datos["Url"] = $"http://localhost:5241/Gastos/Consultar?correo={correo}";
 
             this.iComunicaciones = new Comunicaciones();
             var task = this.iComunicaciones.Ejecutar(datos)!;
@@ -25,7 +25,7 @@ namespace presentacion_libreria.implementaciones
                 respuesta["Valor"].ToString()!)!;
         }
 
-        public Gastos Guardar(Gastos entidad)
+        public Gastos Guardar(Gastos entidad, string correo)
         {
             if (entidad.Id != 0)
                 throw new Exception("Ya se guardo");
@@ -33,7 +33,7 @@ namespace presentacion_libreria.implementaciones
             this.iComunicaciones = new Comunicaciones();
 
             var datos = new Dictionary<string, object>();
-            datos["Url"] = "http://localhost:5241/Gastos/Guardar";
+            datos["Url"] = $"http://localhost:5241/Gastos/Guardar?correo={correo}";
             datos["Entidad"] = entidad;
 
 

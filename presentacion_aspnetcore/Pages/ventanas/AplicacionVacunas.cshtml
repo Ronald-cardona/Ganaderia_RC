@@ -50,7 +50,8 @@
 
 
                     @{
-                        var animales = new presentacion_libreria.implementaciones.AnimalesNegocio().Consultar();
+                        var correo = HttpContext.Session.GetString("Usuario");
+                        var animales = new presentacion_libreria.implementaciones.AnimalesNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">
@@ -80,7 +81,7 @@
                     </div>
 
                     @{
-                        var vacunas = new presentacion_libreria.implementaciones.VacunasNegocio().Consultar();
+                        var vacunas = new presentacion_libreria.implementaciones.VacunasNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">
@@ -184,7 +185,7 @@
 
                             <td>
                                 <input type="submit"
-                                       value="Modicar"
+                                       value="Modificar"
                                        asp-page-handler="BtModificar"
                                        class="btn btn-secondary"
                                        asp-route-data="@elemento.Id" />

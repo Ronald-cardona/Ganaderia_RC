@@ -10,10 +10,10 @@ namespace presentacion_libreria.implementaciones
     {
         private IComunicaciones? iComunicaciones;
 
-        public List<Clientes> Consultar()
+        public List<Clientes> Consultar(string correo)
         {
             var datos = new Dictionary<string, object>();
-            datos["Url"] = "http://localhost:5241/Clientes/Consultar";
+            datos["Url"] = $"http://localhost:5241/Clientes/Consultar?correo={correo}";
 
             this.iComunicaciones = new Comunicaciones();
             var task = this.iComunicaciones.Ejecutar(datos)!;
@@ -27,7 +27,7 @@ namespace presentacion_libreria.implementaciones
                 respuesta["Valor"].ToString()!)!;
         }
 
-        public Clientes Guardar(Clientes entidad)
+        public Clientes Guardar(Clientes entidad, string correo)
         {
             if (entidad.Id != 0)
                 throw new Exception("Ya se guardo");
@@ -35,7 +35,7 @@ namespace presentacion_libreria.implementaciones
             this.iComunicaciones = new Comunicaciones();
 
             var datos = new Dictionary<string, object>();
-            datos["Url"] = "http://localhost:5241/Clientes/Guardar";
+            datos["Url"] = $"http://localhost:5241/Clientes/Guardar?correo={correo}";
             datos["Entidad"] = entidad;
 
 

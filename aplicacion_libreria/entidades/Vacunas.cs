@@ -11,6 +11,9 @@ namespace aplicacion_libreria.entidades
         public decimal CostoVacuna { get; set; }
         public string LoteVacuna { get; set; }
         public DateTime FechaCompraVacuna { get; set; }
+        public int? UsuarioId { get; set; }
+
+        [ForeignKey("UsuarioId")] public Usuarios? _usuario { get; set; }
 
 
         //Listas

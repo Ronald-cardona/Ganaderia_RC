@@ -12,7 +12,10 @@ namespace aplicacion_libreria.entidades
         public decimal CantidadSuplemento { get; set; }
         public DateTime FechaCompraSuplemento { get; set; }
 
-       
+        public int? UsuarioId { get; set; }
+
+        [ForeignKey("UsuarioId")] public Usuarios? _usuario { get; set; }
+
         [NotMapped] public List<BrindarSuplementos>? brindarSuplemento { get; set; } 
         [NotMapped] public List<Gastos>? gasto { get; set; }
     }

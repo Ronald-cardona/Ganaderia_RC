@@ -50,7 +50,8 @@
 
 
                     @{
-                        var animales = new presentacion_libreria.implementaciones.AnimalesNegocio().Consultar();
+                        var correo = HttpContext.Session.GetString("Usuario");
+                        var animales = new presentacion_libreria.implementaciones.AnimalesNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">
@@ -81,12 +82,12 @@
 
 
                     @{
-                        var suplementos = new presentacion_libreria.implementaciones.SuplementosNegocio().Consultar();
+                        var suplementos = new presentacion_libreria.implementaciones.SuplementosNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">
                         <label>
-                            Descripción de la venta  (Opcional)
+                            Suplemento brindado
                         </label>
 
                         <div class="col-6">

@@ -13,6 +13,10 @@ namespace aplicacion_libreria.entidades
         public decimal Sueldo { get; set; }
         public bool Activo { get; set; }
 
+        public int? UsuarioId { get; set; }
+
+        [ForeignKey("UsuarioId")] public Usuarios? _usuario { get; set; }
+
         [NotMapped] public List<Gastos>? Gastos { get; set; }
         [NotMapped] public List<Empleados>? Empleados { get; set; }
         [NotMapped] public List<Veterinarios>? Veterinarios { get; set; }

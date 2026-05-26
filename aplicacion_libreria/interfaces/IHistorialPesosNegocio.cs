@@ -6,8 +6,8 @@ namespace aplicacion_libreria.interfaces
 {
     public interface IHistorialPesosNegocio
     {
-        List<HistorialPesos> Consultar();
-        HistorialPesos Guardar(HistorialPesos entidad);
+        List<HistorialPesos> Consultar(string correo);
+        HistorialPesos Guardar(HistorialPesos entidad, string correo);
 
         HistorialPesos Modificar(HistorialPesos entidad);
         void Borrar(HistorialPesos entidad);

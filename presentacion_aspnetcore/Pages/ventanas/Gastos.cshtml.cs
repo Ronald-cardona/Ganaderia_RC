@@ -21,6 +21,21 @@ namespace presentacion_aspnetcore.Pages.ventanas
 
         public void OnGet()
         {
+
+            //codigo para proteger paginas  no se puede ingresar sin registrarse antes
+            var usuario = HttpContext.Session.GetString("Usuario");
+
+
+            if (string.IsNullOrEmpty(usuario))
+            {
+                Response.Redirect("/");
+                return;
+            }
+
+            //para manejar las sesiones 
+            var correo = HttpContext.Session.GetString("Usuario");
+
+            ListaGastos = new GastosNegocio().Consultar(correo!);
             OnPostBtRefrescar();
 
 
@@ -33,7 +48,9 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (iGastosNegocio == null)
                     return;
-                ListaGastos = iGastosNegocio.Consultar();
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+                ListaGastos = iGastosNegocio.Consultar(correo!);
                 Gasto = null;
             }
             catch (Exception ex)
@@ -72,8 +89,10 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (Gasto == null)
                     return;
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
                 if (Gasto.Id == 0)
-                    Gasto = iGastosNegocio!.Guardar(Gasto!);
+                    Gasto = iGastosNegocio!.Guardar(Gasto!,correo!);
                 else
                     Gasto = iGastosNegocio!.Modificar(Gasto!);
                 if (Gasto.Id == 0)

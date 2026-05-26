@@ -10,7 +10,7 @@ namespace aplicacion_libreria.implementaciones
     {
         private IConexion? iConexion;
 
-        public List<Clientes> Consultar()
+        public List<Clientes> Consultar(string correo)
         {
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
@@ -23,10 +23,10 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.SaveChanges();
 
 
-            return this.iConexion.Clientes!.ToList();
+            return this.iConexion.Clientes!.Where(x => x._usuario!.Correo == correo).ToList();  //filtrar por correo para que solo el usuario vea
         }
 
-        public Clientes Guardar(Clientes entidad)
+        public Clientes Guardar(Clientes entidad, string correo)
         {
             if (entidad.Id != 0)
                 throw new Exception("Ya se guardo");
@@ -38,6 +38,10 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
+
+            //para que pueda guardar por usuario
+            var usuario = this.iConexion.Usuarios!.First(x => x.Correo == correo);
+            entidad.UsuarioId = usuario.Id;
 
             this.iConexion.Clientes!.Add(entidad!);
 
@@ -58,6 +62,10 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
+
+            //para saber cual animal modificar respecto al usuario 
+            var clienteBd = this.iConexion.Clientes!.First(x => x.Id == entidad.Id);
+            entidad.UsuarioId = clienteBd.UsuarioId;
 
             var entry = this.iConexion!.Entry<Clientes>(entidad);
             entry.State = EntityState.Modified;

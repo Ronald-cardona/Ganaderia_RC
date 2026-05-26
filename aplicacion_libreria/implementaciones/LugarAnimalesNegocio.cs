@@ -10,7 +10,7 @@ namespace aplicacion_libreria.implementaciones
     {
         private IConexion? iConexion;
 
-        public List<LugarAnimales> Consultar()
+        public List<LugarAnimales> Consultar(string correo)
         {
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
@@ -23,12 +23,12 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.SaveChanges();
 
 
-            return this.iConexion.LugarAnimales!
+            return this.iConexion.LugarAnimales!.Where(x => x._usuario!.Correo == correo) //filtrar por correo para que solo el usuario vea sus animales 
             .Include(x => x._finca)
             .ToList();
         }
 
-        public LugarAnimales Guardar(LugarAnimales entidad)
+        public LugarAnimales Guardar(LugarAnimales entidad, string correo)
         {
             if (entidad.Id != 0)
                 throw new Exception("Ya se guardo");
@@ -40,6 +40,10 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
+
+            //para que pueda guardar por usuario
+            var usuario = this.iConexion.Usuarios!.First(x => x.Correo == correo);
+            entidad.UsuarioId = usuario.Id;
 
             this.iConexion.LugarAnimales!.Add(entidad!);
 
@@ -60,6 +64,10 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
+
+            //para saber cual animal modificar respecto al usuario 
+            var LugaranimalBd = this.iConexion.LugarAnimales!.First(x => x.Id == entidad.Id);
+            entidad.UsuarioId = LugaranimalBd.UsuarioId;
 
             var entry = this.iConexion!.Entry<LugarAnimales>(entidad);
             entry.State = EntityState.Modified;

@@ -49,7 +49,8 @@
                     </div>
 
                     @{
-                        var animales = new presentacion_libreria.implementaciones.AnimalesNegocio().Consultar();
+                        var correo = HttpContext.Session.GetString("Usuario");
+                        var animales = new presentacion_libreria.implementaciones.AnimalesNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">
@@ -80,7 +81,7 @@
 
 
                     @{
-                        var alimentos = new presentacion_libreria.implementaciones.AlimentosNegocio().Consultar();
+                        var alimentos = new presentacion_libreria.implementaciones.AlimentosNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">

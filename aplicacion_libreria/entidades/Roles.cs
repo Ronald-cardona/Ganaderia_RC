@@ -10,8 +10,10 @@ namespace aplicacion_libreria.entidades
 
         public string Tipo { get; set; }
 
-        public int RolUsuario { get; set; }
-        [ForeignKey("RolUsuario")] public Usuarios? _usuario { get; set; }
+        
+
+
+        [NotMapped] public List<Usuarios>? Usuarios { get; set; }
 
     }
 }

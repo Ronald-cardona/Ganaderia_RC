@@ -21,6 +21,21 @@ namespace presentacion_aspnetcore.Pages.ventanas
 
         public void OnGet()
         {
+
+            //codigo para proteger paginas  no se puede ingresar sin registrarse antes
+            var usuario = HttpContext.Session.GetString("Usuario");
+
+
+            if (string.IsNullOrEmpty(usuario))
+            {
+                Response.Redirect("/");
+                return;
+            }
+
+            //para manejar las sesiones 
+            var correo = HttpContext.Session.GetString("Usuario");
+
+            ListaLotes = new LotesNegocio().Consultar(correo!);
             OnPostBtRefrescar();
             
         }
@@ -32,7 +47,9 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (iLotesNegocio == null)
                     return;
-                ListaLotes = iLotesNegocio.Consultar();
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+                ListaLotes = iLotesNegocio.Consultar(correo!);
                 Lote = null;
             }
             catch (Exception ex)
@@ -71,8 +88,9 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (Lote == null)
                     return;
+                var correo = HttpContext.Session.GetString("Usuario");
                 if (Lote.Id == 0)
-                    Lote = iLotesNegocio!.Guardar(Lote!);
+                    Lote = iLotesNegocio!.Guardar(Lote!,correo!);
                 else
                     Lote = iLotesNegocio!.Modificar(Lote!);
                 if (Lote.Id == 0)

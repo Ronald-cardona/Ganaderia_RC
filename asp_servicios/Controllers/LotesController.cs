@@ -18,19 +18,19 @@ namespace asp_servicios.Controllers
         }
 
         [HttpGet]
-        public List<Lotes> Consultar()
+        public List<Lotes> Consultar(string correo)
         {
             if (this.ILotesNegocio == null)
                 throw new Exception("No implementado");
-            return this.ILotesNegocio!.Consultar();
+            return this.ILotesNegocio!.Consultar(correo);
         }
 
         [HttpPost]
-        public Lotes Guardar(Lotes entidad)
+        public Lotes Guardar([FromBody] Lotes entidad, [FromQuery] string correo)
         {
             if (this.ILotesNegocio == null)
                 throw new Exception("No implementado");
-            return this.ILotesNegocio!.Guardar(entidad);
+            return this.ILotesNegocio!.Guardar( entidad,  correo);
         }
 
         [HttpPost]

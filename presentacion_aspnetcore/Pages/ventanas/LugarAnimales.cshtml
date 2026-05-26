@@ -90,7 +90,9 @@
                     </div>
 
                     @{
-                        var fincas = new presentacion_libreria.implementaciones.FincasNegocio().Consultar();
+                        var correo = HttpContext.Session.GetString("Usuario");
+                        
+                        var fincas = new presentacion_libreria.implementaciones.FincasNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">

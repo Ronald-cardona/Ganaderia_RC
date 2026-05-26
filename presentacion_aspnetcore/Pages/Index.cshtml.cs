@@ -67,7 +67,8 @@ namespace presentacion_aspnetcore.Pages
                     "Usuario",
                     usuario.Correo!);
 
-              
+                // guardar sesión rol
+                HttpContext.Session.SetString("Rol", usuario._rol!.Tipo!);
 
                 EstaLogueado = true;
             }

@@ -21,6 +21,9 @@ namespace aplicacion_libreria.entidades
         public int? DiasTranscurridos { get; set; }
 
         public int IdAnimal { get; set; }
+        public int? UsuarioId { get; set; }
+
+        [ForeignKey("UsuarioId")] public Usuarios? _usuario { get; set; }
         [ForeignKey("IdAnimal")] public Animales? _animal { get; set; }
     }
 }

@@ -21,6 +21,21 @@ namespace presentacion_aspnetcore.Pages.ventanas
 
         public void OnGet()
         {
+
+            //codigo para proteger paginas  no se puede ingresar sin registrarse antes
+            var usuario = HttpContext.Session.GetString("Usuario");
+
+
+            if (string.IsNullOrEmpty(usuario))
+            {
+                Response.Redirect("/");
+                return;
+            }
+
+            //para manejar las sesiones 
+            var correo = HttpContext.Session.GetString("Usuario");
+
+            ListaProveedores = new ProveedoresNegocio().Consultar(correo!);
             OnPostBtRefrescar();
         }
 
@@ -31,7 +46,9 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (iProveedoresNegocio == null)
                     return;
-                ListaProveedores = iProveedoresNegocio.Consultar();
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+                ListaProveedores = iProveedoresNegocio.Consultar(correo!);
                 Proveedor = null;
             }
             catch (Exception ex)
@@ -40,14 +57,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
             }
         }
 
-        //public void OnPostBtNuevo()
-        //{
-        //    Proveedor = new Proveedores()
-        //    {
-        //        Fecha = DateTime.Now
-        //    };
-        //    Borrando = false;
-        //}
+        
 
         public void OnPostBtModificar(int data)
         {
@@ -70,8 +80,10 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (Proveedor == null)
                     return;
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
                 if (Proveedor.Id == 0)
-                    Proveedor = iProveedoresNegocio!.Guardar(Proveedor!);
+                    Proveedor = iProveedoresNegocio!.Guardar(Proveedor!,correo!);
                 else
                     Proveedor = iProveedoresNegocio!.Modificar(Proveedor!);
                 if (Proveedor.Id == 0)

@@ -79,7 +79,8 @@
                     </div>
                    
                     @{
-                        var proveedores = new presentacion_libreria.implementaciones.ProveedoresNegocio().Consultar();
+                        var correo = HttpContext.Session.GetString("Usuario");
+                        var proveedores = new presentacion_libreria.implementaciones.ProveedoresNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">

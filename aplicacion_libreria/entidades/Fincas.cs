@@ -14,6 +14,9 @@ namespace aplicacion_libreria.entidades
 
         public decimal? ExtensionHectareas { get; set; }
 
+        public int? UsuarioId { get; set; }
+        [ForeignKey("UsuarioId")] public Usuarios? _usuario { get; set; }
+
         [NotMapped] public List<Empleados>? _empleado { get; set; } 
         [NotMapped] public List<LugarAnimales>? _lugarAnimal { get; set; }
     }

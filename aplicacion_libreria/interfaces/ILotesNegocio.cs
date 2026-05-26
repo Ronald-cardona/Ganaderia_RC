@@ -6,8 +6,8 @@ namespace aplicacion_libreria.interfaces
 {
     public interface ILotesNegocio
     {
-        List<Lotes> Consultar();
-        Lotes Guardar(Lotes entidad);
+        List<Lotes> Consultar(string correo);
+        Lotes Guardar(Lotes entidad, string correo);
 
         Lotes Modificar(Lotes entidad);
         void Borrar(Lotes entidad);

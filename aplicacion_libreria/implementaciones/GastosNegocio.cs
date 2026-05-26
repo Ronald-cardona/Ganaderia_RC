@@ -11,13 +11,9 @@ namespace aplicacion_libreria.implementaciones
     {
         private IConexion? iConexion;
 
-        // Método  para calcular el total
-        //private decimal CalcularTotalGastos()
-        //{
-        //    return this.iConexion.Gastos?.Sum(g => g.CostoGasto) ?? 0;
-        //}
+        
 
-        public List<Gastos> Consultar()
+        public List<Gastos> Consultar(string correo)
         {
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
@@ -30,7 +26,7 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.SaveChanges();
 
 
-            return this.iConexion.Gastos!
+            return this.iConexion.Gastos!.Where(x => x._usuario!.Correo == correo) //filtrar por correo para que solo el usuario vea
            .Include(x => x._alimento)
            .Include(x => x._compra)
            .Include(x => x._vacuna)
@@ -39,7 +35,7 @@ namespace aplicacion_libreria.implementaciones
            .ToList();
         }
 
-        public Gastos Guardar(Gastos entidad)
+        public Gastos Guardar(Gastos entidad, string correo)
         {
             if (entidad.Id != 0)
                 throw new Exception("Ya se guardo");
@@ -52,10 +48,13 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
 
+            //para que pueda guardar por usuario
+            var usuario = this.iConexion.Usuarios!.First(x => x.Correo == correo);
+            entidad.UsuarioId = usuario.Id;
+
             this.iConexion.Gastos!.Add(entidad!);
 
-            //llamamos metodo totalgastos
-            //entidad.TotalGastos = CalcularTotalGastos();
+            
             
 
             Auditorias auditorias = new Auditorias();
@@ -77,11 +76,14 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
 
+            //para saber cual animal modificar respecto al usuario 
+            var gastoBd = this.iConexion.Gastos!.First(x => x.Id == entidad.Id);
+            entidad.UsuarioId = gastoBd.UsuarioId;
+
             var entry = this.iConexion!.Entry<Gastos>(entidad);
             entry.State = EntityState.Modified;
 
-            //llamado del metodo
-            //entidad.TotalGastos = CalcularTotalGastos();
+            
 
             Auditorias auditorias = new Auditorias();
             auditorias.Metodo = "Modificar";
@@ -115,8 +117,6 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion.Gastos.Remove(gasto);
 
-            //llamado del metodo
-            //entidad.TotalGastos = CalcularTotalGastos();
 
             Auditorias auditorias = new Auditorias();
             auditorias.Metodo = "Borrar";

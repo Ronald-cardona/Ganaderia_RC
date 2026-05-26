@@ -16,6 +16,9 @@ namespace aplicacion_libreria.entidades
         public int? VacunaId { get; set; }
         public int? SuplementoId { get; set; }
         public int? PersonaId { get; set; }
+        public int? UsuarioId { get; set; }
+
+        [ForeignKey("UsuarioId")] public Usuarios? _usuario { get; set; }
 
         [ForeignKey("CompraId")] public Compras? _compra { get; set; }
         [ForeignKey("AlimentoId")] public Alimentos? _alimento { get; set; }

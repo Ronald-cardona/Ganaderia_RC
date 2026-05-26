@@ -17,6 +17,9 @@ namespace aplicacion_libreria.entidades
 
         public int? IngresoId { get; set; }
         public int ClienteId { get; set; }
+        public int? UsuarioId { get; set; }
+
+        [ForeignKey("UsuarioId")] public Usuarios? _usuario { get; set; }
         [ForeignKey("IngresoId")] public Ingresos? _ingreso { get; set; }
         [ForeignKey("ClienteId")] public Clientes? _cliente { get; set; }
 

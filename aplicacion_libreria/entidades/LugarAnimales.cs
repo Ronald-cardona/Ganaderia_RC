@@ -14,6 +14,10 @@ namespace aplicacion_libreria.entidades
         public DateTime FechaIngreso { get; set; }
         public DateTime? FechaSalida { get; set; }
 
+        public int? UsuarioId { get; set; }
+
+        [ForeignKey("UsuarioId")] public Usuarios? _usuario { get; set; }
+
 
         public int FincaId { get; set; } 
         [ForeignKey("FincaId")] public Fincas? _finca { get; set; }

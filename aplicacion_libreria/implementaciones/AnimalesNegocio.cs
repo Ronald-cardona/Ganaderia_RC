@@ -11,7 +11,7 @@ namespace aplicacion_libreria.implementaciones
     {
         private IConexion? iConexion;
 
-        public List<Animales> Consultar()
+        public List<Animales> Consultar(string correo)
         {
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
@@ -25,6 +25,7 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.SaveChanges();
 
             return this.iConexion.Animales!
+            .Where(x => x._usuario!.Correo == correo) //filtrar por correo para que solo el usuario vea sus animales 
             .Include(x => x._lote)
             .Include(x => x._compra)
             .Include(x => x._estado)
@@ -33,18 +34,20 @@ namespace aplicacion_libreria.implementaciones
 
         }
 
-        public Animales Guardar(Animales entidad)
+        public Animales Guardar(Animales entidad, string correo)
         {
             if (entidad.Id != 0)
                 throw new Exception("Ya se guardo");
             //aca se hacen los calculos y los metodos del negocio 
 
-
-
-
+           
 
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
+
+            //para que pueda guardar por usuario
+            var usuario = this.iConexion.Usuarios!.First(x => x.Correo == correo);
+            entidad.UsuarioId = usuario.Id;
 
             this.iConexion.Animales!.Add(entidad!);
 
@@ -76,8 +79,12 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
 
+            //para saber cual animal modificar respecto al usuario 
+            var animalBd = this.iConexion.Animales!.First(x => x.Id == entidad.Id);
+            entidad.UsuarioId = animalBd.UsuarioId;
+
             var animalAnterior = this.iConexion.Animales
-        .FirstOrDefault(x => x.Id == entidad.Id); // parte de  calculo de contar lote animales
+            .FirstOrDefault(x => x.Id == entidad.Id); // parte de  calculo de contar lote animales
             int? loteAnteriorId = animalAnterior.LoteId;
 
             var entry = this.iConexion!.Entry<Animales>(entidad);
@@ -87,7 +94,7 @@ namespace aplicacion_libreria.implementaciones
 
             auditorias.Metodo = "Modificar";
             auditorias.Fecha = DateTime.Now;
-            auditorias.Descripcion = "Se modificó un  usuario";
+            auditorias.Descripcion = "Se modificó un  animal";
             this.iConexion.Auditorias!.Add(auditorias);
 
             //calculo de ganancia de animales 

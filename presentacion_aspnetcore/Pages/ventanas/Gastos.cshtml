@@ -73,7 +73,8 @@
 
 
                     @{
-                        var compras = new presentacion_libreria.implementaciones.ComprasNegocio().Consultar();
+                        var correo = HttpContext.Session.GetString("Usuario");
+                        var compras = new presentacion_libreria.implementaciones.ComprasNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">
@@ -103,7 +104,8 @@
                     </div>
                     
                     @{
-                        var alimentos = new presentacion_libreria.implementaciones.AlimentosNegocio().Consultar();
+                       
+                        var alimentos = new presentacion_libreria.implementaciones.AlimentosNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">
@@ -133,7 +135,8 @@
                     </div>
 
                     @{
-                        var vacunas = new presentacion_libreria.implementaciones.VacunasNegocio().Consultar();
+                       
+                        var vacunas = new presentacion_libreria.implementaciones.VacunasNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">
@@ -164,7 +167,7 @@
 
 
                     @{
-                        var suplementos = new presentacion_libreria.implementaciones.SuplementosNegocio().Consultar();
+                        var suplementos = new presentacion_libreria.implementaciones.SuplementosNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">
@@ -195,7 +198,8 @@
 
 
                     @{
-                        var personas = new presentacion_libreria.implementaciones.PersonasNegocio().Consultar();
+                        
+                        var personas = new presentacion_libreria.implementaciones.PersonasNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">

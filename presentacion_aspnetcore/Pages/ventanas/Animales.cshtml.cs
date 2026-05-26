@@ -25,20 +25,40 @@ namespace presentacion_aspnetcore.Pages.ventanas
         public void OnGet()
         {
             Animal = new Animales();
+
+            //codigo para proteger paginas  no se puede ingresar sin registrarse antes
+            var usuario = HttpContext.Session.GetString("Usuario");
+          
+
+            if (string.IsNullOrEmpty(usuario))
+            {
+                Response.Redirect("/");
+                return;
+            }
+
+            //para manejar las sesiones 
+            var correo = HttpContext.Session.GetString("Usuario");
+
+            ListaAnimales = new AnimalesNegocio().Consultar(correo!);
+
+
             OnPostBtRefrescar();
             
 
 
         }
 
-
+        
         public void OnPostBtRefrescar()
         {
             try
             {
                 if (iAnimalesNegocio == null)
                     return;
-                ListaAnimales = iAnimalesNegocio.Consultar();
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+
+                ListaAnimales = iAnimalesNegocio.Consultar(correo!);
                 Animal = null;
                 
             }
@@ -48,14 +68,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
             }
         }
 
-        //public void OnPostBtNuevo()
-        //{
-        //    Animal = new Animales()
-        //    {
-        //        Fecha = DateTime.Now
-        //    };
-        //    Borrando = false;
-        //}
+       
 
         public void OnPostBtModificar(int data)
         {
@@ -80,8 +93,13 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (Animal == null)
                     return;
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+
+               
+
                 if (Animal.Id == 0)
-                    Animal = iAnimalesNegocio!.Guardar(Animal!);
+                    Animal = iAnimalesNegocio!.Guardar(Animal!,correo!);
                 else
                     Animal = iAnimalesNegocio!.Modificar(Animal!);
                 if (Animal.Id == 0)

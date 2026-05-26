@@ -21,6 +21,20 @@ namespace presentacion_aspnetcore.Pages.ventanas
 
         public void OnGet()
         {
+            //codigo para proteger paginas  no se puede ingresar sin registrarse antes
+            var usuario = HttpContext.Session.GetString("Usuario");
+
+
+            if (string.IsNullOrEmpty(usuario))
+            {
+                Response.Redirect("/");
+                return;
+            }
+
+            //para manejar las sesiones 
+            var correo = HttpContext.Session.GetString("Usuario");
+
+            ListaPersonas = new PersonasNegocio().Consultar(correo!);
             OnPostBtRefrescar();
         }
 
@@ -31,7 +45,9 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (iPersonasNegocio == null)
                     return;
-                ListaPersonas = iPersonasNegocio.Consultar();
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+                ListaPersonas = iPersonasNegocio.Consultar(correo!);
                 Persona = null;
             }
             catch (Exception ex)
@@ -40,15 +56,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
             }
         }
 
-        //public void OnPostBtNuevo()
-        //{
-        //    Persona = new Personas()
-        //    {
-        //        Fecha = DateTime.Now
-        //    };
-        //    Borrando = false;
-        //}
-
+      
         public void OnPostBtModificar(int data)
         {
             try
@@ -70,8 +78,11 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (Persona == null)
                     return;
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+
                 if (Persona.Id == 0)
-                    Persona = iPersonasNegocio!.Guardar(Persona!);
+                    Persona = iPersonasNegocio!.Guardar(Persona!,correo!);
                 else
                     Persona = iPersonasNegocio!.Modificar(Persona!);
                 if (Persona.Id == 0)

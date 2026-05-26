@@ -6,8 +6,8 @@ namespace aplicacion_libreria.interfaces
 {
     public interface IAnimalesNegocio
     {
-        List<Animales> Consultar();
-        Animales Guardar(Animales entidad);
+        List<Animales> Consultar(string correo);
+        Animales Guardar(Animales entidad, string correo);
 
         Animales Modificar(Animales entidad);
         void Borrar(Animales entidad);

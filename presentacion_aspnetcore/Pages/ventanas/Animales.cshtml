@@ -89,7 +89,8 @@
                     </div>
 
                     @{
-                        var lugarAnimales = new presentacion_libreria.implementaciones.LugarAnimalesNegocio().Consultar();
+                        var correo = HttpContext.Session.GetString("Usuario");
+                        var lugarAnimales = new presentacion_libreria.implementaciones.LugarAnimalesNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">
@@ -119,7 +120,8 @@
                     </div>
 
                         @{
-                            var lotes = new presentacion_libreria.implementaciones.LotesNegocio().Consultar();
+                        
+                            var lotes = new presentacion_libreria.implementaciones.LotesNegocio().Consultar(correo!);
                         }
 
                     <div class="form-group">
@@ -149,7 +151,7 @@
                     </div>
 
                     @{
-                        var compras = new presentacion_libreria.implementaciones.ComprasNegocio().Consultar();
+                        var compras = new presentacion_libreria.implementaciones.ComprasNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">
@@ -191,7 +193,7 @@
 
 
                     @{
-                        var ventas = new presentacion_libreria.implementaciones.VentasNegocio().Consultar();
+                        var ventas = new presentacion_libreria.implementaciones.VentasNegocio().Consultar(correo!);
                     }
 
                     <div class="form-group">

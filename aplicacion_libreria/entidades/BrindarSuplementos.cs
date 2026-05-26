@@ -9,6 +9,9 @@ namespace aplicacion_libreria.entidades
         public DateTime FechaBrindarSuplemetos { get; set; }
         public int? IdAnimal { get; set; }
         public int? SuplementoId { get; set; }
+        public int? UsuarioId { get; set; }
+
+        [ForeignKey("UsuarioId")] public Usuarios? _usuario { get; set; }
 
         [ForeignKey("IdAnimal")] public Animales? _animal { get; set; }
         [ForeignKey("SuplementoId")] public Suplementos? _suplemento { get; set; }

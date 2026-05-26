@@ -21,6 +21,21 @@ namespace presentacion_aspnetcore.Pages.ventanas
 
         public void OnGet()
         {
+
+            //codigo para proteger paginas  no se puede ingresar sin registrarse antes
+            var usuario = HttpContext.Session.GetString("Usuario");
+
+
+            if (string.IsNullOrEmpty(usuario))
+            {
+                Response.Redirect("/");
+                return;
+            }
+
+            //para manejar las sesiones 
+            var correo = HttpContext.Session.GetString("Usuario");
+
+            ListaVacunas = new VacunasNegocio().Consultar(correo!);
             OnPostBtRefrescar();
         }
 
@@ -31,7 +46,9 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (iVacunasNegocio == null)
                     return;
-                ListaVacunas = iVacunasNegocio.Consultar();
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+                ListaVacunas = iVacunasNegocio.Consultar(correo!);
                 Vacuna = null;
             }
             catch (Exception ex)
@@ -40,14 +57,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
             }
         }
 
-        //public void OnPostBtNuevo()
-        //{
-        //    Vacuna = new Vacunas()
-        //    {
-        //        Fecha = DateTime.Now
-        //    };
-        //    Borrando = false;
-        //}
+      
 
         public void OnPostBtModificar(int data)
         {
@@ -70,8 +80,10 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (Vacuna == null)
                     return;
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
                 if (Vacuna.Id == 0)
-                    Vacuna = iVacunasNegocio!.Guardar(Vacuna!);
+                    Vacuna = iVacunasNegocio!.Guardar(Vacuna!,correo!);
                 else
                     Vacuna = iVacunasNegocio!.Modificar(Vacuna!);
                 if (Vacuna.Id == 0)

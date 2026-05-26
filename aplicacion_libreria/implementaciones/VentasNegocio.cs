@@ -11,7 +11,7 @@ namespace aplicacion_libreria.implementaciones
     {
         private IConexion? iConexion;
 
-        public List<Ventas> Consultar()
+        public List<Ventas> Consultar(string correo)
         {
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
@@ -24,13 +24,13 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.SaveChanges();
 
 
-            return this.iConexion.Ventas!
+            return this.iConexion.Ventas!.Where(x => x._usuario!.Correo == correo) //filtrar por correo para que solo el usuario vea
             .Include(x => x._ingreso)
             .Include(x => x._cliente)
             .ToList();
         }
 
-        public Ventas Guardar(Ventas entidad)
+        public Ventas Guardar(Ventas entidad, string correo)
         {
             if (entidad.Id != 0)
                 throw new Exception("Ya se guardo");
@@ -42,6 +42,10 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
+
+            //para que pueda guardar por usuario
+            var usuario = this.iConexion.Usuarios!.First(x => x.Correo == correo);
+            entidad.UsuarioId = usuario.Id;
 
             //calculo para total de ventas 
             entidad.VentaTotal = entidad.PrecioKilo * entidad.PesoFinal;
@@ -65,6 +69,10 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion = new Conexion();
             this.iConexion.string_conexion = ConfiguracionesC.obtener("string_conexion");
+
+            //para saber cual animal modificar respecto al usuario 
+            var ventaBd = this.iConexion.Ventas!.First(x => x.Id == entidad.Id);
+            entidad.UsuarioId = ventaBd.UsuarioId;
 
             //calculo para total de ventas 
             entidad.VentaTotal = entidad.PrecioKilo * entidad.PesoFinal;

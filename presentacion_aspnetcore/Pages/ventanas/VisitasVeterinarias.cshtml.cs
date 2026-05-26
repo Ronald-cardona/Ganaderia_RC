@@ -21,6 +21,21 @@ namespace presentacion_aspnetcore.Pages.ventanas
 
         public void OnGet()
         {
+
+            //codigo para proteger paginas  no se puede ingresar sin registrarse antes
+            var usuario = HttpContext.Session.GetString("Usuario");
+
+
+            if (string.IsNullOrEmpty(usuario))
+            {
+                Response.Redirect("/");
+                return;
+            }
+
+            //para manejar las sesiones 
+            var correo = HttpContext.Session.GetString("Usuario");
+
+            ListaVisitasVeterinarias = new VisitasVeterinariasNegocio().Consultar(correo!);
             OnPostBtRefrescar();
         }
 
@@ -31,7 +46,9 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (iVisitasVeterinariasNegocio == null)
                     return;
-                ListaVisitasVeterinarias = iVisitasVeterinariasNegocio.Consultar();
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
+                ListaVisitasVeterinarias = iVisitasVeterinariasNegocio.Consultar(correo!);
                 VisitasVeterinaria = null;
             }
             catch (Exception ex)
@@ -70,8 +87,10 @@ namespace presentacion_aspnetcore.Pages.ventanas
             {
                 if (VisitasVeterinaria == null)
                     return;
+                //manejo de sesiones
+                var correo = HttpContext.Session.GetString("Usuario");
                 if (VisitasVeterinaria.Id == 0)
-                    VisitasVeterinaria = iVisitasVeterinariasNegocio!.Guardar(VisitasVeterinaria!);
+                    VisitasVeterinaria = iVisitasVeterinariasNegocio!.Guardar(VisitasVeterinaria!,correo!);
                 else
                     VisitasVeterinaria = iVisitasVeterinariasNegocio!.Modificar(VisitasVeterinaria!);
                 if (VisitasVeterinaria.Id == 0)

@@ -20,7 +20,9 @@ namespace aplicacion_libreria.entidades
         public int EstadoId { get; set; }
         public int? VentaId { get; set; }
         public int LugarAnimalId { get; set; }
+        public int? UsuarioId { get; set; }
 
+        [ForeignKey("UsuarioId")] public Usuarios? _usuario { get; set; }
         [ForeignKey("LoteId")] public Lotes? _lote { get; set; }
         [ForeignKey("CompraId")] public Compras? _compra { get; set; }
         [ForeignKey("EstadoId")] public Estados? _estado { get; set; }

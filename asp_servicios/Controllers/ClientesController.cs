@@ -18,19 +18,19 @@ namespace asp_servicios.Controllers
         }
 
         [HttpGet]
-        public List<Clientes> Consultar()
+        public List<Clientes> Consultar(string correo)
         {
             if (this.IClientesNegocio == null)
                 throw new Exception("No implementado");
-            return this.IClientesNegocio!.Consultar();
+            return this.IClientesNegocio!.Consultar(correo);
         }
 
         [HttpPost]
-        public Clientes Guardar(Clientes entidad)
+        public Clientes Guardar(Clientes entidad, string correo)
         {
             if (this.IClientesNegocio == null)
                 throw new Exception("No implementado");
-            return this.IClientesNegocio!.Guardar(entidad);
+            return this.IClientesNegocio!.Guardar(entidad,correo);
         }
 
         [HttpPost]
