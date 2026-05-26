@@ -24,7 +24,10 @@ namespace aplicacion_libreria.implementaciones
             this.iConexion.Auditorias!.Add(auditorias);
             this.iConexion.SaveChanges();
 
-            return this.iConexion.Usuarios!.ToList(); //realizar los roles
+            return this.iConexion.Usuarios!
+                .Include(x => x._rol)
+
+                .ToList(); //realizar los roles
         }
 
         public Usuarios Guardar(Usuarios entidad)

@@ -59,6 +59,40 @@
                                    asp-for="@Model.Usuario!.Contraseña" />
                         </div>
                     </div>
+
+
+
+
+
+                    @{
+                    var roles = new presentacion_libreria.implementaciones.RolesNegocio().Consultar();
+                    }
+
+                    <div class="form-group">
+                        <label>
+                            Rol  del usuario
+                        </label>
+
+                        <div class="col-6">
+
+                            <select asp-for="Usuario.RolId"
+                                    class="form-control">
+
+                                <option value="">
+                                    Seleccione el rol
+                                </option>
+
+                                @foreach (var rol in roles)
+                                {
+                                    <option value="@rol.Id">
+                                        @rol.Tipo
+                                    </option>
+                                }
+
+                            </select>
+
+                        </div>
+                    </div>
                    
                   
 
@@ -112,6 +146,10 @@
                         <th>
                             Contraseña
                         </th>
+
+                        <th>
+                            Rol del usuario
+                        </th>
                        
 
                        
@@ -128,12 +166,16 @@
                             <td>
                                 @elemento.Contraseña
                             </td>
+
+                            <td>
+                                @elemento._rol?.Tipo
+                            </td>
                            
 
                             
                             <td>
                                 <input type="submit"
-                                       value="Modicar"
+                                       value="Modificar"
                                        asp-page-handler="BtModificar"
                                        class="btn btn-secondary"
                                        asp-route-data="@elemento.Id" />

@@ -1,8 +1,12 @@
 ﻿
+using aplicacion_libreria.clima;
 using aplicacion_libreria.entidades;
 using aplicacion_libreria.interfaces;
 using aplicacion_libreria.nucleo;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.Globalization;
+using System.Net.Http;
 
 namespace aplicacion_libreria.implementaciones
 {
@@ -48,6 +52,62 @@ namespace aplicacion_libreria.implementaciones
             var usuario = this.iConexion.Usuarios!.First(x => x.Correo == correo);
 
             entidad.UsuarioId = usuario.Id;
+
+            //obtener coordenadas para el clima
+            using var client = new HttpClient();
+
+            client.DefaultRequestHeaders.Add(
+                "User-Agent",
+                "GanaderiaRC");
+
+            var direccion =
+                entidad.Direcccion?.Trim();
+
+            if (string.IsNullOrEmpty(direccion))
+                throw new Exception(
+                    "La dirección está vacía");
+
+            var direccionCodificada =
+                Uri.EscapeDataString(direccion);
+
+            var url =
+            $"https://nominatim.openstreetmap.org/search?q={direccionCodificada}&format=json&limit=1";
+
+            var json =
+                client.GetStringAsync(url).Result;
+
+            var resultado =
+                JsonConvert.DeserializeObject<List<GeocodingResult>>(json);
+
+            if (resultado != null &&
+                resultado.Any())
+            {
+                entidad.Latitud =
+                decimal.Parse(
+                resultado.First().Lat!,
+                    CultureInfo.InvariantCulture);
+
+                entidad.Longitud =
+                    decimal.Parse(
+                     resultado.First().Lon!,
+                    CultureInfo.InvariantCulture);
+            }
+
+            //// PROBAR CLIMA
+
+            //// LLAMAR CLIMA NEGOCIO
+
+            //var clima =
+            //     new ClimasNegocio()
+            //            .ConsultarClima(
+            //                 entidad.Latitud!.Value,
+            //                         entidad.Longitud!.Value);
+            //throw new Exception(
+            //    $"Temp: {clima.Temperatura}°C - " +
+            //    $"Humedad: {clima.Humedad}%");
+
+
+
 
             this.iConexion.Fincas!.Add(entidad!);
 

@@ -48,35 +48,7 @@
                         </div>
                     </div>
 
-                    @{
-                        var usuarios = new presentacion_libreria.implementaciones.UsuariosNegocio().Consultar();
-                    }
-
-                    <div class="form-group">
-                        <label>
-                            Correo del usuario
-                        </label>
-
-                        <div class="col-6">
-
-                            <select asp-for="Rol.RolUsuario"
-                                    class="form-control">
-
-                                <option value="">
-                                    Seleccione el codigo del animal
-                                </option>
-
-                                @foreach (var usuario in usuarios)
-                                {
-                                    <option value="@usuario.Id">
-                                        @usuario.Correo
-                                    </option>
-                                }
-
-                            </select>
-
-                        </div>
-                    </div>
+                 
 
                   
 
@@ -125,11 +97,9 @@
                 <table class="tb_data table table-striped table-bordered table-hover">
                     <tr>
                         <th>
-                            Tipo de Rol
+                            Tipo de rol
                         </th>
-                        <th>
-                            Correo del usuario
-                        </th>
+                       
                        
 
                        
@@ -143,15 +113,13 @@
                             <td>
                                 @elemento.Tipo
                             </td>
-                            <td>
-                                @elemento._usuario?.Correo
-                            </td>
+                          
                             
 
                             
                             <td>
                                 <input type="submit"
-                                       value="Modicar"
+                                       value="Modificar"
                                        asp-page-handler="BtModificar"
                                        class="btn btn-secondary"
                                        asp-route-data="@elemento.Id" />

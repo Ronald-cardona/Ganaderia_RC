@@ -926,6 +926,7 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0",
+          "Newtonsoft.Json": "13.0.4",
           "ScottPlot": "5.1.58",
           "itext": "9.6.0",
           "itext.bouncy-castle-adapter": "9.6.0"

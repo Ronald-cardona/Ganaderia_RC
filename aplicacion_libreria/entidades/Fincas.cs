@@ -14,6 +14,10 @@ namespace aplicacion_libreria.entidades
 
         public decimal? ExtensionHectareas { get; set; }
 
+        public decimal? Latitud { get; set; }
+                                                        //para calcular el clima 
+        public decimal? Longitud { get; set; }
+
         public int? UsuarioId { get; set; }
         [ForeignKey("UsuarioId")] public Usuarios? _usuario { get; set; }
 

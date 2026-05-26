@@ -3,7 +3,47 @@
 @{
     ViewData["Title"] = "Fincas";
 }
+@if (Model.ClimaActual != null)
+{
+    <div class="weather-card">
 
+        <h3>
+            🌤 Clima actual de mi finca
+        </h3>
+
+        <div class="weather-grid">
+
+            <div class="weather-item">
+                <span>🌡 Temperatura</span>
+                <strong>
+                    @Model.ClimaActual.Temperatura °C
+                </strong>
+            </div>
+
+            <div class="weather-item">
+                <span>💧 Humedad</span>
+                <strong>
+                    @Model.ClimaActual.Humedad %
+                </strong>
+            </div>
+
+            <div class="weather-item">
+                <span>🌧 Lluvia</span>
+                <strong>
+                    @Model.ClimaActual.Lluvia mm
+                </strong>
+            </div>
+
+            <div class="weather-item">
+                <span>🌬 Viento</span>
+                <strong>
+                    @Model.ClimaActual.VelocidadViento km/h
+                </strong>
+            </div>
+
+        </div>
+    </div>
+}
 <center>
     <div>
         <form method="POST"
@@ -11,7 +51,7 @@
             @Html.AntiForgeryToken()
 
             <div align="left">
-                <h3>Fincaes</h3>
+                <h3>Fincas</h3>
             </div>
 
             <div>

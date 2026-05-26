@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@* @{
+    var rol = Context.Session.GetString("Rol");
+       
+} *@
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,9 +17,21 @@
     <link rel="stylesheet" href="~/presentacion_aspnetcore.styles.css" asp-append-version="true" />
 </head>
 <body>
+
+    @{
+
+        var usuario = Context.Session.GetString("Usuario"); // para que no se muestre la pagina hasta que se inicie sesion 
+        var rol = Context.Session.GetString("Rol"); // para filtrar por roles
+
+    }
+
     <div class="layout">
 
-        <!-- SIDEBAR -->
+
+        @if (!string.IsNullOrEmpty(usuario))   @*  para que no se muestre la pagina hasta que se inicie sesion  *@
+        
+       
+        {
         <aside class="sidebar">
 
             <div class="logo">
@@ -21,7 +40,8 @@
 
             <ul class="menu">
 
-                <li>
+              
+                    <li>
 
                     <button class="dropdown-btn">
                          Mi entorno ganadero
@@ -207,12 +227,13 @@
                             </a>
                         </li>
 
-                       
-
-
                     </ul>
 
                 </li>
+
+                @* SOLO ADMINISTRADOR *@
+                @if (rol == "Administrador")
+                {
 
                 <li>
                     <a asp-page="/ventanas/Configuraciones"
@@ -236,9 +257,13 @@
                     </a>
                 </li>
 
+                } @*Hasta aca va el administrador *@
+
             </ul>
 
         </aside>
+
+        }
 
         <!-- CONTENIDO -->
         <main class="main-content">

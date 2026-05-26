@@ -1,4 +1,6 @@
+
 using aplicacion_libreria.entidades;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using presentacion_libreria.implementaciones;
@@ -11,6 +13,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
         private IFincasNegocio? iFincasNegocio;
         [BindProperty] public List<Fincas>? ListaFincas { get; set; }
         [BindProperty] public Fincas? Finca { get; set; }
+        [BindProperty] public Climas? ClimaActual { get; set; }
         [BindProperty] public bool Borrando { get; set; }
 
 
@@ -23,7 +26,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
 
         {
 
-            Finca = new Fincas();
+            
 
             //codigo para proteger paginas  no se puede ingresar sin registrarse antes
             var usuario = HttpContext.Session.GetString("Usuario");
@@ -36,9 +39,33 @@ namespace presentacion_aspnetcore.Pages.ventanas
             }
 
             //para manejar las sesiones 
-            var correo = HttpContext.Session.GetString("Usuario");
-
+            //var correo = HttpContext.Session.GetString("Usuario");
             OnPostBtRefrescar();
+
+            // CARGAR FINCAS
+            //ListaFincas =
+            //    new 
+            //    FincasNegocio()
+            //    .Consultar(correo!);
+           
+
+            if (ListaFincas.Any())
+            {
+                var finca =
+                    ListaFincas.First();
+
+                if (finca.Latitud != null &&
+                    finca.Longitud != null)
+                {
+                    ClimaActual = new aplicacion_libreria.implementaciones.ClimasNegocio().ConsultarClima(
+                            finca.Latitud.Value,
+                            finca.Longitud.Value);
+
+                  
+                }
+            }
+
+                   
         }
 
 
@@ -78,40 +105,45 @@ namespace presentacion_aspnetcore.Pages.ventanas
             }
         }
 
-        public void OnPostBtGuardar()
+        public IActionResult OnPostBtGuardar()
         {
             try
             {
                 if (Finca == null)
-                    return;
+                    return Page();
                 //manejo de sesiones
                 var correo = HttpContext.Session.GetString("Usuario");
                 if (Finca.Id == 0)
                     Finca = iFincasNegocio!.Guardar(Finca!,correo!);
                 else
                     Finca = iFincasNegocio!.Modificar(Finca!);
+                return RedirectToPage();
+
                 if (Finca.Id == 0)
-                    return;
-                OnPostBtRefrescar();
+                    return Page();
+                //OnPostBtRefrescar();
             }
             catch (Exception ex)
             {
                 ViewData["Mensaje"] = ex.Message;
+                return Page();
             }
         }
 
-        public void OnPostBtBorrar()
+        public IActionResult OnPostBtBorrar()
         {
             try
             {
                 if (Finca == null)
-                    return;
+                    return Page();
                 Finca = iFincasNegocio!.Borrar(Finca!);
-                OnPostBtRefrescar();
+                // OnPostBtRefrescar();
+                return RedirectToPage();
             }
             catch (Exception ex)
             {
                 ViewData["Mensaje"] = ex.Message;
+                return Page();
             }
         }
 
