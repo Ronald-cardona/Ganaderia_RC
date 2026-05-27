@@ -7,5 +7,8 @@
     <Project Path="aplicacion_libreria/aplicacion_libreria.csproj" />
     <Project Path="asp_servicios/asp_servicios.csproj" Id="4b25d9e0-ef68-4843-8eb8-161ee8450166" />
   </Folder>
-  <Folder Name="/3. Pruebas Unitarias/" />
+  <Folder Name="/3. Pruebas Unitarias/">
+    <Project Path="Pruebas_unitarias_Comunicaciones/Pruebas_unitarias_Comunicaciones.csproj" Id="4769969e-3297-4c08-bda2-f5d5232b9507" />
+    <Project Path="pruebas_unitarias_repositorio/pruebas_unitarias_repositorio.csproj" Id="90425206-0175-4fd2-af59-063a5e1a207d" />
+  </Folder>
 </Solution>
