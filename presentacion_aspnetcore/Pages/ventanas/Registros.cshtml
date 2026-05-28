@@ -1,0 +1,35 @@
+﻿@page
+@model RegistrosModel
+@{
+}
+
+
+<form method="post">
+
+    @Html.AntiForgeryToken()
+
+    <div>
+        <label>Correo</label>
+        <input asp-for="Usuario.Correo"
+               class="form-control" />
+    </div>
+
+    <div>
+        <label>Contraseña</label>
+        <input asp-for="Usuario.Contraseña"
+               class="form-control" />
+    </div>
+
+    <br />
+
+    <input type="submit"
+           value="Registrarse"
+           asp-page-handler="BtGuardar"
+           class="btn btn-primary" />
+
+    <a asp-page="/Index"
+       class="btn btn-secondary">
+        Volver al login
+    </a>
+
+</form>

@@ -19,8 +19,16 @@ namespace presentacion_aspnetcore.Pages.ventanas
             iUsuariosNegocio = new UsuariosNegocio();
         }
 
+
+      
+
+
+
         public void OnGet()
         {
+           
+
+            
             OnPostBtRefrescar();
         }
 
@@ -62,19 +70,30 @@ namespace presentacion_aspnetcore.Pages.ventanas
             try
             {
                 if (Usuario == null)
-                    return;
+                    return ;
+
+               
+
+
+
                 if (Usuario.Id == 0)
                     Usuario = iUsuariosNegocio!.Guardar(Usuario!);
                 else
                     Usuario = iUsuariosNegocio!.Modificar(Usuario!);
+
+              
+
                 if (Usuario.Id == 0)
-                    return;
+                    return ;
                 OnPostBtRefrescar();
             }
             catch (Exception ex)
             {
                 ViewData["Mensaje"] = ex.Message;
+
+               
             }
+            
         }
 
         public void OnPostBtBorrar()

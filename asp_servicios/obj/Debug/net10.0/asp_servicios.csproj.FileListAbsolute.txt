@@ -111,3 +111,13 @@ C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\asp_servicios\obj\Debug\net10.0\
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\asp_servicios\obj\Debug\net10.0\asp_servicios.dll
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\asp_servicios\obj\Debug\net10.0\refint\asp_servicios.dll
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\asp_servicios\obj\Debug\net10.0\asp_servicios.pdb
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\asp_servicios\bin\Debug\net10.0\appsettings.Development.json
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\asp_servicios\bin\Debug\net10.0\appsettings.json
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\asp_servicios\bin\Debug\net10.0\asp_servicios.staticwebassets.endpoints.json
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\asp_servicios\bin\Debug\net10.0\asp_servicios.deps.json
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\asp_servicios\bin\Debug\net10.0\asp_servicios.runtimeconfig.json
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\asp_servicios\bin\Debug\net10.0\asp_servicios.pdb
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\asp_servicios\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\asp_servicios\obj\Debug\net10.0\asp_serv.1BB33DF7.Up2Date
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\asp_servicios\obj\Debug\net10.0\asp_servicios.genruntimeconfig.cache
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\asp_servicios\obj\Debug\net10.0\ref\asp_servicios.dll

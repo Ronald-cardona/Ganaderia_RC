@@ -10,13 +10,16 @@
     <div>
         <form method="POST"
               enctype="multipart/form-data">
+             
             @Html.AntiForgeryToken()
+           
 
             <div align="left">
                 <h3>Usuarios</h3>
             </div>
 
             <div>
+                
                 <input type="submit"
                        value="Refrescar"
                        class="btn btn-secondary"
@@ -26,6 +29,7 @@
                        class="btn btn-secondary"
                        asp-page-handler="BtNuevo"
                        disabled="@(Model.Usuario != null)" />
+                    
                 <input type="submit"
                        value="Guardar"
                        class="btn btn-secondary"
@@ -67,7 +71,8 @@
                     @{
                     var roles = new presentacion_libreria.implementaciones.RolesNegocio().Consultar();
                     }
-
+                    
+                 
                     <div class="form-group">
                         <label>
                             Rol  del usuario
@@ -136,7 +141,7 @@
 
             @if (Model != null &&
                 Model.ListaUsuarios != null &&
-                Model.ListaUsuarios.Count > 0)
+                Model.ListaUsuarios.Count > 0  )
             {
                 <table class="tb_data table table-striped table-bordered table-hover">
                     <tr>
@@ -172,20 +177,32 @@
                             </td>
                            
 
-                            
-                            <td>
-                                <input type="submit"
-                                       value="Modificar"
-                                       asp-page-handler="BtModificar"
-                                       class="btn btn-secondary"
-                                       asp-route-data="@elemento.Id" />
-                                <input type="submit"
-                                       value="Borrar"
-                                       asp-page-handler="BtBorrarVal"
-                                       class="btn btn-secondary"
-                                       asp-route-data="@elemento.Id" />
-                            </td>
-                        </tr>
+                           
+                                    <td>
+                                        <div class="acciones">
+                                            <button type="submit"
+                                                    asp-page-handler="BtModificar"
+                                                    asp-route-data="@elemento.Id"
+                                                    class="icon-btn edit-btn"
+                                                    title="Modificar">
+
+                                                <img src="~/imagenes/editable.png"
+                                                     class="action-icon" />
+                                            </button>
+
+
+                                            <button type="submit"
+                                                    asp-page-handler="BtBorrarVal"
+                                                    asp-route-data="@elemento.Id"
+                                                    class="icon-btn edit-btn"
+                                                    title="Borrar">
+
+                                                <img src="~/imagenes/delete.png"
+                                                     class="action-icon" />
+                                            </button>
+                                    </td>
+                                
+                            </tr>
                     }
                 </table>
             }

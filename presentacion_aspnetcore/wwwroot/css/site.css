@@ -1,138 +1,663 @@
+/* ==========================
+   ESTILO GENERAL
+========================== */
+
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f4f6f9;
+    background: linear-gradient( 180deg, #F5F7FA 0%, #E9EEF4 100% );
 }
+
+/* ==========================
+   LAYOUT
+========================== */
 
 .layout {
     display: flex;
+    min-height: 100vh;
 }
 
+/* ==========================
+   SIDEBAR
+========================== */
+
 .sidebar {
-    width: 260px;
-    min-height: 100vh;
-    background: #1e293b;
+    width: 300px;
+    background: #415A77;
     color: white;
-    padding: 20px;
+    padding: 25px 18px;
 }
 
 .logo {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
+
+    .logo h3 {
+        font-size: 33px;
+        margin-bottom: 5px;
+    }
+
+    .logo h2 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+/* ==========================
+   MENU
+========================== */
 
 .menu {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
-    .menu li {
-        margin-bottom: 10px;
+    .menu a,
+    .dropdown-btn {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        white-space: normal;
+        line-height: 1.4;
+        padding: 14px;
     }
 
-    .menu a {
-        color: white;
-        text-decoration: none;
-        display: block;
-        padding: 12px;
-        border-radius: 10px;
-    }
-
-        .menu a:hover {
-            background: rgba(255,255,255,0.15);
-        }
+.menu-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: .92;
+}
 
 .menu-title {
-    margin-top: 25px;
-    margin-bottom: 10px;
     font-size: 12px;
-    opacity: .7;
     text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: .75;
+    margin-bottom: 15px;
+    margin-top: 30px;
 }
+
+.menu li {
+    margin-bottom: 8px;
+}
+
+.menu a,
+.dropdown-btn {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    transition: .2s ease;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+    .menu a:hover,
+    .dropdown-btn:hover {
+        background: rgba(255,255,255,.12);
+    }
+
+
+.submenu {
+    display: none;
+    list-style: none;
+    margin-top: 5px;
+    padding-left: 10px;
+}
+
+    .submenu li a {
+        font-size: 14px;
+        opacity: .9;
+    }
+
+/* ==========================
+   MAIN CONTENT
+========================== */
 
 .main-content {
     flex: 1;
 }
 
 .navbar-custom {
-    background: white;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    background: #FFFFFF;
+    padding: 24px 35px;
+    border-bottom: 1px solid #ECE7DE;
 }
+
+    .navbar-custom h1,
+    .navbar-custom h2,
+    .navbar-custom h3 {
+        margin: 0;
+    }
+
+/* ==========================
+   CONTENT
+========================== */
 
 .content {
-    padding: 30px;
+    padding: 35px;
 }
 
+.content-card {
+    background: rgba(255,255,255,.85);
+    border-radius: 30px;
+    padding: 35px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.04);
+    border: 1px solid rgba(0,0,0,.03);
+}
 
-.dropdown-btn {
+/* ==========================
+   TITULOS
+========================== */
+
+h1, h2, h3, h4, h5 {
+    margin-top: 0;
+    color: #2F2F2F;
+}
+
+/* ==========================
+   BOTONES
+========================== */
+
+.btn-primary,
+.btn-secondary {
+    background: #567189 !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 10px 18px !important;
+    font-size: 15px;
+    font-weight: 500;
+    transition: .2s;
+}
+
+    .btn-primary:hover,
+    .btn-secondary:hover {
+        background: #415A77 !important;
+    }
+
+    .btn-primary:disabled,
+    .btn-secondary:disabled {
+        background: #D7D0C8 !important;
+        color: #F5F5F5 !important;
+    }
+
+.btn-danger {
+    background: #B0564A !important;
+    border: none !important;
+    border-radius: 12px !important;
+}
+
+    .btn-danger:hover {
+        background: #99483C !important;
+    }
+
+/* ==========================
+   FORMULARIOS
+========================== */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #4A4A4A;
+}
+
+.form-control,
+.cts_forms {
     width: 100%;
-    background: transparent;
-    border: none;
-    color: white;
-    text-align: left;
-    padding: 14px;
-    cursor: pointer;
-    border-radius: 10px;
-    font-size: 16px;
+    border: 1px solid #DDD7CE !important;
+    border-radius: 14px !important;
+    padding: 12px 15px !important;
+    font-size: 15px;
+    background: #FAF9F6;
+    transition: .2s;
 }
 
-    .dropdown-btn:hover {
-        background: rgba(255,255,255,0.15);
+    .form-control:focus,
+    .cts_forms:focus {
+        outline: none;
+        border-color: #567189 !important;
+        background: white;
+        box-shadow: 0 0 0 4px rgba(86,113,137,.12);
     }
 
-.submenu {
-    display: none;
-    list-style: none;
-    padding-left: 15px;
+/* ==========================
+   TABLAS
+========================== */
+
+.tb_data {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    margin-top: 25px;
+    border-radius: 22px;
+    background: white;
 }
 
-    .submenu li a {
-        display: block;
-        color: #ddd;
-        text-decoration: none;
-        padding: 10px;
-        border-radius: 8px;
+    .tb_data th:last-child {
+        background: #F1EEE7;
+        color: #3A3A3A;
+        text-align: left;
+        white-space: normal;
+        word-break: keep-all;
+        line-height: 1.5;
+        padding: 18px;
+        font-weight: 600;
+        border-bottom: 1px solid #E7E2D9;
+        border-right: 1px solid rgba(0,0,0,.06);
+        border-right: none;
     }
 
-        .submenu li a:hover {
-            background: rgba(255,255,255,0.15);
+
+    .tb_data td {
+        padding: 22px 18px;
+        border-bottom: 1px solid rgba(0,0,0,.05);
+        color: #3E3E3E;
+        font-size: 15px;
+        vertical-align: top;
+        line-height: 1.7;
+        word-break: keep-all;
+        
+        
+    }
+
+ 
+        .tb_data tbody tr:nth-child(even) {
+            transition: .18s ease;
+            background: rgba(0,0,0,.015);
         }
 
-/*Para que se vea bien la tarjeta del clima */
+        .tb_data tbody tr:hover {
+            background: #F9F7F2;
+        }
+
+/* ==========================
+   WEATHER CARD
+========================== */
 
 .weather-card {
     background: white;
-    border-radius: 20px;
-    padding: 25px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-radius: 24px;
+    border: 1px solid #ECE7DE;
+    padding: 28px;
+    margin-bottom: 30px;
 }
 
     .weather-card h3 {
-        margin-bottom: 20px;
-        color: #2d3436;
+        margin-bottom: 22px;
     }
 
 .weather-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    gap: 18px;
 }
 
 .weather-item {
-    background: #f5f7fa;
-    border-radius: 15px;
-    padding: 20px;
+    background: #FAF9F6;
+    border: 1px solid #ECE7DE;
+    border-radius: 18px;
+    padding: 22px;
     text-align: center;
 }
 
     .weather-item span {
         display: block;
-        margin-bottom: 8px;
-        color: #666;
+        margin-bottom: 10px;
+        color: #777;
     }
 
     .weather-item strong {
-        font-size: 22px;
+        font-size: 26px;
+        font-weight: 700;
     }
+
+/* ==========================
+   POPUP
+========================== */
+
+.popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.30);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pp_ms_inner {
+    background: white;
+    border-radius: 24px;
+    padding: 35px;
+    width: 420px;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:900px) {
+
+    .weather-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .sidebar {
+        width: 200px;
+    }
+}
+
+@media(max-width:700px) {
+
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .weather-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .content-card {
+        padding: 20px;
+    }
+}
+
+/* ==========================
+   BOTONES DE ACCIÓN
+========================== */
+
+.acciones {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
+
+/* botón general */
+
+.icon-btn {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+/* iconos */
+
+.action-icon {
+    width: 37px;
+    height: 37px;
+    object-fit: contain;
+    opacity: .8;
+    transition: .2s;
+}
+
+/* hover general */
+
+.icon-btn:hover .action-icon {
+    transform: scale(1.08);
+    opacity: 1;
+}
+
+/* modificar */
+
+.editable-btn:hover {
+    background: #EAF2FF;
+}
+
+/* borrar */
+
+.delete-btn:hover {
+    background: #FDECEC;
+}
+
+/* pdf */
+
+.pdf-btn:hover {
+    background: #FFF3E8;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.logo-img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+
+.logo h2 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+}
+/* ==========================
+   LOGIN ELEGANTE
+========================== */
+
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: linear-gradient(135deg, #5D6E85 0%, #4A5A72 100%);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 520px;
+    background: white;
+    border-radius: 28px;
+    padding: 50px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.08);
+    text-align: center;
+}
+
+.login-logo {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    margin-bottom: 0px;
+}
+
+.login-card h1 {
+    font-size: 42px;
+    color: #25364A;
+    margin-bottom: 8px;
+}
+
+.login-subtitle {
+    color: #7B8794;
+    margin-bottom: 35px;
+}
+
+.login-card .form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.login-card label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    color: #2d3748;
+}
+
+.login-input {
+    border-radius: 16px !important;
+    padding: 16px !important;
+    border: 1px solid #d7dde5 !important;
+    transition: .2s;
+}
+
+    .login-input:focus {
+        border-color: rgba(86,113,137,.15) !important;
+        box-shadow: 0 0 0 4px rgba(86,113,137,.15) !important;
+    }
+
+.login-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.login-btn {
+    flex: 1;
+    border: none;
+    border-radius: 16px;
+    padding: 15px;
+    background: #567189;
+    color: white;
+    font-weight: bold;
+    transition: .2s;
+}
+
+    .login-btn:hover {
+        background: #415A77;
+    }
+
+.login-btn-secondary {
+    flex: 1;
+    border: none;
+    border-radius: 16px;
+    padding: 15px;
+    background: #E5E7EB;
+    color: #374151;
+    font-weight: bold;
+}
+
+.registro-link {
+    margin-top: 25px;
+}
+
+    .registro-link a {
+        color: #567189;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+        .registro-link a:hover {
+            text-decoration: underline;
+        }
+
+* ==========================
+NAVBAR PREMIUM
+========================== */
+
+.navbar-custom {
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(10px);
+    padding: 18px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,.04);
+    box-shadow: 0 4px 20px rgba(0,0,0,.05);
+}
+
+.navbar-custom h4 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: #25364A;
+}
+
+/* lado derecho */
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+/* caja usuario */
+
+.user-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #F7F9FC;
+    padding: 10px 16px;
+    border-radius: 18px;
+}
+
+.user-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #DCE5EF;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-label {
+    font-size: 12px;
+    color: #94A3B8;
+}
+
+.user-email {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2C3E50;
+}
+
+/* boton salir */
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    background: #567189;
+    color: white;
+    padding: 13px 20px;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.logout-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: .92;
+}

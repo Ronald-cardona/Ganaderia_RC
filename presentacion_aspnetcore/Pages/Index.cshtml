@@ -13,55 +13,79 @@
 
 @if (!Model.EstaLogueado)
 {
-    <div class="container"
-         align="left"
-         style="width:100%">
-        <h3>
-            Login
-        </h3>
+    <div class="login-wrapper">
 
-        <h3>
-            Bienvenido
-            @HttpContext.Session.GetString("Usuario")
-        </h3>
+        <div class="login-card">
 
-        <form method="POST">
-            <div style="width:60%">
+            <img src="~/imagenes/logo.png"
+                 class="login-logo" />
+
+            <h1>Bienvenido</h1>
+
+            <p class="login-subtitle">
+                Inicia sesión en gestión ganadera  RC
+            </p>
+
+            <form method="POST">
+
                 <div class="form-group">
-                    <label class="control-label">
-                        Usuario:
+
+                    <label>
+                        Usuario
                     </label>
+
                     <input onchange="keyUp(this)"
                            asp-for="@Model.Correo"
-                           class="form-control" />
+                           class="form-control login-input" />
+
                 </div>
+
                 <div class="form-group">
-                    <label class="control-label">
-                        Contraseña:
+
+                    <label>
+                        Contraseña
                     </label>
+
                     <input type="password"
                            onchange="keyUp(this)"
                            asp-for="@Model.Contraseña"
-                           class="form-control" />
+                           class="form-control login-input" />
+
                 </div>
 
-                <input type="submit"
-                       value="Limpiar"
-                       asp-page-handler="BtClean"
-                       class="btn btn-default" />
-                <input type="submit"
-                       value="Entrar"
-                       asp-page-handler="BtEnter"
-                       class="btn btn-default" />
-            </div>
-        </form>
+                <div class="login-buttons">
+
+                    <input type="submit"
+                           value="Entrar"
+                           asp-page-handler="BtEnter"
+                           class="login-btn" />
+
+                    <input type="submit"
+                           value="Limpiar"
+                           asp-page-handler="BtClean"
+                           class="login-btn-secondary" />
+
+                </div>
+
+                <div class="registro-link">
+
+                    <a asp-page="/ventanas/Registros">
+                        ¿No eres usuario? Regístrate
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
 }
-else
+@* else
 {
     <div class="text-center">
         <h1 class="display-4">
-            Bienvenido
+            Bienvenido a tu proyecto ganadero
         </h1>
 
         <form method="POST">
@@ -71,4 +95,4 @@ else
                    class="btn btn-default" />
         </form>
     </div>
-}
+} *@
