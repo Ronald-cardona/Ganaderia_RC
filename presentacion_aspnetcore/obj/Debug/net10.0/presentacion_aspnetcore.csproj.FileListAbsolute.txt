@@ -191,4 +191,4 @@ C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debu
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\presentacion_aspnetcore.genruntimeconfig.cache
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\ref\presentacion_aspnetcore.dll
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
-C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\compressed\buuzysppln-{0}-7ec2b4kt37-7ec2b4kt37.gz
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\compressed\buuzysppln-{0}-z7excgyyn9-z7excgyyn9.gz

@@ -222,14 +222,14 @@
                                 @elemento.FechaVenta.ToString("dd/MM/yyyy")
                             </td>
                             <td>
-                                @elemento.PesoFinal
+                                @elemento.PesoFinal.ToString("N2") kg
                             </td>
                             <td>
-                                @elemento.PrecioKilo
+                                $@elemento.PrecioKilo.ToString("N0")
                             </td>
 
                             <td>
-                                $ @elemento.VentaTotal?.ToString("N2")
+                                 $@elemento.VentaTotal?.ToString("N0")
 
                             </td>
                            

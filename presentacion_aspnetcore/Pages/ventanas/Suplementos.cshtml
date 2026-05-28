@@ -59,7 +59,7 @@
                     </div>
                     <div class="form-group">
                         <label>
-                            Cantidad de suplemento
+                            Cantidad de suplemento (kg)
                         </label>
                         <div class="col-6">
                             <input id="inCantidadSuplemento"
@@ -131,7 +131,7 @@
                             Costo del suplemento
                         </th>
                         <th>
-                            Cantidad de Suplemento
+                            Cantidad de Suplemento (kg)
                         </th>
                          <th class="cl_hidden">
                             FechaCompraSuplemento
@@ -149,10 +149,10 @@
                                 @elemento.Nombre
                             </td>
                             <td>
-                                @elemento.CostoSuplemento
+                                $@elemento.CostoSuplemento.ToString("N0")
                             </td>
                             <td>
-                                @elemento.CantidadSuplemento
+                                @elemento.CantidadSuplemento.ToString("N2") kg
                             </td>
                             <td class="cl_hidden">
                                 @elemento.FechaCompraSuplemento.ToString("dd/MM/yyyy")

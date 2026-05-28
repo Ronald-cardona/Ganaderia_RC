@@ -11,7 +11,7 @@
             @Html.AntiForgeryToken()
 
             <div align="left">
-                <h3>LugarAnimales</h3>
+                <h3>Lugar de los animales</h3>
             </div>
 
             <div>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         <label>
-                            Metros del lugar
+                            Tamaño del lugar (metros)
                         </label>
                         <div class="col-6">
                             <input id="inMetros"
@@ -171,10 +171,10 @@
                             Código
                         </th>
                         <th>
-                            Metros
+                            Tamaño del lugar
                         </th>
                         <th>
-                            Corral/Potrero
+                            Tipo de lugar
                         </th>
                          <th class="cl_hidden">
                             Fecha entrada 
@@ -198,7 +198,7 @@
                                 @elemento.Codigo
                             </td>
                             <td>
-                                @elemento.Metros
+                                @elemento.Metros.ToString("N0") M²
                             </td>
                             <td>
                                 @elemento.Direccion

@@ -70,6 +70,7 @@ wwwroot\imagenes\editable.png
 wwwroot\imagenes\farmer.png
 wwwroot\imagenes\goat.png
 wwwroot\imagenes\house.png
+wwwroot\imagenes\imagenBienvenida.jpg
 wwwroot\imagenes\injection.png
 wwwroot\imagenes\logo.png
 wwwroot\imagenes\logout.png

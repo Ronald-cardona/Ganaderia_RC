@@ -187,6 +187,7 @@
                         </label>
                         <div class="col-6">
                             <input id="inEstadoId"
+                                   class="cts_forms form-control"
                                    asp-for="@Model.Animal!.EstadoId" />
                         </div>
                     </div>
@@ -292,9 +293,9 @@
                         <th class="cl_hidden">
                             Estado del animal
                         </th>
-                        <th class="cl_hidden">
+                       @*  <th class="cl_hidden">
                             Descripción venta 
-                        </th>
+                        </th> *@
                         <th class="cl_hidden">
                             Lugar del animal
                         </th>
@@ -320,7 +321,7 @@
                                 @elemento.Codigo
                             </td>
                             <td>
-                                @elemento.PesoInicial
+                                @elemento.PesoInicial.ToString("N2")Kg
                             </td>
                             <td>
                                 @elemento.Raza
@@ -349,11 +350,11 @@
                             </td>
 
                             <td class="cl_hidden">
-                                @elemento.Ganancia
+                                $@elemento.Ganancia?.ToString("N0")
                             </td>
 
                             <td class="cl_hidden">
-                                @elemento.PorcentajeGanancia
+                                @elemento.PorcentajeGanancia?.ToString("N2")%
                             </td>
 
                             <td>

@@ -81,18 +81,71 @@
 
     </div>
 }
-@* else
+else
 {
-    <div class="text-center">
-        <h1 class="display-4">
-            Bienvenido a tu proyecto ganadero
-        </h1>
+    
+        <div class="welcome-container">
 
-        <form method="POST">
-            <input type="submit"
-                   value="Cerrar"
-                   asp-page-handler="BtClose"
-                   class="btn btn-default" />
-        </form>
-    </div>
-} *@
+            <div class="welcome-text">
+
+                <h1>
+                    Bienvenido a Ganadería RC
+                </h1>
+
+                <p class="welcome-subtitle">
+
+                    Tu plataforma de gestión integral para el control,
+                    seguimiento y crecimiento de tu proyecto ganadero.
+
+                </p>
+
+                <div class="welcome-description">
+
+                    <p>
+                        Desde aquí podrás administrar de manera eficiente:
+                    </p>
+
+                    <ul>
+                        <li>
+                            Gestión de fincas y entorno ganadero
+                        </li>
+
+                        <li>
+                            Control de animales, lotes y estados
+                        </li>
+
+                        <li>
+                            Alimentación, suplementación y producción
+                        </li>
+
+                        <li>
+                            Gastos, compras, ventas y rentabilidad
+                        </li>
+
+                        <li>
+                            Reportes PDF y seguimiento del clima
+                        </li>
+                    </ul>
+
+                </div>
+
+                <form method="POST">
+
+                    <input type="submit"
+                           value="Cerrar sesión"
+                           asp-page-handler="BtClose"
+                           class="btn-welcome-close" />
+
+                </form>
+
+            </div>
+
+            <div class="welcome-image">
+
+                <img src="~/imagenes/imagenBienvenida.jpg"
+                     alt="Ganadería RC" />
+
+            </div>
+
+        </div>
+}

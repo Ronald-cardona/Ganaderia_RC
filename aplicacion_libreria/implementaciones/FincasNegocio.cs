@@ -72,9 +72,11 @@ namespace aplicacion_libreria.implementaciones
 
             var url =
             $"https://nominatim.openstreetmap.org/search?q={direccionCodificada}&format=json&limit=1";
+            //
+            
 
-            var json =
-                client.GetStringAsync(url).Result;
+            var json = client.GetStringAsync(url).Result;
+
 
             var resultado =
                 JsonConvert.DeserializeObject<List<GeocodingResult>>(json);
@@ -93,9 +95,9 @@ namespace aplicacion_libreria.implementaciones
                     CultureInfo.InvariantCulture);
             }
 
-            //// PROBAR CLIMA
+            // PROBAR CLIMA
 
-            //// LLAMAR CLIMA NEGOCIO
+            // LLAMAR CLIMA NEGOCIO
 
             //var clima =
             //     new ClimasNegocio()

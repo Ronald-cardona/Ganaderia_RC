@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group">
                         <label>
-                            Veterinario o empleado? 
+                            Cargo de la persona
                         </label>
                         <div class="col-6">
                             <input id="inApellido"
@@ -78,22 +78,15 @@
                                    asp-for="@Model.Persona!.Telefono" />
                         </div>
                     </div>
-                    @*  <div class="form-group">
-                        <label>
-                            Fecha
-                        </label>
-                        <div class="col-6">
-                            <input id="inFecha"
-                                   class="cts_forms form-control"
-                                   asp-for="@Model.Persona!.Fecha" />
-                        </div>
-                    </div> *@
+                
+                    
                     <div class="form-group">
                         <label>
                             Sueldo
                         </label>
                         <div class="col-6">
                             <input id="inSueldo"
+                                   class="cts_forms form-control"
                                    asp-for="@Model.Persona!.Sueldo" />
                         </div>
                     </div>
@@ -104,6 +97,7 @@
                         </label>
                         <div class="col-6">
                             <input id="inActivo"
+                                   
                                    asp-for="@Model.Persona!.Activo" />
                         </div>
                     </div>
@@ -157,16 +151,14 @@
                             Nombre
                         </th>
                         <th>
-                           Veterinario/empleado
+                           Cargo
                         </th>
                         <th>
-                            Cedula
+                            Cédula
                         </th>
-                        @* <th class="cl_hidden">
-                            Fecha
-                        </th> *@
+                       
                         <th class="cl_hidden">
-                            Telefono
+                            Teléfono
                         </th>
                         <th class="cl_hidden">
                             Sueldo
@@ -192,14 +184,12 @@
                             <td>
                                 @elemento.Cedula
                             </td>
-                            @* <td class="cl_hidden">
-                                @elemento.Fecha.ToString("dd/MM/yyyy")
-                            </td> *@
+                           
                             <td class="cl_hidden">
                                 @elemento.Telefono
                             </td>
                             <td class="cl_hidden">
-                                @elemento.Sueldo
+                                $ @elemento.Sueldo.ToString("N0")
                             </td>
                             <td class="cl_hidden">
                                 @elemento.Activo

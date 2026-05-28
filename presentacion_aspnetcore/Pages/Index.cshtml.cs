@@ -34,7 +34,7 @@ namespace presentacion_aspnetcore.Pages
             }
         }
 
-        public IActionResult OnPostBtEnter()
+        public void OnPostBtEnter()
         {
             try
             {
@@ -44,7 +44,7 @@ namespace presentacion_aspnetcore.Pages
                     ViewData["Error"] =
                         "Ingrese usuario y contraseña";
 
-                    return Page();
+                    return ;
                 }
 
                 var negocio = new aplicacion_libreria.implementaciones.UsuariosNegocio();
@@ -60,7 +60,7 @@ namespace presentacion_aspnetcore.Pages
                     ViewData["Error"] =
                         "Usuario o contraseña incorrectos";
 
-                    return Page();
+                    return ;
                 }
 
                 HttpContext.Session.SetString(
@@ -72,12 +72,12 @@ namespace presentacion_aspnetcore.Pages
 
                 EstaLogueado = true;
                 // REDIRECCIONAR AL SISTEMA
-                return RedirectToPage("/ventanas/Fincas");
+               // return RedirectToPage("/ventanas/Fincas");
             }
             catch (Exception ex)
             {
                 ViewData["Error"] = ex.Message;
-                return Page();
+                return ;
             }
         }
 

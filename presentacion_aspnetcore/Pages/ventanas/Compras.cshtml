@@ -85,7 +85,7 @@
 
                     <div class="form-group">
                         <label>
-                            Descripción de la venta  (Opcional)
+                           Proveedor
                         </label>
 
                         <div class="col-6">
@@ -94,7 +94,7 @@
                                     class="form-control">
 
                                 <option value="">
-                                    Seleccione una descripción
+                                    Seleccione un proveedor
                                 </option>
 
                                 @foreach (var proveedor in proveedores)
@@ -159,7 +159,7 @@
                         <th>
                             Fecha de la Compra
                         </th>
-                        <th>
+                        <th class ="cl_hidden">
                             Peso del animal en la compra
                         </th>
                         <th>
@@ -191,10 +191,10 @@
                                 @elemento.FechaCompra.ToString("dd/MM/yyyy")
                             </td>
                             <td>
-                                @elemento.PesoCompra
+                                @elemento.PesoCompra Kg
                             </td>
                             <td>
-                                @elemento.PrecioKilo
+                                $ @elemento.PrecioKilo.ToString("N0")
                             </td>
                             
                             <td class="cl_hidden">
@@ -206,7 +206,8 @@
 
 
                             <td>
-                                $ @elemento.CompraTotal?.ToString("N2")
+                               
+                               $@elemento.CompraTotal?.ToString("N0") 
                             
                             </td>
                           

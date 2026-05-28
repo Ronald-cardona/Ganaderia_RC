@@ -177,7 +177,7 @@
                             Fecha último Pesaje
                         </th>
 
-                        <th>
+                        <th class="cl_hidden">
                             Ultimo peso
                         </th>
 
@@ -225,7 +225,7 @@
                             </td> 
 
                             <td class="cl_hidden">
-                                @elemento.UltimoPeso kg
+                                @elemento.UltimoPeso kg 
                             </td>
 
                             <td class="cl_hidden">
@@ -234,12 +234,12 @@
                            
                            
                             <td class="cl_hidden">
-                                @elemento.PesoActual kg
+                                @elemento.PesoActual.ToString("N2")kg
                             </td>
 
                             
                             <td class="cl_hidden">
-                                @elemento.GananciaPeso?.ToString("N2") kg
+                                @elemento.GananciaPeso?.ToString("N2")kg
                             </td>
 
                             
