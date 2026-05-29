@@ -147,6 +147,8 @@ namespace aplicacion_libreria.implementaciones
 
             this.iConexion.SaveChanges();
         }
+
+        //Reporte PDF
         public byte[] GenerarReporte(int IdAnimal)
         {
             ReporteHistorialPesos reporte = new ReporteHistorialPesos();

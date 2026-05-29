@@ -21,7 +21,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
 
         public void OnGet()
         {
-            //LugarAnimal = new LugarAnimales();
+           
 
             //codigo para proteger paginas  no se puede ingresar sin registrarse antes
             var usuario = HttpContext.Session.GetString("Usuario");

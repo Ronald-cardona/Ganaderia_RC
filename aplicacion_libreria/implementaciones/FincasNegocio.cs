@@ -72,7 +72,7 @@ namespace aplicacion_libreria.implementaciones
 
             var url =
             $"https://nominatim.openstreetmap.org/search?q={direccionCodificada}&format=json&limit=1";
-            //
+            
             
 
             var json = client.GetStringAsync(url).Result;

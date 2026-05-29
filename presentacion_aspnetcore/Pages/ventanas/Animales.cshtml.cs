@@ -152,7 +152,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
             
         }
 
-
+        // reporte del pdf
         public IActionResult OnPostReportePdf(int Id)
 
         {

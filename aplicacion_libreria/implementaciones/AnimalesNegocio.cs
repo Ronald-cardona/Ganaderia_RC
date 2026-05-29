@@ -100,34 +100,34 @@ namespace aplicacion_libreria.implementaciones
             //calculo de ganancia de animales 
             if (entidad.VentaId != null && entidad.CompraId != null)
             {
-                var compra = this.iConexion.Compras
-                    .FirstOrDefault(x => x.Id == entidad.CompraId);
+                var compra = this.iConexion.Compras.FirstOrDefault(x => x.Id == entidad.CompraId);
+                  
 
-                var venta = this.iConexion.Ventas
-                    .FirstOrDefault(x => x.Id == entidad.VentaId);
+                var venta = this.iConexion.Ventas.FirstOrDefault(x => x.Id == entidad.VentaId);
+                    
 
                 if (compra != null && venta != null)
                 {
-                    decimal costoAnimal =
-                        compra.PesoCompra * compra.PrecioKilo;
+                    decimal costoAnimal = compra.PesoCompra * compra.PrecioKilo;
+                    
 
-                    decimal valorVenta =
-                        venta.PesoFinal * venta.PrecioKilo;
+                    decimal valorVenta = venta.PesoFinal * venta.PrecioKilo;
+                   
 
-                    decimal ganancia =
-                        valorVenta - costoAnimal;
+                    decimal ganancia = valorVenta - costoAnimal;
+                    
 
                     decimal porcentajeGanancia = 0;
 
                     if (costoAnimal > 0)
                     {
-                        porcentajeGanancia =
-                            (ganancia / costoAnimal) * 100;
+                        porcentajeGanancia = (ganancia / costoAnimal) * 100;
+                        
                     }
 
                     entidad.Ganancia = ganancia;
-                    entidad.PorcentajeGanancia =
-                        porcentajeGanancia;
+                    entidad.PorcentajeGanancia = porcentajeGanancia;
+                   
                 }
             }
 
@@ -224,7 +224,7 @@ namespace aplicacion_libreria.implementaciones
                 }
             }
         }
-
+        //Reporte PDF
         public byte[] GenerarReporte(int Id)
         {
             ReporteAnimales reporte = new ReporteAnimales();

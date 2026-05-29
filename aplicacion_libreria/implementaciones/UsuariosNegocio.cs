@@ -27,7 +27,7 @@ namespace aplicacion_libreria.implementaciones
             return this.iConexion.Usuarios!
                 .Include(x => x._rol)
 
-                .ToList(); //realizar los roles
+                .ToList(); 
         }
 
         public Usuarios Guardar(Usuarios entidad)

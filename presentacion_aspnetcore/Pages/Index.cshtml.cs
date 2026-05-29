@@ -41,8 +41,8 @@ namespace presentacion_aspnetcore.Pages
                 if (string.IsNullOrEmpty(Correo) ||
                     string.IsNullOrEmpty(Contraseña))
                 {
-                    ViewData["Error"] =
-                        "Ingrese usuario y contraseña";
+                    ViewData["Error"] = "Ingrese usuario y contraseña";
+                    
 
                     return ;
                 }
@@ -50,29 +50,27 @@ namespace presentacion_aspnetcore.Pages
                 var negocio = new aplicacion_libreria.implementaciones.UsuariosNegocio();
 
 
-                var usuario =
-                    negocio.Login(
-                        Correo!,
-                        Contraseña!);
+                var usuario = negocio.Login(Correo!, Contraseña!);
+              
+               
 
                 if (usuario == null)
                 {
-                    ViewData["Error"] =
-                        "Usuario o contraseña incorrectos";
+                    ViewData["Error"] = "Usuario o contraseña incorrectos";
+                   
 
                     return ;
                 }
 
-                HttpContext.Session.SetString(
-                    "Usuario",
-                    usuario.Correo!);
+                HttpContext.Session.SetString("Usuario", usuario.Correo!);
+               
+
 
                 // guardar sesión rol
                 HttpContext.Session.SetString("Rol", usuario._rol!.Tipo!);
 
                 EstaLogueado = true;
-                // REDIRECCIONAR AL SISTEMA
-               // return RedirectToPage("/ventanas/Fincas");
+               
             }
             catch (Exception ex)
             {

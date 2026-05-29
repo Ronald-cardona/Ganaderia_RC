@@ -18,8 +18,8 @@ namespace presentacion_aspnetcore.Pages.ventanas
 
         public void OnGet()
         {
-            Usuario =
-                new Usuarios();
+            Usuario = new Usuarios();
+           
         }
 
         public IActionResult OnPostBtGuardar()
@@ -29,33 +29,28 @@ namespace presentacion_aspnetcore.Pages.ventanas
                 if (Usuario == null)
                     return Page();
 
-                var rolCliente =
-                    new RolesNegocio()
-                    .Consultar()
-                    .FirstOrDefault(x =>
-                        x.Tipo.Trim().ToLower()
-                        == "cliente");
+                var rolCliente = new RolesNegocio().Consultar().FirstOrDefault(x => x.Tipo.Trim().ToLower() == "cliente");
+               
 
                 if (rolCliente == null)
-                    throw new Exception(
-                        "No existe el rol cliente");
+                    throw new Exception("No existe el rol cliente");
+                
 
-                Usuario.RolId =
-                    rolCliente.Id;
+                Usuario.RolId = rolCliente.Id;
+              
 
-                iUsuariosNegocio =
-                    new UsuariosNegocio();
+                iUsuariosNegocio = new UsuariosNegocio();
+              
 
-                Usuario =
-                    iUsuariosNegocio
-                    .Guardar(Usuario);
+                Usuario = iUsuariosNegocio.Guardar(Usuario);
+               
 
                 return RedirectToPage("/Index");
             }
             catch (Exception ex)
             {
-                ViewData["Mensaje"] =
-                    ex.Message;
+                ViewData["Mensaje"] = ex.Message;
+               
 
                 return Page();
             }

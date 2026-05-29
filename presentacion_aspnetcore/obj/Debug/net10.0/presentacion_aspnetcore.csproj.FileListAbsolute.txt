@@ -116,6 +116,7 @@ C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debu
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\scopedcss\bundle\presentacion_aspnetcore.styles.css
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\scopedcss\projectbundle\presentacion_aspnetcore.bundle.scp.css
+C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\compressed\buuzysppln-{0}-z7excgyyn9-z7excgyyn9.gz
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\compressed\tsvrdmg797-{0}-61n19gt1b8-61n19gt1b8.gz
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\compressed\do8f5gzt4w-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\compressed\5z7e3czzi2-{0}-bqjiyaj88i-bqjiyaj88i.gz
@@ -191,4 +192,3 @@ C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debu
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\presentacion_aspnetcore.genruntimeconfig.cache
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\ref\presentacion_aspnetcore.dll
 C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
-C:\Users\ronal\Desktop\ProyectoDEV\Ganaderia_RC\presentacion_aspnetcore\obj\Debug\net10.0\compressed\buuzysppln-{0}-z7excgyyn9-z7excgyyn9.gz

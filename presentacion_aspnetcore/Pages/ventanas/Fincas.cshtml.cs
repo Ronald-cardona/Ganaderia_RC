@@ -38,15 +38,10 @@ namespace presentacion_aspnetcore.Pages.ventanas
                 return;
             }
 
-            //para manejar las sesiones 
-            //var correo = HttpContext.Session.GetString("Usuario");
+            
             OnPostBtRefrescar();
 
-            // CARGAR FINCAS
-            //ListaFincas =
-            //    new 
-            //    FincasNegocio()
-            //    .Consultar(correo!);
+            
            
 
             if (ListaFincas.Any())
@@ -121,7 +116,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
 
                 if (Finca.Id == 0)
                     return Page();
-                //OnPostBtRefrescar();
+               
             }
             catch (Exception ex)
             {
@@ -137,7 +132,7 @@ namespace presentacion_aspnetcore.Pages.ventanas
                 if (Finca == null)
                     return Page();
                 Finca = iFincasNegocio!.Borrar(Finca!);
-                // OnPostBtRefrescar();
+               
                 return RedirectToPage();
             }
             catch (Exception ex)
